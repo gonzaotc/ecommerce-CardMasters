@@ -10,8 +10,8 @@ alert("Bienvenido al prototipo de mi calculadora de rendimiento de minado de cry
 //CONSTANTES
 const DOLARBLUE = 180;
 const DOLAROFICIAL = 104;
-const valorKwh = prompt("Ingrese el costo de su KwH (Kilowatt/hora) en usd.");
-console.log(`Su costo de KiloWattHora es de ${valorKwh} dolares`)
+const KWH = prompt("Ingrese el costo de su KwH (Kilowatt/hora) en usd.\nNota: 0.1 USD aprox para Arg.", 0.1);
+console.log(`Su costo de KiloWattHora es de ${KWH} dolares`)
 const HORAS = 24; //Cantidad de horas que se usará por día.
 const DIAS = 30; //Cantidad de días que se usará por mes.
 const IVA = 1.21; // Multiplicador equivalente a 21%. 
@@ -28,6 +28,10 @@ class Tarjeta{
         this.precioArs = precioArs;
         this.consumoWatts = consumoWatts;
         this.hashrateDiarioUsd = hashrateDiarioUsd;
+                                     //consumo energetico mensual. 
+        this.consumoMensual = ((consumoWatts*HORAS*DIAS) / 1000) * DOLARBLUE * KWH;
+        this.produccionMensual = hashrateDiarioUsd * DIAS * DOLARBLUE;
+        this.gananciaMensual = this.produccionMensual - this.consumoMensual;
     }
 }
 
@@ -64,6 +68,7 @@ function mostrarTarjetas(){
 }
 
 function informacionTarjeta(){
+    // la función busca una tarjeta que cumpla con el parametro dado. 
     let findProperty = prompt("Por que propiedad quiere buscar la tarjeta? \n \"nombre\" para buscar por nombre \n \"id\" para buscar por id ");
     // Mientras no sea una propiedad valida de busqueda, repetir.
     while (findProperty != 'id' && findProperty != 'nombre'){
@@ -91,7 +96,7 @@ function ordenarTarjetas(propiedad){
     console.log(`lista ordenada por ${propiedad}`);
 }
 
-//COMIENZO DEL MAIN DEL PROGRAMA.
+//MAIN DEL PROGRAMA.
 
 //Tarjetas añadidas por defecto inicialmente. 
   //    ID,   NOMBRE,   M,     PU,  PA,    CW,  HRD
@@ -122,7 +127,7 @@ while (exit === false){
             let sortParameter = prompt("Según que propiedad desea ordenar las tarjetas \n \"id\" \n \"marca\" \n \"nombre\" \n \"consumoWatts\" \n \"precioUsd\" \n \"precioArs\" \n \"hashrateDiarioUsd\"?");
             // Si el primer elemento del arreglo de tarjetas no tiene la propiedad, no es una prop valida. 
             while (!tarjetas[0].hasOwnProperty(sortParameter)){
-                sortParameter = prompt("Esa NO ES una propiedad válida. \n \"id\" \n \"marca\" \n \"nombre\" \n \"consumoWatts\" \n \"precioUsd\" \n \"precioArs\" \n \"hashrateDiarioUsd\"?");
+                sortParameter = prompt("Esa NO ES una propiedad válida. \n \"id\" \n \"marca\" \n \"nombre\" \n \"consumoWatts\" \n \"precioUsd\" \n \"precioArs\" \n \"hashrateDiarioUsd\" \n \"produccionMensual\" \n \"consumoMensual\" \n \"gananciaMensual\" ");
             }
             ordenarTarjetas(sortParameter);
             break;
