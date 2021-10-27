@@ -54,7 +54,7 @@ body::before {
   align-items: center
 }
 
-#cards {
+#cards-container{
   grid-area: cards;
   display: flex;
   flex-wrap: wrap;
@@ -63,18 +63,20 @@ body::before {
 .card{
   background: var(--color_dark);
   margin: 15px auto;
-  width: 350px;
-  height: 350px;
+  width: 300px;
+  height: 320px;
   border-radius: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: 5px 5px 20px rgba(0,0,0,1);   box-shadow: -5px -5px 20px rgba(0,0,0,1);
 }
 
 .card__img{
   width: 300px;
   height: 250px;
+  filter: drop-shadow(2px 10px 5px rgba(0,0,0,0.5));
 }
 
 .card__stats{
@@ -86,3 +88,7 @@ body::before {
   grid-area: footer;
 }
 
+h1{
+  font-size: 30px;
+  color: white;
+}

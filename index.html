@@ -5,76 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="reset.css" rel="stylesheet">
-    <link href="sweetalert.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-    <title>Rentabilidad de minado - ARG</title>
+    <title>Card master</title>
 </head>
 <body>
     <nav id="navbar" class="defaultArea">
-        navbar
+        Bienvenido a Card Master - navbar
     </nav>
 
     <section id="pre-cards" class="defaultArea">
-        Ordenar según: <select></select>
+        <button id="amd">AMD</button>
+        <button id="amd">NVIDIA</button>
+        <label for="KHW"></label>
+        <input id="KWH" name="KHW" type="number" placeholder="valor del khw">
     </section>
 
-     <section id="cards" class="">
-        <div class="card">
-            <img src="images/graphicCard.png" class="card__img">
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-        </div>
+    <section id="cards-container" class="">
 
-        <div class="card">
-            <img src="images/graphicCard.png" class="card__img">
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-        </div>
+    </section>
 
-        <div class="card">
-            <img src="images/graphicCard.png" class="card__img">
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-        </div>
-
-        <div class="card">
-            <img src="images/graphicCard.png" class="card__img">
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-        </div>
-
-        <div class="card">
-            <img src="images/graphicCard.png" class="card__img">
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-        </div>
-
-        <div class="card">
-            <img src="images/graphicCard.png" class="card__img">
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-            <p class="card__stats">STAT1: 534124</p>
-        </div>
-     </section>
-    
-      <footer id="footer" class="defaultArea">
+    <footer id="footer" class="defaultArea">
         footer - @gonzaotc
-      </footer>
+    </footer>
 
+    <script src="tarjetas.js"></script>
     <script src="scripts.js"></script>
-    <!-- Libreria a incorporar: SweetAlerts.js -> Dependo de saber Async/Await -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetAlert.js"></script>
+
 </body>
 </html>
