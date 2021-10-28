@@ -106,6 +106,9 @@ function calcularTotalCarrito(){
 
     let carritoProductos = document.querySelector('#carrito-productos');
     carritoProductos.innerText = `${carrito.length}`;
+
+    //Retorno el total por si lo necesito para otra operacion.
+    return total; 
 }
 
 function limpiarCarrito(){
@@ -121,13 +124,14 @@ function realizarCompra(){
         return;
     }
 
-    let compra = "Desea confirmar la compra de:\n";
+    let compra = "Desea confirmar la compra de:\n\n";
     for (let producto of carrito){
         compra = compra + ` ${producto.nombre}: ${producto.precio}$\n`;
     }
-    compra = compra + `ingrese "si" para confirmar.`;
+    compra = compra + `\n Por un total de ${calcularTotalCarrito()}$ \n\n Ingrese "si" para confirmar.\n `;
 
-    let confirmacion = prompt(compra);
+    let confirmacion = "";
+    confirmacion = prompt(compra);
 
     if (confirmacion.toLowerCase() == "si"){
         carrito = [];
