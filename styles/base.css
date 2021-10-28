@@ -17,8 +17,10 @@ body {
   position: relative;
   background: var(--color_dark);
   display: grid;
-  grid-template-rows: 100px 100px 100px auto 100px;
+  grid-template-rows: 100px 100px 100px 100px 100px auto 100px;
   grid-template-areas: "navbar"
+                       "."
+                       "carrito"
                        "."
                        "pre-cards"
                        "cards"
@@ -54,6 +56,22 @@ body::before {
   grid-area: navbar;
 }
 
+#carrito{
+  grid-area: carrito;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.carrito-info{
+
+}
+
+.carrito-info-parrafo{
+  display: flex;
+  align-items: center;
+}
+
 /* PRE-CARDS y CARDS en cards.css */
 
 #footer {
@@ -74,4 +92,25 @@ p{
   font-family: Kanit;
   font-weight: 300;
 }
+
+.numerico{
+  font-size: 25px;
+  color: orange;
+}
+
+.material-icons{
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 1);
+}
+
+.material-icons:hover{
+  color: orange;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
 

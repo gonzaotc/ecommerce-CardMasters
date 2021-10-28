@@ -15,6 +15,7 @@ const DIAS = 30; //Cantidad de días que se usará por mes.
 const IVA = 1.21; // Multiplicador equivalente a 21%. 
 const IMPUESTOPAIS = 1.30; //Multiplicador equivalente a 30%
 
+// Operaciones básicas sobre las tarjetas.
 for (let tarjeta of arrayTarjetas){
     tarjeta.consumoMensual = ((tarjeta.consumoWatts * HORAS * DIAS) / 1000) * DOLARBLUE * KWH;
     tarjeta.produccionMensual = tarjeta.hashrate * DIAS * DOLARBLUE;
@@ -31,6 +32,8 @@ function ordenarTarjetas(){
 
 }
 
+
+
 //MAIN DEL PROGRAMA.
 
 for (let tarjeta of arrayTarjetas){
@@ -39,6 +42,7 @@ for (let tarjeta of arrayTarjetas){
     const card = document.createElement('div');
     card.classList.add('card');
 
+    //CARD DEL PRODUCTO
     card.innerHTML = `
     <div class="image-container">
         <img class="card-image" src="${tarjeta.img}">
@@ -53,9 +57,6 @@ for (let tarjeta of arrayTarjetas){
             <button id="minado">
                 minado
             </button>
-            <button id="comprar">
-                comprar
-            </button>
         </div>
         <div class="info-gaming">
             <p>FPS promedio: ${tarjeta.gaming}</p>
@@ -68,10 +69,80 @@ for (let tarjeta of arrayTarjetas){
             <p>ganancia mensual: ${tarjeta.gananciaMensual}</p>
             <p>meses rentabilidad: ${tarjeta.rentabilidad}</p>
         </div>
+        <div class="compra-container">
+            <button id="${tarjeta.id}" class="material-icons md-36">
+                shopping_cart
+            </button>
+            <p>añadir al carrito<p>
+        </div>
+            
     </div>
     `
-
     container.appendChild(card);
+
+    //EVENTOS DEL PRODUCTO
+    //Selecciono el botón de añadir al carrito de la tarjeta
+    const botonAñadir = document.getElementById(`${tarjeta.id}`);
+    //Si se clickea el botón, se añade la tarjeta al carrito.
+    botonAñadir.addEventListener(`click`, () => agregarAlCarrito(`${tarjeta.id}`));
 }
+
+//CARRITO
+
+let carrito = [];
+
+function agregarAlCarrito(id) {
+    carrito.push(arrayTarjetas[id - 1]);
+    alert(`${arrayTarjetas[id - 1].nombre} añadida al carrito con éxito.`);
+
+    calcularTotalCarrito();
+}
+
+// Esta funcion actualiza el total$ y la cantidad de productos en el carrito.
+function calcularTotalCarrito(){
+    let carritoTotal = document.querySelector('#carrito-total');
+    let total = carrito.reduce((acc,el) => acc + el.precio, 0);
+    carritoTotal.innerText = `${total} $`;
+
+    let carritoProductos = document.querySelector('#carrito-productos');
+    carritoProductos.innerText = `${carrito.length}`;
+}
+
+function limpiarCarrito(){
+    // Vacio el arreglo y actualizo los valores en pantalla.
+    carrito = [];
+    calcularTotalCarrito();
+    console.log(carrito);
+    alert("Has vaciado el carrito!");
+}
+
+function realizarCompra(){
+    if (carrito.length === 0){
+        return;
+    }
+
+    let compra = "Desea confirmar la compra de:\n";
+    for (let producto of carrito){
+        compra = compra + ` ${producto.nombre}: ${producto.precio}$\n`;
+    }
+    compra = compra + `ingrese "si" para confirmar.`;
+
+    let confirmacion = prompt(compra);
+
+    if (confirmacion.toLowerCase() == "si"){
+        carrito = [];
+        calcularTotalCarrito();
+        alert("Gracias por su compra!");
+}
+    }
+
+
+
+const botonComprar = document.querySelector('#boton-comprar');
+botonComprar.addEventListener('click', realizarCompra);
+
+
+const botonLimpiar = document.querySelector('#boton-limpiar');
+botonLimpiar.addEventListener('click', limpiarCarrito);
 
 

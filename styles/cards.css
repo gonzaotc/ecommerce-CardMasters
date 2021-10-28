@@ -76,3 +76,8 @@
   .info-minado{
     /* border: 2px solid grey; */
   }
+
+  .compra-container{
+    display: flex;
+    align-items: center;
+  }
