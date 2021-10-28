@@ -60,7 +60,7 @@ body::before {
   grid-area: carrito;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .carrito-info{

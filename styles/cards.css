@@ -19,16 +19,18 @@
   #cards-container{
     grid-area: cards;
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
-    margin: 50px;
+    margin: 50px auto;
+    /* border: 2px solid red; */
   }
   
   .card{
     /* La card se separa en dos partes principales: el image-container y el info-container.*/
     background: var(--color_dark);
-    margin: 20px auto;
+    margin: 20px 0;
     width: 600px;
-    height: 300px;
+    height: 325px;
     border-radius: 20px;
     display: grid;
     justify-items: center;

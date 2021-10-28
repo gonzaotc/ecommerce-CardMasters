@@ -61,14 +61,14 @@ for (let tarjeta of arrayTarjetas){
         <div class="info-gaming">
             <p>FPS promedio: ${tarjeta.gaming}</p>
             <p>extra info gaming</p>
-            <p>extra info gaming</p>
         </div>
         <div class="info-minado">
             <p>hashrate: ${tarjeta.hashrate} usd/día</p>
             <p>consumo: ${tarjeta.consumoWatts} watts</p>
-            <p>ganancia mensual: ${tarjeta.gananciaMensual}</p>
+            <p>ganancia mensual: ${tarjeta.gananciaMensual}$</p>
             <p>meses rentabilidad: ${tarjeta.rentabilidad}</p>
         </div>
+        <p>precio: ${tarjeta.precio}$</p>
         <div class="compra-container">
             <button id="${tarjeta.id}" class="material-icons md-36">
                 shopping_cart
@@ -121,6 +121,7 @@ function limpiarCarrito(){
 
 function realizarCompra(){
     if (carrito.length === 0){
+        alert("No hay productos en el carrito.")
         return;
     }
 
