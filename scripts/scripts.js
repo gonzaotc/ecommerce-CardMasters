@@ -91,11 +91,21 @@ for (let tarjeta of arrayTarjetas){
 
 let carrito = [];
 
+// Recupero el carrito del localStorage
+carritoLocal = JSON.parse(localStorage.getItem('carrito'));
+if (carritoLocal != null){
+    carrito = carritoLocal;
+}
+calcularTotalCarrito();
+
 function agregarAlCarrito(id) {
     carrito.push(arrayTarjetas[id - 1]);
     alert(`${arrayTarjetas[id - 1].nombre} añadida al carrito con éxito.`);
 
     calcularTotalCarrito();
+
+    //cada vez que agrego al carrito, lo actualizo en el local storage
+    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 // Esta funcion actualiza el total$ y la cantidad de productos en el carrito.
@@ -114,8 +124,10 @@ function calcularTotalCarrito(){
 function limpiarCarrito(){
     // Vacio el arreglo y actualizo los valores en pantalla.
     carrito = [];
+    //Al vaciar el carrito, lo remuevo tambien del local storage.
+    localStorage.removeItem("carrito");
     calcularTotalCarrito();
-    console.log(carrito);
+    
     alert("Has vaciado el carrito!");
 }
 
@@ -135,19 +147,21 @@ function realizarCompra(){
     confirmacion = prompt(compra);
 
     if (confirmacion.toLowerCase() == "si"){
+        // vaciamos el carrito y lo limpiamos del local storage
         carrito = [];
+        localStorage.removeItem("carrito");
         calcularTotalCarrito();
         alert("Gracias por su compra!");
-}
     }
+}
 
-
-
+// boton de confirmacion de compra del carrito
 const botonComprar = document.querySelector('#boton-comprar');
 botonComprar.addEventListener('click', realizarCompra);
 
-
+//boton de vaciar el carrito
 const botonLimpiar = document.querySelector('#boton-limpiar');
 botonLimpiar.addEventListener('click', limpiarCarrito);
 
+//Salvado en local storage del estado del carrito
 
