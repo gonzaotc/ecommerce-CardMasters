@@ -19,35 +19,16 @@ for (let tarjeta of arrayTarjetas){
     tarjeta.consumoMensual = ((tarjeta.consumoWatts * HORAS * DIAS) / 1000) * DOLARBLUE * KWH;
     tarjeta.produccionMensual = tarjeta.hashrate * DIAS * DOLARBLUE;
     tarjeta.gananciaMensual = tarjeta.produccionMensual - tarjeta.consumoMensual;
+    tarjeta.rentabilidad = Math.floor(tarjeta.precio / tarjeta.gananciaMensual);
 }
 
-function informacionTarjeta(){
-    // la función busca una tarjeta que cumpla con el parametro dado. 
-    let findProperty = prompt("Por que propiedad quiere buscar la tarjeta? \n \"nombre\" para buscar por nombre \n \"id\" para buscar por id ");
-    // Mientras no sea una propiedad valida de busqueda, repetir.
-    while (findProperty != 'id' && findProperty != 'nombre'){
-        findProperty = prompt("Esa NO ES una propiedad valida para buscar. \n \"nombre\" para buscar por nombre \n \"id\" para buscar por id ")
-    }
-    let searchKey = prompt(`ingrese el ${findProperty} de la tarjeta.`);
-    let found = tarjetas.find(el => el[findProperty] == searchKey)
+function buscarTarjeta(){
 
-    if (found == undefined){
-        alert("Tarjeta no encontrada.");
-        return;
-    }
-    else{
-        alert(`Datos de la tarjeta ${found.nombre}:`);
-        alert(`Información de la tarjeta en formato JSON: \n ${JSON.stringify(found)}`);
-        console.log(`Información de la tarjeta buscada`)
-        console.log(found);
-    }
 }
 
 
-function ordenarTarjetas(propiedad){
-    tarjetas.sort((a,b) => a[propiedad] - b[propiedad]);
-    alert(`lista ordenada por ${propiedad}`);
-    console.log(`lista ordenada por ${propiedad}`);
+function ordenarTarjetas(){
+
 }
 
 //MAIN DEL PROGRAMA.
@@ -59,8 +40,35 @@ for (let tarjeta of arrayTarjetas){
     card.classList.add('card');
 
     card.innerHTML = `
-    <h1>${tarjeta.nombre}</h1>
-    <img class="card__img" src="${tarjeta.img}">
+    <div class="image-container">
+        <img class="card-image" src="${tarjeta.img}">
+        <p>${tarjeta.nombre}</p>
+        <p>${tarjeta.marca}</p>
+    </div>
+    <div class="info-container">
+        <div class="button-container">
+            <button id="gaming">
+                gaming
+            </button>
+            <button id="minado">
+                minado
+            </button>
+            <button id="comprar">
+                comprar
+            </button>
+        </div>
+        <div class="info-gaming">
+            <p>FPS promedio: ${tarjeta.gaming}</p>
+            <p>extra info gaming</p>
+            <p>extra info gaming</p>
+        </div>
+        <div class="info-minado">
+            <p>hashrate: ${tarjeta.hashrate} usd/día</p>
+            <p>consumo: ${tarjeta.consumoWatts} watts</p>
+            <p>ganancia mensual: ${tarjeta.gananciaMensual}</p>
+            <p>meses rentabilidad: ${tarjeta.rentabilidad}</p>
+        </div>
+    </div>
     `
 
     container.appendChild(card);

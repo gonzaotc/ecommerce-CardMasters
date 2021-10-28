@@ -4,32 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="reset.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+
+    <link href="styles/reset.css" rel="stylesheet">
+    <link href="styles/base.css" rel="stylesheet">
+    <link href="styles/cards.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Kanit:wght@100;200;300;400;500;600;700&family=Lexend+Deca&display=swap" rel="stylesheet">
+    
     <title>Card master</title>
 </head>
 <body>
     <nav id="navbar" class="defaultArea">
-        Bienvenido a Card Master - navbar
+        navbar - // under construction
     </nav>
 
     <section id="pre-cards" class="defaultArea">
-        <button id="amd">AMD</button>
-        <button id="amd">NVIDIA</button>
-        <label for="KHW"></label>
-        <input id="KWH" name="KHW" type="number" placeholder="valor del khw">
+        <div class="selector">
+            Filtrar por:
+            <button id="amd">AMD</button>
+            <button id="nvidia">NVIDIA</button>
+        </div>
+
+        <div class="selector">
+            <label for="Moneda">Moneda</label>
+            <select>
+                <option value="eth">Ethereum (ETH)</option>
+                <option value="rvn">Ravencoin (RVN)</option>
+                <option value="erg">Ergo (ERG)</option>
+                <option value="beam">Beam (Beam)</option>
+                <option value="etc">EthereumClassic (ETC)</option>
+                <option value="CLO">Callisto (CLO)</option>
+                <option value="ETP">Metaverse (ETP)</option>
+                <option value="QKC">Quark Chain (1KC)</option>
+            </select>
+            </div>
+            
+        <div class="selector">
+            <label for="KHW">Valor del KHW</label>
+            <input id="KWH" name="KHW" type="number" placeholder="valor del khw">
+        </div>    
+            
+
     </section>
 
-    <section id="cards-container" class="">
+    <section id="cards-container">
 
     </section>
 
     <footer id="footer" class="defaultArea">
-        footer - @gonzaotc
+        footer - @gonzaotc -> //Under construction
     </footer>
 
-    <script src="tarjetas.js"></script>
-    <script src="scripts.js"></script>
+    <script src="scripts/tarjetas.js"></script>
+    <script src="scripts/scripts.js"></script>
 
 </body>
 </html>
