@@ -2,7 +2,8 @@
   --color_main: ;
   --color_secondary: ;
   --color_dark: rgb(32, 34, 49);
-  --footer_height: 200px;
+
+  --iconscolor: rgba(255,255,255,1);
 }
 
 html {
@@ -10,7 +11,7 @@ html {
 }
 *, *:before, *:after {
   box-sizing: inherit;
-  /* font-family: Kanit; */
+  font-family: Kanit;
 }
 
 body {
@@ -63,14 +64,40 @@ body::before {
   justify-content: center;
 }
 
-.carrito-info{
-
+.carrito-botones{
+  /* border: 2px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.carrito-info-parrafo{
+.carrito-comprar-container{
+  display: flex;
+  position: relative;
+}
+
+#carrito-productos{
+  position: absolute;
+  left: 28px;
+  top: -11px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  color: var(--color_dark);
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 1000;
+  font-size: 20px;
+}
+
+.carrito-info{
   display: flex;
   align-items: center;
 }
+
+
 
 /* PRE-CARDS y CARDS en cards.css */
 
@@ -88,7 +115,7 @@ h1{
 
 p{
   color: white;
-  font-size: 20px;
+  font-size: 17.5px;
   font-family: Kanit;
   font-weight: 300;
 }
@@ -101,7 +128,7 @@ p{
 .material-icons{
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 1);
+  color: var(--iconscolor);
 }
 
 .material-icons:hover{
@@ -110,7 +137,19 @@ p{
 
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 { font-size: 30px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
 
+.icon-image{
+  height: 21px;
+  width: 21px;
+  filter: invert(100%);
+  position: relative;
+  top: -4px;
+}
+
+.icon-image:hover{
+  filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg) brightness(98%) contrast(108%);
+}
 
