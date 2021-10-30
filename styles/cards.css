@@ -59,7 +59,7 @@
     /* que ocupe todo su contenedor. */
     width: 90%;
     height: 80%;
-    filter: drop-shadow(-15px 5px 5px rgba(0,0,0,0.5));
+    filter: drop-shadow(-15px 5px 7px rgba(0,0,0,0.4));
     position: relative;
     top: 20px;
     left: 15px;
