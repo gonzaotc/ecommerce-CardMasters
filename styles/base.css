@@ -3,13 +3,15 @@
   --color_secondary: ;
   --color_dark: rgb(32, 34, 49);
 
-  --iconscolor: rgba(255,255,255,1);
+  --iconscolor: rgba(255, 255, 255, 1);
 }
 
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
   font-family: Kanit;
 }
@@ -19,13 +21,14 @@ body {
   background: var(--color_dark);
   display: grid;
   grid-template-rows: 100px 100px 100px 100px 100px auto 100px;
-  grid-template-areas: "navbar"
-                       "."
-                       "carrito"
-                       "."
-                       "pre-cards"
-                       "cards"
-                       "footer";
+  grid-template-areas:
+    "navbar"
+    "."
+    "carrito"
+    "."
+    "pre-cards"
+    "cards"
+    "footer";
 }
 
 body::before {
@@ -44,39 +47,39 @@ body::before {
   z-index: -1;
 }
 
-.defaultArea{
+.defaultArea {
   color: white;
   background: var(--color_dark);
   font-size: 30px;
   display: grid;
   justify-content: center;
-  align-content: center; 
+  align-content: center;
 }
 
-#navbar{
+#navbar {
   grid-area: navbar;
 }
 
-#carrito{
+#carrito {
   grid-area: carrito;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.carrito-botones{
+.carrito-botones {
   /* border: 2px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.carrito-comprar-container{
+.carrito-comprar-container {
   display: flex;
   position: relative;
 }
 
-#carrito-productos{
+#carrito-productos {
   position: absolute;
   left: 28px;
   top: -11px;
@@ -92,12 +95,10 @@ body::before {
   font-size: 20px;
 }
 
-.carrito-info{
+.carrito-info {
   display: flex;
   align-items: center;
 }
-
-
 
 /* PRE-CARDS y CARDS en cards.css */
 
@@ -107,41 +108,51 @@ body::before {
 
 /* ELEMENTOS GENERALES: */
 
-h1{
+h1 {
   font-family: Kanit;
   font-size: 30px;
   color: white;
 }
 
-p{
+p {
   color: white;
   font-size: 17.5px;
   font-family: Kanit;
   font-weight: 300;
 }
 
-.numerico{
+.numerico {
   font-size: 25px;
   color: orange;
 }
 
-.material-icons{
+.material-icons {
   background: none;
   border: none;
   color: var(--iconscolor);
 }
 
-.material-icons:hover{
+.material-icons:hover {
   color: orange;
 }
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-30 { font-size: 30px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18 {
+  font-size: 18px;
+}
+.material-icons.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-30 {
+  font-size: 30px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
 
-.icon-image{
+.icon-image {
   height: 21px;
   width: 21px;
   filter: invert(100%);
@@ -149,7 +160,7 @@ p{
   top: -4px;
 }
 
-.icon-image:hover{
-  filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg) brightness(98%) contrast(108%);
+.icon-image:hover {
+  filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg)
+    brightness(98%) contrast(108%);
 }
-
