@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- CSS archives -->
     <link href="styles/reset.css" rel="stylesheet">
     <link href="styles/base.css" rel="stylesheet">
     <link href="styles/cards.css" rel="stylesheet">
+
+    <!-- Fonts and icons from googlefonts -->
+    <!-- I will use round style from material icons. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Kanit:wght@100;200;300;400;500;600;700&family=Lexend+Deca&display=swap" rel="stylesheet">
-    
-    <title>Card master</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Kanit:wght@100;200;300;400;500;600;700&family=Lexend+Deca&display=swap"
+        rel="stylesheet">
+
+    <title>CardMaster Shop</title>
 </head>
+
 <body>
-    <nav id="navbar" class="defaultArea">
-        Card Master Shop // NAVBAR under construction 
+    <!-- navbar -->
+    <nav class="navbar-container defaultArea">
+        <div class="navbar">
+            <span class="nav-icon material-icons-round">
+                menu
+            </span>
+            <h1 class="title">CardMaster</h1>
+            <div class="cart-btn">
+                <span class="nav-icon material-icons-round">
+                    shopping_cart
+                </span>
+                <div class="cart-items">0</div>
+            </div>
+        </div>
     </nav>
+    <!-- end of navbar -->
 
     <section id="carrito" class="defaultArea">
         <div class="carrito-botones">
-            <div class="carrito-comprar-container">
-               <button id="boton-comprar" class="material-icons md-36">
-                    shopping_cart
-                </button>
-                <div id="carrito-productos" class="numerico">0</div>
-            </div>
-            <button id="boton-limpiar"class="material-icons md-36">
+
+            <button id="boton-limpiar" class="material-icons md-36">
                 delete
             </button>
         </div>
         <div class="carrito-info">
-            <p>Total:&nbsp</p><div id="carrito-total" class="numerico">0</div>
+            <p>Total:&nbsp</p>
+            <div id="carrito-total" class="numerico">0</div>
         </div>
     </section>
 
@@ -59,13 +73,13 @@
                 <option value="ETP">Metaverse (ETP)</option>
                 <option value="QKC">Quark Chain (1KC)</option>
             </select>
-            </div>
-            
+        </div>
+
         <div class="selector">
             <label for="KHW">Valor del KHW</label>
             <input id="KWH" name="KHW" type="number" placeholder="valor del khw">
-        </div>    
-        
+        </div>
+
     </section>
 
     <section id="cards-container">
@@ -81,4 +95,5 @@
     <script src="scripts/carrito.js"></script>
 
 </body>
+
 </html>

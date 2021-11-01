@@ -4,11 +4,14 @@
   --color_dark: rgb(32, 34, 49);
 
   --iconscolor: rgba(255, 255, 255, 1);
+
+  --navbar_height: 60px;
 }
 
 html {
   box-sizing: border-box;
 }
+
 *,
 *:before,
 *:after {
@@ -16,11 +19,13 @@ html {
   font-family: Kanit;
 }
 
+/* body */
+
 body {
   position: relative;
   background: var(--color_dark);
   display: grid;
-  grid-template-rows: 100px 100px 100px 100px 100px auto 100px;
+  grid-template-rows: auto 100px 100px 100px 100px auto 100px;
   grid-template-areas:
     "navbar"
     "."
@@ -47,6 +52,10 @@ body::before {
   z-index: -1;
 }
 
+/* end of body */
+
+/* temporal default area */
+
 .defaultArea {
   color: white;
   background: var(--color_dark);
@@ -56,9 +65,90 @@ body::before {
   align-content: center;
 }
 
-#navbar {
+/* end of temporal default area */
+
+/* navbar */
+
+.navbar-container {
   grid-area: navbar;
+  position: sticky;
+  top: 0;
+  height: var(--navbar_height);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
 }
+
+.navbar {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid blue;
+}
+
+.title {
+}
+
+.cart-btn {
+  /* le doy posicion relativa para que el hijo de pos 
+  absoluta tenga de donde posicionarse correctamente. */
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-items {
+  position: absolute;
+  background: orange;
+  font-family: Kanit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 2px;
+  top: -8px;
+  right: -4px;
+  border-radius: 50%;
+  color: var(--color_dark);
+}
+
+/* end of navbar */
+
+/* icons */
+
+.nav-icon {
+  font-size: 50px;
+}
+
+.material-icons,
+.material-icons-round {
+  background: none;
+  border: none;
+  color: var(--iconscolor);
+}
+
+.material-icons:hover,
+.material-icons-round:hover {
+  color: orange;
+}
+
+/* this is to make an image(png) icon look like the material ones. */
+/* used png because the picaxe icon is custom made. */
+.icon-image {
+  height: 21px;
+  width: 21px;
+  filter: invert(100%);
+  position: relative;
+  top: -4px;
+}
+
+/* filters generated from  */
+.icon-image:hover {
+  filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg)
+    brightness(98%) contrast(108%);
+}
+
+/* end of icons */
 
 #carrito {
   grid-area: carrito;
@@ -124,43 +214,4 @@ p {
 .numerico {
   font-size: 25px;
   color: orange;
-}
-
-.material-icons {
-  background: none;
-  border: none;
-  color: var(--iconscolor);
-}
-
-.material-icons:hover {
-  color: orange;
-}
-
-.material-icons.md-18 {
-  font-size: 18px;
-}
-.material-icons.md-24 {
-  font-size: 24px;
-}
-.material-icons.md-30 {
-  font-size: 30px;
-}
-.material-icons.md-36 {
-  font-size: 36px;
-}
-.material-icons.md-48 {
-  font-size: 48px;
-}
-
-.icon-image {
-  height: 21px;
-  width: 21px;
-  filter: invert(100%);
-  position: relative;
-  top: -4px;
-}
-
-.icon-image:hover {
-  filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg)
-    brightness(98%) contrast(108%);
 }
