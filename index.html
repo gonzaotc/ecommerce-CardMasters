@@ -35,25 +35,35 @@
                 <span class="nav-icon material-icons-round">
                     shopping_cart
                 </span>
-                <div class="cart-items">0</div>
+                <div class="cart-items">1</div>
             </div>
         </div>
     </nav>
     <!-- end of navbar -->
 
-    <section id="carrito" class="defaultArea">
-        <div class="carrito-botones">
 
-            <button id="boton-limpiar" class="material-icons md-36">
-                delete
-            </button>
-        </div>
-        <div class="carrito-info">
-            <p>Total:&nbsp</p>
-            <div id="carrito-total" class="numerico">0</div>
-        </div>
-    </section>
+    <!-- cart -->
+    <div class="cart-overlay">
+        <div class="cart">
+            <span class="close-cart material-icons-round">
+                disabled_by_default
+            </span>
+            <h2>Tu orden: </h2>
+            <div class="cart-content">
 
+                <!-- cart items dinamiclly generated -->
+
+            </div>
+            <div class="cart-footer">
+                <h3>your total: 0$ <span class="cart-total"></span></h3>
+                <button class="clear-cart banner-btn">delete cart</button>
+            </div>
+        </div>
+    </div>
+    <!-- end of cart -->
+
+
+    <!-- pre-cards -->
     <section id="pre-cards" class="defaultArea">
         <div class="selector">
             Filtrar por:
@@ -81,14 +91,22 @@
         </div>
 
     </section>
+    <!-- end of pre-cards -->
 
+
+    <!-- cards section -->
     <section id="cards-container">
 
     </section>
+    <!-- end of cards section -->
 
+
+    <!-- footer -->
     <footer id="footer" class="defaultArea">
         footer - @gonzaotc -> //Under construction
     </footer>
+    <!-- end of footer -->
+
 
     <script src="scripts/tarjetas.js"></script>
     <script src="scripts/base.js"></script>
