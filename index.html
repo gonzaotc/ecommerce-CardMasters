@@ -14,7 +14,9 @@
     <!-- Fonts and icons from googlefonts -->
     <!-- I will use round style from material icons. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Kanit:wght@100;200;300;400;500;600;700&family=Lexend+Deca&display=swap"
@@ -65,14 +67,12 @@
 
     <!-- pre-cards -->
     <section id="pre-cards" class="defaultArea">
-        <div class="selector">
-            Filtrar por:
-            <button id="amd">AMD</button>
-            <button id="nvidia">NVIDIA</button>
+        <div class="selector-container">
+            <h3>valor del khw</h3>
+            <input id="KWH" name="KHW" type="number" placeholder="valor del khw">
         </div>
-
-        <div class="selector">
-            <label for="Moneda">Moneda</label>
+        <div class="selector-container">
+            <h3>red minado</h3>
             <select>
                 <option value="eth">Ethereum (ETH)</option>
                 <option value="rvn">Ravencoin (RVN)</option>
@@ -84,10 +84,12 @@
                 <option value="QKC">Quark Chain (1KC)</option>
             </select>
         </div>
-
-        <div class="selector">
-            <label for="KHW">Valor del KHW</label>
-            <input id="KWH" name="KHW" type="number" placeholder="valor del khw">
+        <div class="selector-container">
+            <h3>filtrar</h3>
+            <div class="filter-button-container">
+                <button id="AMD">AMD</button>
+                <button id="NVIDIA">NVIDIA</button>
+            </div>
         </div>
 
     </section>
@@ -95,7 +97,10 @@
 
 
     <!-- cards section -->
-    <section id="cards-container">
+    <section id="products-container">
+        <div class="products">
+            <!-- aca van los productos desde el dom -->
+        </div>
 
     </section>
     <!-- end of cards section -->

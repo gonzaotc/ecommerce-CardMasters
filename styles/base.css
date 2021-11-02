@@ -1,9 +1,11 @@
 :root {
-  --color_main: ;
-  --color_secondary: ;
-  --color_dark: rgb(32, 34, 49);
+  --main_color_dark: rgba(32, 34, 49, 0.97);
+  --icons_color_dark: rgba(255, 255, 255, 1);
+  --text_color_dark: white;
 
-  --iconscolor: rgba(255, 255, 255, 1);
+  --seconday_color: rgb(255,165,0);
+  --secondary_color_opacity: rgb(255,165,0,0.3);;
+
 
   --navbar_height: 60px;
 
@@ -25,9 +27,9 @@ html {
 
 body {
   position: relative;
-  background: var(--color_dark);
+  background: var(--main_color_dark);
   display: grid;
-  grid-template-rows: auto 100px 100px auto 100px;
+  grid-template-rows: auto 100px auto auto 100px;
   grid-template-areas:
     "navbar"
     "."
@@ -58,7 +60,7 @@ body::before {
 
 .defaultArea {
   color: white;
-  background: var(--color_dark);
+  background: var(--main_color_dark);
   font-size: 30px;
   display: grid;
   justify-content: center;
@@ -82,7 +84,7 @@ body::before {
 
 .navbar {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,17 +102,17 @@ body::before {
 
 .cart-items {
   position: absolute;
-  background: orange;
+  background: var(--seconday_color);
   font-family: Kanit;
   font-size: 16px;
   font-weight: 500;
   width: 20px;
   height: 20px;
   padding: 2px;
-  top: -10px;
-  right: -10px;
+  top: -11px;
+  right: 8px;
   border-radius: 50%;
-  color: var(--color_dark);
+  color: var(--main_color_dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,24 +126,35 @@ body::before {
 .material-icons-round.nav-icon {
   font-size: 30px;
   cursor: pointer;
+  padding: 0px 20px;
 }
 
 /* classes to adjust size from html */
-.material-icons-round.md-18 { font-size: 18px; }
-.material-icons-round.md-24 { font-size: 24px; }
-.material-icons-round.md-30 { font-size: 30px; }
-.material-icons-round.md-36 { font-size: 36px; }
-.material-icons-round.md-48 { font-size: 48px; }
+.material-icons-round.md-18 {
+  font-size: 18px;
+}
+.material-icons-round.md-24 {
+  font-size: 24px;
+}
+.material-icons-round.md-30 {
+  font-size: 30px;
+}
+.material-icons-round.md-36 {
+  font-size: 36px;
+}
+.material-icons-round.md-48 {
+  font-size: 48px;
+}
 
 /* icons style */
 .material-icons-round {
   background: none;
   border: none;
-  color: var(--iconscolor);
+  color: var(--icons_color_dark);
 }
 
 .material-icons-round:hover {
-  color: orange;
+  color: var(--seconday_color);
 }
 
 /* this is to make an image(png) icon look like the material ones. */
@@ -154,17 +167,15 @@ body::before {
   top: -4px;
 }
 
-/* filters generated to simulate the orange color. */
+/* filters generated to simulate the --seconday_color color. */
 /* url of the tool: https://codepen.io/sosuke/pen/Pjoqqp */
 .icon-image:hover {
   filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg)
     brightness(98%) contrast(108%);
 }
-
 /* end of icons */
 
 /* start of cart */
-
 .cart-overlay {
   position: fixed;
   top: 0;
@@ -172,7 +183,7 @@ body::before {
   width: 100%;
   height: 100%;
   transition: var(--mainTransition);
-  background: rgb(240, 157, 81, 0.5);
+  background: var(--secondary_color_opacity);
   z-index: 2;
   visibility: hidden;
 }
@@ -184,7 +195,7 @@ body::before {
   height: 100%;
   overflow: scroll;
   z-index: 3;
-  background: rgb(231, 226, 221);
+  background: var(--main_color_dark);
   padding: 1.5rem;
   transition: var(--mainTransition);
   transform: translateX(100%);
@@ -212,30 +223,77 @@ body::before {
   text-align: center;
   letter-spacing: var(--mainSpacing);
   margin-bottom: 2rem;
+  color: var(--text_color_dark);
 }
 
-/* PRE-CARDS y CARDS en cards.css */
+.cart h3 {
+  color: var(--text_color_dark);
+}
+/* end of cart */
 
+/* precards */
+#pre-cards {
+  grid-area: pre-cards;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  /* border: 2px solid red; */
+}
+
+.selector-container {
+    color: var(--text_color_dark);
+    /* border: 2px solid blue; */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width: 550px){
+  #pre-cards {
+    flex-direction: column;
+  }
+
+  .selector-container{
+    flex-direction: row;
+  }
+}
+
+
+.selector-container h3{
+  font-family: Kanit;
+  color: var(--text_color_dark);
+  font-size: 22px;
+  padding: 0 5px;
+}
+
+.filter-button-container{
+
+}
+/* end of pre-carts */
+
+/* footer */
 #footer {
   grid-area: footer;
 }
+/* end of footer */
 
-/* ELEMENTOS GENERALES: */
-
+/* elementos generales */
 h1 {
   font-family: Kanit;
   font-size: 30px;
-  color: white;
+  color: var(--text_color_dark);
 }
 
 p {
-  color: white;
+  color: var(--text_color_dark);
   font-size: 17.5px;
   font-family: Kanit;
   font-weight: 300;
 }
 
-.numerico {
-  font-size: 25px;
-  color: orange;
+/* end of elementos generales */
+
+.show{
+  display: none !important;
 }
