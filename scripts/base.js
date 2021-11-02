@@ -234,7 +234,6 @@ class UI {
         cartItems.forEach(id => ui.removeItem(id));
 
         // Lo elimino tambien de la vista del cart sidebar
-        while 
     }
     removeItem(id) {
         // Filtro el cart con los que no sean el elemento a eliminar.
