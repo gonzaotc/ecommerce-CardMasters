@@ -5,7 +5,7 @@
   --card_height: 340px;
 }
 
-#products-container {
+.products-container {
   grid-area: cards;
   padding: 4rem 0;
   /* border: 2px solid purple; */
@@ -38,12 +38,12 @@
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 1);
   box-shadow: -5px -5px 20px rgba(0, 0, 0, 1);
   /* border: 2px solid orange; */
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 .card-img-container {
   /* background: linear-gradient(45deg, orange, rgba(223, 122, 29, 0.8)); */
-  background: var(--seconday_color);
+  background: var(--secondary_color);
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
   /* border: 2px solid black; */
@@ -124,6 +124,14 @@
 }
 
 .card-buttons-container{
+
+}
+
+.gaming-btn{
+
+}
+
+.mining-btn{
 
 }
 

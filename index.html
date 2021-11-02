@@ -29,7 +29,7 @@
     <!-- navbar -->
     <nav class="navbar-container defaultArea">
         <div class="navbar">
-            <span class="nav-icon material-icons-round">
+            <span class="menu nav-icon material-icons-round">
                 menu
             </span>
             <h1 class="title">CardMaster</h1>
@@ -37,7 +37,7 @@
                 <span class="nav-icon material-icons-round">
                     shopping_cart
                 </span>
-                <div class="cart-items">1</div>
+                <div class="cart-items">0</div>
             </div>
         </div>
     </nav>
@@ -50,15 +50,13 @@
             <span class="close-cart material-icons-round">
                 disabled_by_default
             </span>
-            <h2>Tu orden: </h2>
+            <p class="cart-title">Your order: <p>
             <div class="cart-content">
-
-                <!-- cart items dinamiclly generated -->
-
+                <!-- items del carrito generados dinamicamente -->
             </div>
             <div class="cart-footer">
-                <h3>your total: 0$ <span class="cart-total"></span></h3>
-                <button class="clear-cart banner-btn">delete cart</button>
+                <p class="cart-footer-total">order total: <span class="cart-total"></span>$</p>
+                <button class="clear-cart">delete cart</button>
             </div>
         </div>
     </div>
@@ -66,14 +64,14 @@
 
 
     <!-- pre-cards -->
-    <section id="pre-cards" class="defaultArea">
+    <section class="pre-cards defaultArea">
         <div class="selector-container">
             <h3>valor del khw</h3>
-            <input id="KWH" name="KHW" type="number" placeholder="valor del khw">
+            <input id="KWH" name="KHW" type="number" placeholder="0.1 usd">
         </div>
         <div class="selector-container">
             <h3>red minado</h3>
-            <select>
+            <select id="network">
                 <option value="eth">Ethereum (ETH)</option>
                 <option value="rvn">Ravencoin (RVN)</option>
                 <option value="erg">Ergo (ERG)</option>
@@ -97,9 +95,9 @@
 
 
     <!-- cards section -->
-    <section id="products-container">
+    <section class="products-container">
         <div class="products">
-            <!-- aca van los productos desde el dom -->
+            <!-- productos generados dinamicamente -->
         </div>
 
     </section>
@@ -107,7 +105,7 @@
 
 
     <!-- footer -->
-    <footer id="footer" class="defaultArea">
+    <footer class="footer defaultArea">
         footer - @gonzaotc -> //Under construction
     </footer>
     <!-- end of footer -->
@@ -115,7 +113,6 @@
 
     <script src="scripts/tarjetas.js"></script>
     <script src="scripts/base.js"></script>
-    <script src="scripts/carrito.js"></script>
 
 </body>
 

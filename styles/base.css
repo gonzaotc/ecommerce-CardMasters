@@ -3,9 +3,10 @@
   --icons_color_dark: rgba(255, 255, 255, 1);
   --text_color_dark: white;
 
-  --seconday_color: rgb(255,165,0);
-  --secondary_color_opacity: rgb(255,165,0,0.3);;
+  --secondary_color: rgb(255, 165, 0);
+  --secondary_color_opacity: rgb(255, 165, 0, 0.3);
 
+  --color_red: hsl(356, 100%, 45%);
 
   --navbar_height: 60px;
 
@@ -102,7 +103,7 @@ body::before {
 
 .cart-items {
   position: absolute;
-  background: var(--seconday_color);
+  background: var(--secondary_color);
   font-family: Kanit;
   font-size: 16px;
   font-weight: 500;
@@ -129,23 +130,6 @@ body::before {
   padding: 0px 20px;
 }
 
-/* classes to adjust size from html */
-.material-icons-round.md-18 {
-  font-size: 18px;
-}
-.material-icons-round.md-24 {
-  font-size: 24px;
-}
-.material-icons-round.md-30 {
-  font-size: 30px;
-}
-.material-icons-round.md-36 {
-  font-size: 36px;
-}
-.material-icons-round.md-48 {
-  font-size: 48px;
-}
-
 /* icons style */
 .material-icons-round {
   background: none;
@@ -154,7 +138,7 @@ body::before {
 }
 
 .material-icons-round:hover {
-  color: var(--seconday_color);
+  color: var(--secondary_color);
 }
 
 /* this is to make an image(png) icon look like the material ones. */
@@ -167,7 +151,7 @@ body::before {
   top: -4px;
 }
 
-/* filters generated to simulate the --seconday_color color. */
+/* filters generated to simulate the --secondary_color color. */
 /* url of the tool: https://codepen.io/sosuke/pen/Pjoqqp */
 .icon-image:hover {
   filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg)
@@ -217,7 +201,7 @@ body::before {
   font-size: 1.7rem;
   cursor: pointer;
 }
-.cart h2 {
+.cart-title {
   text-transform: capitalize;
   font-size: 2rem;
   text-align: center;
@@ -226,13 +210,99 @@ body::before {
   color: var(--text_color_dark);
 }
 
-.cart h3 {
-  color: var(--text_color_dark);
+.cart-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 2px solid purple; */
+  margin: 20px 0;
 }
+
+.cart-footer-total {
+  font-size: 22.5px;
+  padding-bottom: 15px;
+}
+
+.clear-cart {
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-size: 20px;
+  background: var(--secondary_color);
+  color: var(--main_color_dark);
+  border: 2px solid var(--secondary_color);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.clear-cart:hover {
+  box-sizing: border-box;
+  background: transparent;
+  color: var(--secondary_color);
+  border: 2px solid var(--secondary_color);
+}
+
 /* end of cart */
 
+/*---------- Cart Item -------------------- */
+.cart-item {
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr auto;
+  grid-column-gap: 1.5rem;
+  /* margin: 1rem 0; */
+  /* border: 2px solid blue; */
+}
+.cart-item img {
+  width: 100px;
+  height: 100px;
+}
+.item-name {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+}
+.item-price {
+  margin: 0.5rem 0;
+  letter-spacing: var(--mainSpacing);
+}
+.item-amount {
+  text-align: center;
+}
+.remove-item {
+  color: var(--main_color_dark);
+  background: var(--color_red);
+  border: 2px solid var(--color_red);
+  font-size: 13px;
+  border-radius: 4px;
+  padding: 0px 7px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  font-family: Kanit;
+}
+.remove-item:hover {
+  color: var(--color_red);
+  background: transparent;
+  cursor: pointer;
+  font-family: Kanit;
+}
+
+.material-icons-round.cart-icon {
+  cursor: pointer;
+  color: black;
+  font-size: 35px;
+  padding: 5px 0;
+}
+
+.material-icons-round:hover {
+  color: var(--secondary_color);
+}
+/* end of cart item*/
+
 /* precards */
-#pre-cards {
+.pre-cards {
   grid-area: pre-cards;
   display: flex;
   align-items: center;
@@ -242,38 +312,36 @@ body::before {
 }
 
 .selector-container {
-    color: var(--text_color_dark);
-    /* border: 2px solid blue; */
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  color: var(--text_color_dark);
+  /* border: 2px solid blue; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-@media (max-width: 550px){
-  #pre-cards {
+@media (max-width: 550px) {
+  .pre-cards {
     flex-direction: column;
   }
 
-  .selector-container{
+  .selector-container {
     flex-direction: row;
   }
 }
 
-
-.selector-container h3{
+.selector-container h3 {
   font-family: Kanit;
   color: var(--text_color_dark);
   font-size: 22px;
   padding: 0 5px;
 }
 
-.filter-button-container{
-
+.filter-button-container {
 }
 /* end of pre-carts */
 
 /* footer */
-#footer {
+.footer {
   grid-area: footer;
 }
 /* end of footer */
@@ -294,6 +362,6 @@ p {
 
 /* end of elementos generales */
 
-.show{
+.show {
   display: none !important;
 }
