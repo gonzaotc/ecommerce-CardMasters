@@ -67,11 +67,16 @@
     <section class="pre-cards defaultArea">
         <div class="selector-container">
             <h3>Buscar por nombre </h3>
-            <input type="text" name="" id="search-filter" class="search-filter" placeholder="nombre" onkeyup="searchProduct()">
+            <div class="search-container">
+                <input type="text" name="" id="search-input" class="search-filter" placeholder="nombre">
+                <button id="search-button">buscar</button>
+            </div>
+
         </div>
         <div class="selector-container">
             <h3>Ordenar por</h3>
-            <select id="sort">
+            <select id="sort-input">
+                <option value="none">sin ordenar</option>
                 <option value="maxprice">mayor precio</option>
                 <option value="minprice">menor precio</option>
                 <option value="hashrate">hashrate (minado)</option>

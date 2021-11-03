@@ -317,6 +317,7 @@ body::before {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 10px;
 }
 
 @media (max-width: 550px) {
@@ -336,7 +337,8 @@ body::before {
   padding: 0 5px;
 }
 
-.filter-button-container {
+.filter-button-container,.search-container {
+  display: flex;
 }
 
 .filter-button{

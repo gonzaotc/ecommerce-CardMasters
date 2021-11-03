@@ -2,7 +2,7 @@ let products = [
     //Serie 120 AMD
     {id: 1, name: "RX 550", brand: "AMD", serie: "500", price: 40000, consumption: 120 , hashrate: 0.37, gaming: 43, img: 'images/amd500/550.webp'},
     {id: 2, name: "RX 560", brand: "AMD", serie: "500", price: 50000, consumption: 120 , hashrate: 1, gaming: 49, img: 'images/amd500/560.webp'},
-    {id: 3, name: "RX 570", brand: "AMD", serie: "500", price: 60000, consumption: 120 , hashrate: 1.06, gaming: 455, img: 'images/amd500/570.webp'},
+    {id: 3, name: "RX 570", brand: "AMD", serie: "500", price: 60000, consumption: 120 , hashrate: 1.06, gaming: 55, img: 'images/amd500/570.webp'},
     {id: 4, name: "RX 580", brand: "AMD", serie: "500", price: 110000, consumption: 120 , hashrate: 2.55, gaming: 60, img: 'images/amd500/580.webp'},
     {id: 5, name: "RX 590", brand: "AMD", serie: "500", price: 140000, consumption: 120 , hashrate: 1, gaming: 70, img: 'images/amd500/590.webp'},
 

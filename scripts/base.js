@@ -333,7 +333,25 @@ class Operations {
     }
   }
 
-  static searchByName() {}
+  static searchByName() {
+    let searchInput = document.querySelector("#search-input");
+    let searchButton = document.querySelector("#search-button");
+    searchButton.addEventListener("click", () => {
+      let key = searchInput.value.toUpperCase();
+      console.log(`key: ${key}`);
+
+      let searched = [...products].filter((product) =>
+        product.name.toUpperCase().includes(key)
+      );
+      if (searched.length > 0) {
+        Operations.ClearProducts();
+        ui.displayProducts(searched);
+        searchInput.value = "";
+        document.querySelector(".products-container").scrollIntoView({behavior: "smooth"});
+      }
+      else alert(`No se encontró ningún producto con el nombre ${key}`)
+    });
+  }
 
   static filterByBrand() {
     let filterAMD = document.querySelector("#AMD");
@@ -368,7 +386,37 @@ class Operations {
     });
   }
 
-  static sortBy() {}
+  static sortBy() {
+    const sortInput = document.querySelector("#sort-input");
+    sortInput.addEventListener("change", () => {
+      if (sortInput.value == "none") {
+        Operations.ClearProducts();
+        ui.displayProducts(products);
+      } else if (sortInput.value == "maxprice") {
+        let sorted = [...products].sort((a, b) => b.price - a.price);
+        Operations.ClearProducts();
+        ui.displayProducts(sorted);
+      } else if (sortInput.value == "minprice") {
+        let sorted = [...products].sort((a, b) => a.price - b.price);
+        Operations.ClearProducts();
+        ui.displayProducts(sorted);
+      } else if (sortInput.value == "hashrate") {
+        let sorted = [...products].sort((a, b) => b.hashrate - a.hashrate);
+        Operations.ClearProducts();
+        ui.displayProducts(sorted);
+      } else if (sortInput.value == "rentability") {
+        let sorted = [...products].sort(
+          (a, b) => a.rentability - b.rentability
+        );
+        Operations.ClearProducts();
+        ui.displayProducts(sorted);
+      } else if (sortInput.value == "gaming") {
+        let sorted = [...products].sort((a, b) => b.gaming - a.gaming);
+        Operations.ClearProducts();
+        ui.displayProducts(sorted);
+      }
+    });
+  }
 }
 
 // main del programa
@@ -385,23 +433,8 @@ ui.getBuyButtons();
 // una vez obtenido el estado de mis botones, les agrego la lógica de remover.
 ui.cartLogic();
 
+Operations.searchByName();
+
 Operations.filterByBrand();
 
-//  function filter(event) {
-//      // marca retiene la marca del boton clickeado
-//      let marca = event.target.id;
-//      let products = document.querySelectorAll(".card");
-
-//      for (let product of products) {
-//          if (!product.classList.contains(marca)) {
-//              product.classList.toggle("show");
-//          }
-//      }
-//  }
-
-function searchProduct() {
-  const input = document.querySelector("#search-filter").value.toUpperCase();
-  const container = document.querySelector(".products");
-
-  console.log(container);
-}
+Operations.sortBy();
