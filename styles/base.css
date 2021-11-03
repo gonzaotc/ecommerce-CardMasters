@@ -8,7 +8,7 @@
 
   --color_red: hsl(356, 100%, 45%);
 
-  --navbar_height: 60px;
+  --navbar_height: 70px;
 
   --mainTransition: all 0.3s linear;
 }
@@ -30,7 +30,7 @@ body {
   position: relative;
   background: var(--main_color_dark);
   display: grid;
-  grid-template-rows: auto 100px auto auto 100px;
+  grid-template-rows: auto 100px auto auto 200px;
   grid-template-areas:
     "navbar"
     "."
@@ -131,10 +131,12 @@ body::before {
 }
 
 /* icons style */
-.material-icons-round {
+.material-icons-round{
   background: none;
+  cursor: pointer;
   border: none;
   color: var(--icons_color_dark);
+  font-size: 50px;
 }
 
 .material-icons-round:hover {
@@ -320,7 +322,7 @@ body::before {
   flex-direction: column;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 900px) {
   .pre-cards {
     flex-direction: column;
   }

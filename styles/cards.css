@@ -1,14 +1,14 @@
 ﻿/* CARDS */
 
 :root {
-  --card_width: 275px;
-  --card_height: 340px;
+  --card_width: 300px;
+  --card_height: 470px;
 }
 
 .products-container {
   grid-area: cards;
   padding: 4rem 0;
-  /* border: 2px solid purple; */
+  border: 2px solid purple;
 }
 
 .products {
@@ -34,7 +34,7 @@
   display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-columns: 150px 1fr;
+  grid-template-rows: 225px 1fr;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 1);
   box-shadow: -5px -5px 20px rgba(0, 0, 0, 1);
   /* border: 2px solid orange; */
@@ -44,7 +44,7 @@
 .card-img-container {
   /* background: linear-gradient(45deg, orange, rgba(223, 122, 29, 0.8)); */
   background: var(--secondary_color);
-  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
   /* border: 2px solid black; */
   text-align: center;
@@ -52,31 +52,33 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .card-image {
   /* que ocupe todo su contenedor. */
-  width: 90%;
-  height: 60%;
+  width: 100%;
+  height: 87%;
   filter: drop-shadow(-15px 5px 7px rgba(0, 0, 0, 0.4));
   position: relative;
-  top: 20px;
-  left: 15px;
+  top: 5px;
+  /* border: 2px solid red; */
+  object-fit: contain;
 }
 
 .card-name {
   color: var(--main_color_dark);
   font-weight: 400;
-  font-size: 30px;
+  font-size: 35px;
   position: relative;
-  top: 20px;
-  right: -17.5px;
+  top: 15px;
+  right: 0px;
 }
 
 .card-info-container {
   width: 100%;
-  height: 90%;
+  height: 100%;
   /* border: 2px solid green; */
   text-align: center;
   display: flex;

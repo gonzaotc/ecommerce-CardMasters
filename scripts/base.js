@@ -61,8 +61,8 @@ class UI {
       //card de los productos
       card.innerHTML = `
     <div class="card-img-container">
+            <p class="card-name">${product.name}</p>
         <img class="card-image" src="${product.img}">
-        <p class="card-name">${product.name}</p>
     </div>
     <div class="card-info-container">
         <div class="card-header">
@@ -71,10 +71,10 @@ class UI {
                 </p class="brand-name">${product.brand}</p>
             </div>
             <div class="card-buttons-container">
-                <button class="gaming-btn material-icons-round" data-id=${product.id}>
+                <button class="material-icons-round gaming-btn" data-id=${product.id}>
                     sports_esports
                 </button>
-                <button class="mining-btn material-icons-round" data-id=${product.id}>
+                <button class="material-icons-round mining-btn" data-id=${product.id}>
                     <img class="icon-image" src="icons/pickaxe_icon.png">
                 </button>
             </div>
@@ -213,7 +213,12 @@ class UI {
     cartBtn.addEventListener("click", this.showCart);
     closeCartBtn.addEventListener("click", this.hideCart);
     // also close cart when press EXIT. TO-DO
-    // closeCartBtn.addEventListener("click", this.hideCart);
+    window.addEventListener("keydown", (e) => {
+      if (e.key == "Escape") {
+        ui.hideCart();
+      }
+    });
+    
   }
 
   // para cada item del carrito en su estado actual, lo muestro en el sidebar cart.
@@ -284,7 +289,7 @@ class UI {
     let button = this.getSingleButton(id);
     //una vez encontrado el boton, reactivo su funcionalidad
     button.disabled = false;
-    button.firstElementChild.innerText = "removed";
+    button.firstElementChild.innerText = "add to cart";
 
     //Remuevo del dom
   }
@@ -347,9 +352,11 @@ class Operations {
         Operations.ClearProducts();
         ui.displayProducts(searched);
         searchInput.value = "";
-        document.querySelector(".products-container").scrollIntoView({behavior: "smooth"});
-      }
-      else alert(`No se encontró ningún producto con el nombre ${key}`)
+        document
+          .querySelector(".products-container")
+          .scrollIntoView({ behavior: "smooth" });
+        ui.getBuyButtons();
+      } else alert(`No se encontró ningún producto con el nombre ${key}`);
     });
   }
 
@@ -369,6 +376,7 @@ class Operations {
         filterAMD.classList.add("filter-button-active");
         filterNVIDIA.classList.remove("filter-button-active");
       }
+      ui.getBuyButtons();
     });
 
     filterNVIDIA.addEventListener("click", () => {
@@ -383,6 +391,7 @@ class Operations {
         filterNVIDIA.classList.add("filter-button-active");
         filterAMD.classList.remove("filter-button-active");
       }
+      ui.getBuyButtons();
     });
   }
 
@@ -415,6 +424,7 @@ class Operations {
         Operations.ClearProducts();
         ui.displayProducts(sorted);
       }
+      ui.getBuyButtons();
     });
   }
 }
