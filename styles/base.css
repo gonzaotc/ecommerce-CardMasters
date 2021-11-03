@@ -316,8 +316,8 @@ body::before {
   /* border: 2px solid blue; */
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-direction: column;
-  padding: 10px;
 }
 
 @media (max-width: 550px) {
@@ -335,15 +335,19 @@ body::before {
   color: var(--text_color_dark);
   font-size: 22px;
   padding: 0 5px;
+  /* border: 2px solid red; */
+  margin: 5px;
 }
 
 .filter-button-container,.search-container {
   display: flex;
+  /* border: 2px solid purple; */
 }
 
 .filter-button{
   border: none;
   padding: 3px 10px;
+  margin: 0 3px; 
   border-radius: 3px;
 }
 
