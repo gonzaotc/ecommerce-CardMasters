@@ -51,7 +51,7 @@
                 disabled_by_default
             </span>
             <p class="cart-title">Your order: </p>
-                <!-- en este contenedor van los cartItems -->
+            <!-- en este contenedor van los cartItems -->
             <div class="cart-content">
             </div>
             <div class="cart-footer">
@@ -65,6 +65,27 @@
 
     <!-- pre-cards -->
     <section class="pre-cards defaultArea">
+        <div class="selector-container">
+            <h3>Buscar por nombre </h3>
+            <input type="text" name="" id="search-filter" class="search-filter" placeholder="nombre" onkeyup="searchProduct()">
+        </div>
+        <div class="selector-container">
+            <h3>Ordenar por</h3>
+            <select id="sort">
+                <option value="maxprice">mayor precio</option>
+                <option value="minprice">menor precio</option>
+                <option value="hashrate">hashrate (minado)</option>
+                <option value="rentability">rentabilidad (inversión)</option>
+                <option value="gaming">rendimiento en gaming</option>
+            </select>
+        </div>
+        <div class="selector-container">
+            <h3>filtrar</h3>
+            <div class="filter-button-container">
+                <button id="AMD" class="filter-button">AMD</button>
+                <button id="NVIDIA" class="filter-button">NVIDIA</button>
+            </div>
+        </div>
         <div class="selector-container">
             <h3>valor del khw</h3>
             <input id="KWH" name="KHW" type="number" placeholder="0.1 usd">
@@ -82,13 +103,7 @@
                 <option value="QKC">Quark Chain (1KC)</option>
             </select>
         </div>
-        <div class="selector-container">
-            <h3>filtrar</h3>
-            <div class="filter-button-container">
-                <button id="AMD">AMD</button>
-                <button id="NVIDIA">NVIDIA</button>
-            </div>
-        </div>
+
 
     </section>
     <!-- end of pre-cards -->

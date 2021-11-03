@@ -48,6 +48,9 @@ for (let product of products) {
 class UI {
   //Metodo para mostrar los productos
   displayProducts(products) {
+    console.log(
+      `displayProducts() - added ${products.length} products to productsDOM.`
+    );
     for (let product of products) {
       const card = document.createElement("article");
       card.classList.add("card");
@@ -317,6 +320,57 @@ class Storage {
   }
 }
 
+class Operations {
+  // products es el arreglo original de productos.
+  // puedo remover todos los articulos del dom y agregar
+  // únicamente los que cumplan ciertas condiciones.
+  static ClearProducts() {
+    console.log(
+      `ClearProducts() - removed ${productsDOM.children.length} products from productsDOM`
+    );
+    while (productsDOM.children.length > 0) {
+      productsDOM.removeChild(productsDOM.firstChild);
+    }
+  }
+
+  static searchByName() {}
+
+  static filterByBrand() {
+    let filterAMD = document.querySelector("#AMD");
+    let filterNVIDIA = document.querySelector("#NVIDIA");
+
+    filterAMD.addEventListener("click", () => {
+      if (filterAMD.classList.contains("filter-button-active")) {
+        Operations.ClearProducts();
+        ui.displayProducts(products);
+        filterAMD.classList.remove("filter-button-active");
+      } else {
+        let filtered = products.filter((product) => product.brand == "AMD");
+        Operations.ClearProducts();
+        ui.displayProducts(filtered);
+        filterAMD.classList.add("filter-button-active");
+        filterNVIDIA.classList.remove("filter-button-active");
+      }
+    });
+
+    filterNVIDIA.addEventListener("click", () => {
+      if (filterNVIDIA.classList.contains("filter-button-active")) {
+        Operations.ClearProducts();
+        ui.displayProducts(products);
+        filterNVIDIA.classList.remove("filter-button-active");
+      } else {
+        let filtered = products.filter((product) => product.brand == "NVIDIA");
+        Operations.ClearProducts();
+        ui.displayProducts(filtered);
+        filterNVIDIA.classList.add("filter-button-active");
+        filterAMD.classList.remove("filter-button-active");
+      }
+    });
+  }
+
+  static sortBy() {}
+}
+
 // main del programa
 
 const ui = new UI();
@@ -331,20 +385,23 @@ ui.getBuyButtons();
 // una vez obtenido el estado de mis botones, les agrego la lógica de remover.
 ui.cartLogic();
 
-  let filterAmd = document.querySelector("#AMD");
-  let filterNvidia = document.querySelector("#NVIDIA");
+Operations.filterByBrand();
 
-  filterAmd.addEventListener("click", filter);
-  filterNvidia.addEventListener("click", filter);
+//  function filter(event) {
+//      // marca retiene la marca del boton clickeado
+//      let marca = event.target.id;
+//      let products = document.querySelectorAll(".card");
 
- function filter(event) {
-     // marca retiene la marca del boton clickeado
-     let marca = event.target.id;
-     let products = document.querySelectorAll(".card");
+//      for (let product of products) {
+//          if (!product.classList.contains(marca)) {
+//              product.classList.toggle("show");
+//          }
+//      }
+//  }
 
-     for (let product of products) {
-         if (!product.classList.contains(marca)) {
-             product.classList.toggle("show");
-         }
-     }
- }
+function searchProduct() {
+  const input = document.querySelector("#search-filter").value.toUpperCase();
+  const container = document.querySelector(".products");
+
+  console.log(container);
+}
