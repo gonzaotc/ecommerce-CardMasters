@@ -331,20 +331,20 @@ ui.getBuyButtons();
 // una vez obtenido el estado de mis botones, les agrego la lógica de remover.
 ui.cartLogic();
 
-//  let filterAmd = document.querySelector("#AMD");
-//  let filterNvidia = document.querySelector("#NVIDIA");
+  let filterAmd = document.querySelector("#AMD");
+  let filterNvidia = document.querySelector("#NVIDIA");
 
-//  filterAmd.addEventListener("click", filter);
-//  filterNvidia.addEventListener("click", filter);
+  filterAmd.addEventListener("click", filter);
+  filterNvidia.addEventListener("click", filter);
 
-// function filter(event) {
-//     // marca retiene la marca del boton clickeado
-//     let marca = event.target.id;
-//     let products = document.querySelectorAll(".product");
+ function filter(event) {
+     // marca retiene la marca del boton clickeado
+     let marca = event.target.id;
+     let products = document.querySelectorAll(".card");
 
-//     for (let product of products) {
-//         if (!product.classList.contains(marca)) {
-//             product.classList.toggle("show");
-//         }
-//     }
-// }
+     for (let product of products) {
+         if (!product.classList.contains(marca)) {
+             product.classList.toggle("show");
+         }
+     }
+ }
