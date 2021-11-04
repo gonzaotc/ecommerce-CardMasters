@@ -30,9 +30,11 @@ body {
   position: relative;
   background: var(--main_color_dark);
   display: grid;
-  grid-template-rows: auto 100px auto auto 200px;
+  grid-template-rows: auto 20px 200px 20px auto auto 200px;
   grid-template-areas:
     "navbar"
+    "."
+    "carrousel"
     "."
     "pre-cards"
     "cards"
@@ -249,7 +251,7 @@ body::before {
 
 /* end of cart */
 
-/*---------- Cart Item -------------------- */
+/* cart Item */
 .cart-item {
   display: grid;
   align-items: center;
@@ -303,6 +305,12 @@ body::before {
   color: var(--secondary_color);
 }
 /* end of cart item*/
+
+/* carrousel */
+.carrousel{
+  grid-area: carrousel;
+}
+/* end of carrousel */
 
 /* precards */
 .pre-cards {

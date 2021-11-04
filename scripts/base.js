@@ -84,6 +84,7 @@ class UI {
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming3</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming4</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming5</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming6</b></p>
         </div>
         <div id="card-mining-container" class="card-mining-container">
             <p class="card-info-text">hashrate: <b class="card-info-variable"> &nbsp ${product.hashrate} usd / day</b></p>
@@ -155,12 +156,12 @@ class UI {
       let inCart = cart.find((item) => item.id == id);
       if (inCart) {
         // Si ya esta en el carrito, cambio el texto del boton, que es su hijo <p> .buy-text
-        button.firstElementChild.innerText = "In Cart";
+        button.firstElementChild.innerText = "in cart";
         button.disabled = true;
       }
       //Al clickear el boton de compra, se cambia el texto y se desabilita el botón.
       button.addEventListener("click", (event) => {
-        button.firstElementChild.innerText = "In Cart";
+        button.firstElementChild.innerText = "in cart";
         button.disabled = true;
         //Obtengo el producto seleccionado desde el arreglo products guardado en el local storage.
         //El id del producto es el mismo que el data-set del boton presionado.
@@ -393,7 +394,21 @@ class Operations {
           .querySelector(".products-container")
           .scrollIntoView({ behavior: "smooth" });
         ui.getBuyButtons();
-      } else alert(`No se encontró ningún producto con el nombre ${key}`);
+      } else {
+        //Creo el elemento que avisa que no se encontro.
+        Operations.ClearProducts();
+        let notFound = document.createElement('div');
+        notFound.classList.add('not-found-container');
+        notFound.innerHTML = `
+        <span class="material-icons-round not-found-icon">
+        sentiment_dissatisfied
+        </span>
+        <p class="not-found-text">no element was found with that name</p>
+        <p class="javi">tkm javi faltan 2 min para que termine la entrega ajsajs</p>
+        `;
+        productsDOM.appendChild(notFound);
+      };
+        
     });
   }
 
