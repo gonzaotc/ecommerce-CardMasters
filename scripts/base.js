@@ -37,10 +37,10 @@ const IMPUESTOPAIS = 1.3; //Multiplicador equivalente a 30%
 
 // Operaciones básicas sobre los productos.
 for (let product of products) {
-  product.consumption =
+  product.energyCost =
     Math.round((product.consumption * HOURS * DAYS) / 1000) * DOLARBLUE * KWH;
   product.production = Math.round(product.hashrate * DAYS * DOLARBLUE);
-  product.income = Math.round(product.production - product.consumption);
+  product.income = Math.round(product.production - product.energyCost);
   product.rentability = Math.round(product.price / product.income);
 }
 
@@ -67,8 +67,7 @@ class UI {
     <div class="card-info-container">
         <div class="card-header">
             <div class="brand ${product.brand}">
-                <img class="brand-icon" src="icons/${product.brand}_icon.png">
-                </p class="brand-name">${product.brand}</p>
+                <img class="brand-icon" src="icons/${product.brand}_icon.png">${product.brand}
             </div>
             <div class="card-buttons-container">
                 <button class="material-icons-round gaming-btn" data-id=${product.id}>
@@ -79,15 +78,23 @@ class UI {
                 </button>
             </div>
         </div>
-        <div class="card-gaming-container">
+        <div id="card-gaming-container" class="card-gaming-container hide">
+            <p class="card-info-text">gaming score: <b class="card-info-variable"> &nbsp ${product.gaming}/100</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming2</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming3</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming4</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming5</b></p>
         </div>
-        <div class="card-mining-container">
-            <p>hashrate: ${product.hashrate} usd/day</p>
-            <p>consumption: ${product.consumption} watts</p>
-            <p>income: ${product.income}$</p>
-            <p>rentability: ${product.rentability} months</p>
+        <div id="card-mining-container" class="card-mining-container">
+            <p class="card-info-text">hashrate: <b class="card-info-variable"> &nbsp ${product.hashrate} usd / day</b></p>
+            <p class="card-info-text">consumption: <b class="card-info-variable"> &nbsp ${product.consumption} watts</b></p>
+            <p class="card-info-text">production: <b class="card-info-variable"> &nbsp ${product.production} $ / mth</b></p>
+            <p class="card-info-text">energy cost: <b class="card-info-variable"> &nbsp ${product.energyCost} $ / mth</b></p>
+            <p class="card-info-text">income: <b class="card-info-variable"> &nbsp ${product.income} $ / mth</b></p>
+            <p class="card-info-text">rentability: <b class="card-info-variable"> &nbsp ${product.rentability} months</b></p>
+
         </div>
-        <p>price: ${product.price}$</p>
+        <p class="card-price">price: ${product.price}$</p>
         <div class="card-buy-container">
             <button class="buy-btn material-icons-round" data-id=${product.id}>
                 shopping_cart
@@ -104,6 +111,37 @@ class UI {
   //Metodo para hacer mis botones funcionar con el carrito y el localStorage
   // Dado que tienen un estado que depende de usos anteriores, los cargo luego de cargar el localStorage.
   getBuyButtons() {
+    // Agrego mis botones de minado/gaming
+
+    const miningBtn = [...document.querySelectorAll(".mining-btn")];
+    for (let button of miningBtn) {
+      let id = button.dataset.id;
+      button.addEventListener("click", (event) => {
+        let miningContainer =
+          event.target.parentElement.parentElement.parentElement
+            .nextElementSibling.nextElementSibling;
+        let gamingContainer =
+          event.target.parentElement.parentElement.parentElement
+            .nextElementSibling;
+        gamingContainer.classList.toggle("hide");
+        miningContainer.classList.toggle("hide");
+      });
+    }
+    const gamingBtn = [...document.querySelectorAll(".gaming-btn")];
+    for (let button of gamingBtn) {
+      let id = button.dataset.id;
+      button.addEventListener("click", (event) => {
+        let miningContainer =
+          event.target.parentElement.parentElement.nextElementSibling
+            .nextElementSibling;
+        let gamingContainer =
+          event.target.parentElement.parentElement.nextElementSibling;
+        gamingContainer.classList.toggle("hide");
+        miningContainer.classList.toggle("hide");
+      });
+    }
+
+    // Agrego mis botones de comprado.
     const buttons = [...document.querySelectorAll(".buy-btn")];
     // genero un arreglo con todos los botones de compra
     // Uso el spead operator para convertir el html collection en array y trabajar más comodo.
@@ -218,7 +256,6 @@ class UI {
         ui.hideCart();
       }
     });
-    
   }
 
   // para cada item del carrito en su estado actual, lo muestro en el sidebar cart.

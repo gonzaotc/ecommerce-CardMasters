@@ -131,12 +131,13 @@ body::before {
 }
 
 /* icons style */
-.material-icons-round{
+.material-icons-round,
+.card-buttons-container .material-icons-round {
   background: none;
   cursor: pointer;
   border: none;
   color: var(--icons_color_dark);
-  font-size: 50px;
+  font-size: 35px;
 }
 
 .material-icons-round:hover {
@@ -146,11 +147,11 @@ body::before {
 /* this is to make an image(png) icon look like the material ones. */
 /* used png because the picaxe icon is custom made. */
 .icon-image {
-  height: 21px;
-  width: 21px;
+  height: 24px;
+  width: 24px;
   filter: invert(100%);
   position: relative;
-  top: -4px;
+  top: -6px;
 }
 
 /* filters generated to simulate the --secondary_color color. */
@@ -341,19 +342,20 @@ body::before {
   margin: 5px;
 }
 
-.filter-button-container,.search-container {
+.filter-button-container,
+.search-container {
   display: flex;
   /* border: 2px solid purple; */
 }
 
-.filter-button{
+.filter-button {
   border: none;
   padding: 3px 10px;
-  margin: 0 3px; 
+  margin: 0 3px;
   border-radius: 3px;
 }
 
-.filter-button-active{
+.filter-button-active {
   background: orange;
 }
 /* end of pre-carts */
@@ -380,6 +382,11 @@ p {
 
 /* end of elementos generales */
 
-.show {
+.hide {
   display: none !important;
+}
+
+.zero-opacity {
+  opacity: 0;
+  transition: all 1s ease-in-out 1s;
 }

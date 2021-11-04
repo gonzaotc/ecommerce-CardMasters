@@ -2,7 +2,7 @@
 
 :root {
   --card_width: 300px;
-  --card_height: 470px;
+  --card_height: 500px;
 }
 
 .products-container {
@@ -56,6 +56,15 @@
   margin-bottom: 20px;
 }
 
+.card-name {
+  color: var(--main_color_dark);
+  font-weight: 400;
+  font-size: 35px;
+  position: relative;
+  top: 15px;
+  right: 0px;
+}
+
 .card-image {
   /* que ocupe todo su contenedor. */
   width: 100%;
@@ -67,14 +76,6 @@
   object-fit: contain;
 }
 
-.card-name {
-  color: var(--main_color_dark);
-  font-weight: 400;
-  font-size: 35px;
-  position: relative;
-  top: 15px;
-  right: 0px;
-}
 
 .card-info-container {
   width: 100%;
@@ -105,14 +106,6 @@
   font-size: 25px;
 }
 
-.AMD {
-  color: rgba(255, 0, 0, 0.7);
-}
-
-.NVIDIA {
-  color: rgba(127, 255, 0, 0.7);
-}
-
 .brand-icon {
   width: 30px;
   height: 30px;
@@ -121,9 +114,15 @@
   left: -4px;
 }
 
-.brand-name{
-
+.AMD {
+  color: rgba(255, 0, 0, 0.7);
 }
+
+.NVIDIA {
+  color: rgba(127, 255, 0, 0.7);
+}
+
+
 
 .card-buttons-container{
 
@@ -145,7 +144,20 @@
   /* border: 2px solid grey; */
 }
 
+.card-info-text{
+font-size: 17.5px;
+line-height: 18px;
+}
+
+.card-info-variable{
+  color: rgba(255,255,255,0.5);
+}
+
 .card-buy-container {
   display: flex;
   align-items: center;
+}
+
+.card-price{
+  font-size: 25px;
 }
