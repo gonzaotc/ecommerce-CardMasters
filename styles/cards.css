@@ -156,22 +156,24 @@ line-height: 18px;
   font-size: 23px;
 }
 
+.card-buy-container {
+  display: flex;
+  align-items: center;
+  /* border: 2px solid red; */
+}
+
 .buy-btn.material-icons-round{
   position: relative;
-  left: -47px;
   font-size: 27.5px;
+  /* border: 2px solid green; */
+  display: flex;
+
 }
 
 .buy-text{
   position: relative;
-  left: 65px;
-  top: -25px;
   font-size: 21px;
-}
-
-.card-buy-container {
-  display: flex;
-  align-items: center;
+  /* border: 2px solid yellow; */
 }
 
 .not-found-container{

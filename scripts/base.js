@@ -35,7 +35,7 @@ const DAYS = 30; //Cantidad de días que se usará por mes.
 const IVA = 1.21; // Multiplicador equivalente a 21%.
 const IMPUESTOPAIS = 1.3; //Multiplicador equivalente a 30%
 
-// Operaciones básicas sobre los productos.
+// Operaciones básicas sobre los productos añadidas como propiedades.
 for (let product of products) {
   product.energyCost =
     Math.round((product.consumption * HOURS * DAYS) / 1000) * DOLARBLUE * KWH;
@@ -55,8 +55,6 @@ class UI {
       const card = document.createElement("article");
       card.classList.add("card");
       // la clase card contiene los estilos de la card.
-      card.classList.add(product.brand);
-      // añado la clase marca para filtrar luego.
 
       //card de los productos
       card.innerHTML = `
@@ -109,8 +107,7 @@ class UI {
     }
   }
 
-  //Metodo para hacer mis botones funcionar con el carrito y el localStorage
-  // Dado que tienen un estado que depende de usos anteriores, los cargo luego de cargar el localStorage.
+  // Dado que los botones de compra tienen un estado que depende de usos anteriores, los cargo luego de cargar el localStorage.
   getBuyButtons() {
     // Agrego mis botones de minado/gaming
 
@@ -142,7 +139,7 @@ class UI {
       });
     }
 
-    // Agrego mis botones de comprado.
+    // Agrego mis botones de compra
     const buttons = [...document.querySelectorAll(".buy-btn")];
     // genero un arreglo con todos los botones de compra
     // Uso el spead operator para convertir el html collection en array y trabajar más comodo.
@@ -157,37 +154,42 @@ class UI {
       if (inCart) {
         // Si ya esta en el carrito, cambio el texto del boton, que es su hijo <p> .buy-text
         button.firstElementChild.innerText = "in cart";
-        button.disabled = true;
       }
       //Al clickear el boton de compra, se cambia el texto y se desabilita el botón.
       button.addEventListener("click", (event) => {
-        button.firstElementChild.innerText = "in cart";
-        button.disabled = true;
-        //Obtengo el producto seleccionado desde el arreglo products guardado en el local storage.
-        //El id del producto es el mismo que el data-set del boton presionado.
-        // Le agrego la propiedad cantidad (amount). La inicio en 1.
-        let cartItem = { ...Storage.getProduct(id), amount: 1 };
-        console.log(`cartItem added to the cart:`);
-        console.log(cartItem);
+      let inCart = cart.find((item) => item.id == id);
+        if (inCart) {
+          // Si ya esta en el carrito al apretar, lo unico que hago es mostrar el carrito.
+          this.showCart();
+          console.log("already in cart");
+        } else {
+          button.firstElementChild.innerText = "in cart";
+          //Obtengo el producto seleccionado desde el arreglo products guardado en el local storage.
+          //El id del producto es el mismo que el data-set del boton presionado.
+          // Le agrego la propiedad cantidad (amount). La inicio en 1.
+          let cartItem = { ...Storage.getProduct(id), amount: 1 };
+          console.log(`cartItem added to the cart:`);
+          console.log(cartItem);
 
-        //añado el producto seleccionado al carrito.
-        // Uso spread, copiando el anterior arreglo y agregando el
-        // elemento nuevo, pero se podria usar .push().
-        cart = [...cart, cartItem];
-        console.log(`cart array now is:`);
-        console.log(cart);
+          //añado el producto seleccionado al carrito.
+          // Uso spread, copiando el anterior arreglo y agregando el
+          // elemento nuevo, pero se podria usar .push().
+          cart = [...cart, cartItem];
+          console.log(`cart array now is:`);
+          console.log(cart);
 
-        //Guardo el estado del carrito en el localStorage.
-        Storage.saveCart(cart);
+          //Guardo el estado del carrito en el localStorage.
+          Storage.saveCart(cart);
 
-        // Actualizar los valores del carrito (cant. items y total$)
-        this.setCartValues(cart);
+          // Actualizar los valores del carrito (cant. items y total$)
+          this.setCartValues(cart);
 
-        // agregar item seleccionado al cart sidebar
-        this.addCartItem(cartItem);
+          // agregar item seleccionado al cart sidebar
+          this.addCartItem(cartItem);
 
-        // show the cart (change css propertys)
-        this.showCart();
+          // show the cart (change css propertys)
+          this.showCart();
+        }
       });
     });
   }
@@ -200,11 +202,10 @@ class UI {
       tempTotal += item.price * item.amount;
       itemsTotal += item.amount;
     });
-
     cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
     cartItems.innerText = itemsTotal;
   }
-  // Metodo para agregar item al cart sidebar al ser seleccionado
+  // Metodo para agregar item al cart sidebar
   addCartItem(item) {
     const div = document.createElement("div");
     div.classList.add("cart-item");
@@ -251,7 +252,7 @@ class UI {
     // Añado los eventos para abrir y cerrar el carrito.
     cartBtn.addEventListener("click", this.showCart);
     closeCartBtn.addEventListener("click", this.hideCart);
-    // also close cart when press EXIT. TO-DO
+    // also close cart when press EXIT
     window.addEventListener("keydown", (e) => {
       if (e.key == "Escape") {
         ui.hideCart();
@@ -259,7 +260,7 @@ class UI {
     });
   }
 
-  // para cada item del carrito en su estado actual, lo muestro en el sidebar cart.
+  // para los items que ya están en el carrito por usos anteriores, los muestro en el sidebar cart.
   populateCart(cart) {
     cart.forEach((item) => this.addCartItem(item));
   }
@@ -320,7 +321,11 @@ class UI {
   }
   removeItem(id) {
     // Filtro el cart con los que no sean el elemento a eliminar.
+    let removed = cart.find(item => item.id == id);
+    console.log(`${removed.name} removido del carrito.`)
     cart = cart.filter((item) => item.id != id);
+    console.log(`cart is now:`);
+    console.log(cart);
     this.setCartValues(cart);
     Storage.saveCart(cart);
     // Devuelvo el estado inicial al boton de compra del producto.
@@ -328,8 +333,6 @@ class UI {
     //una vez encontrado el boton, reactivo su funcionalidad
     button.disabled = false;
     button.firstElementChild.innerText = "add to cart";
-
-    //Remuevo del dom
   }
   // Busco el boton que tenga el id seleccionado.
   getSingleButton(id) {
