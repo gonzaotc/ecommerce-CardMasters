@@ -6,13 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- CSS archives -->
-    <link href="styles/reset.css" rel="stylesheet">
-    <link href="styles/base.css" rel="stylesheet">
-    <link href="styles/cards.css" rel="stylesheet">
-
     <!-- Fonts and icons from googlefonts -->
-    <!-- I will use round style from material icons. -->
+    <!-- I use round style from material icons. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
@@ -21,6 +16,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Kanit:wght@100;200;300;400;500;600;700&family=Lexend+Deca&display=swap"
         rel="stylesheet">
+
+    <!-- CSS archives -->
+    <link href="styles/reset.css" rel="stylesheet">
+    <link href="styles/base.css" rel="stylesheet">
+    <link href="styles/cart.css" rel="stylesheet">
+    <link href="styles/cards.css" rel="stylesheet">
 
     <title>CardMaster Shop</title>
 </head>
@@ -32,7 +33,17 @@
             <span class="menu nav-icon material-icons-round">
                 menu
             </span>
-            <h1 class="title">CardMaster</h1>
+            <div class="navbar-center">
+                <h1 class="title">CardMaster</h1>
+                <section class="searchbar-container">
+                    <div class="searchbar">
+                        <input type="text" name="" id="search-input" class="search-filter" placeholder=" search...">
+                        <span id="search-button" class="nav-icon material-icons-round">
+                            search
+                        </span>
+                    </div>
+            </div>
+            </section>
             <div class="cart-btn">
                 <span class="nav-icon material-icons-round">
                     shopping_cart
@@ -42,6 +53,17 @@
         </div>
     </nav>
     <!-- end of navbar -->
+
+    <!-- searchbar -->
+    <section class="searchbar-container defaultArea searchbar-mobile">
+        <div class="searchbar">
+            <input type="text" name="" id="search-input" class="search-filter" placeholder=" search...">
+            <span id="search-button" class="nav-icon material-icons-round">
+                search
+            </span>
+        </div>
+    </section>
+    <!-- end of search bar -->
 
 
     <!-- cart -->
@@ -62,22 +84,14 @@
     </div>
     <!-- end of cart -->
 
-<!-- carrousel -->
-<div class="carrousel defaultArea">
-     < CARROUSEL >
-</div>
-<!-- end of carrousel -->
+    <!-- carrousel -->
+    <div class="carrousel defaultArea">
+        < CARROUSEL>
+    </div>
+    <!-- end of carrousel -->
 
     <!-- pre-cards -->
     <section class="pre-cards defaultArea">
-        <div class="selector-container">
-            <h3>search by name </h3>
-            <div class="search-container">
-                <input type="text" name="" id="search-input" class="search-filter" placeholder=" nombre">
-                <button id="search-button">buscar</button>
-            </div>
-
-        </div>
         <div class="selector-container">
             <h3>sort by </h3>
             <select id="sort-input">

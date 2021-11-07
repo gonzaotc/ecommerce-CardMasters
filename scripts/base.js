@@ -390,15 +390,12 @@ class Operations {
         Operations.ClearProducts();
         ui.displayProducts(searched);
         searchInput.value = "";
-        document
-          .querySelector(".products-container")
-          .scrollIntoView({ behavior: "smooth" });
         ui.getBuyButtons();
       } else {
         //Creo el elemento que avisa que no se encontro.
         Operations.ClearProducts();
-        let notFound = document.createElement('div');
-        notFound.classList.add('not-found-container');
+        let notFound = document.createElement("div");
+        notFound.classList.add("not-found-container");
         notFound.innerHTML = `
         <span class="material-icons-round not-found-icon">
         sentiment_dissatisfied
@@ -407,8 +404,10 @@ class Operations {
         <p class="javi">tkm javi faltan 2 min para que termine la entrega ajsajs</p>
         `;
         productsDOM.appendChild(notFound);
-      };
-        
+      }
+      document
+        .querySelector(".products-container")
+        .scrollIntoView({ behavior: "smooth" });
     });
   }
 

@@ -24,15 +24,29 @@ html {
   font-family: Kanit;
 }
 
-/* body */
+/* temporal default area: defualt style for my components */
+.defaultArea {
+  color: white;
+  background: var(--main_color_dark);
+  font-size: 30px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+/* end of temporal default area */
 
+
+
+/* body */
 body {
   position: relative;
   background: var(--main_color_dark);
   display: grid;
-  grid-template-rows: auto 20px 200px 20px auto auto 200px;
+  grid-template-rows: auto 5px auto 5px 200px 20px auto auto 200px;
   grid-template-areas:
     "navbar"
+    "."
+    "searchbar"
     "."
     "carrousel"
     "."
@@ -56,24 +70,11 @@ body::before {
   filter: opacity(1);
   z-index: -1;
 }
-
 /* end of body */
 
-/* temporal default area */
 
-.defaultArea {
-  color: white;
-  background: var(--main_color_dark);
-  font-size: 30px;
-  display: grid;
-  justify-content: center;
-  align-content: center;
-}
-
-/* end of temporal default area */
 
 /* navbar */
-
 .navbar-container {
   grid-area: navbar;
   position: sticky;
@@ -91,16 +92,28 @@ body::before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border: 2px solid blue; */
+  padding: 0 20px;
+}
+
+/* Agrupo el titulo con el buscador para desktop */
+.navbar-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 2px solid green; */
+  width: 100%;
+  max-width: 80%;
 }
 
 .title {
+  font-size: 35px;
+  position: relative;
+  top: -2px;
+  color: var(--secondary_color);
 }
 
 .cart-btn {
-  /* le doy posicion relativa para que el hijo de pos 
-  absoluta tenga de donde posicionarse correctamente. */
-  position: relative;
+  position: relative; /*posicionado para el hijo.*/
 }
 
 .cart-items {
@@ -109,11 +122,11 @@ body::before {
   font-family: Kanit;
   font-size: 16px;
   font-weight: 500;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   padding: 2px;
-  top: -11px;
-  right: 8px;
+  top: -10px;
+  right: -9px;
   border-radius: 50%;
   color: var(--main_color_dark);
   display: flex;
@@ -121,18 +134,73 @@ body::before {
   justify-content: center;
   border: 1px solid black;
 }
-
 /* end of navbar */
 
-/* icons */
 
-.material-icons-round.nav-icon {
-  font-size: 30px;
-  cursor: pointer;
-  padding: 0px 20px;
+
+/* searchbar */
+.searchbar-container{
+  grid-area: searchbar;
+  /* border: 3px solid yellow; */
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.searchbar{
+  /* border: 3px solid purple; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  padding: 10px 0;
+}
+#search-input{
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+  font-size: 16px;
+  max-width: 500px;
+  border: none;
+  outline: none;
+  margin-right: 3px;
+}
+.searchbar-mobile{
+  display: flex;
 }
 
-/* icons style */
+@media (min-width: 800px){
+  .searchbar-container{
+    display: flex;
+    /* Controlo el maximo del searchbar en desktop*/
+    max-width: 500px;
+  }
+  .searchbar-mobile{
+    display: none;
+  }
+  .searchbar{
+    width: 100%;
+  }
+  #search-input{
+    max-width: none;
+  }
+  .title{
+    padding-right: 2vw;
+  }
+
+}
+
+
+/* end of searchbar */
+
+
+
+/* icons */
+.material-icons-round {
+  font-size: 30px;
+  cursor: pointer;
+}
+
 .material-icons-round,
 .card-buttons-container .material-icons-round {
   background: none;
@@ -164,153 +232,15 @@ body::before {
 }
 /* end of icons */
 
-/* start of cart */
-.cart-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  transition: var(--mainTransition);
-  background: var(--secondary_color_opacity);
-  z-index: 2;
-  visibility: hidden;
-}
-.cart {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  z-index: 3;
-  background: var(--main_color_dark);
-  padding: 1.5rem;
-  transition: var(--mainTransition);
-  transform: translateX(100%);
-}
-.showCart {
-  transform: translateX(0);
-}
-.transparentBcg {
-  visibility: visible;
-}
-@media screen and (min-width: 768px) {
-  .cart {
-    width: 30vw;
-    min-width: 450px;
-  }
-}
 
-.close-cart {
-  font-size: 1.7rem;
-  cursor: pointer;
-}
-.cart-title {
-  text-transform: capitalize;
-  font-size: 2rem;
-  text-align: center;
-  letter-spacing: var(--mainSpacing);
-  margin-bottom: 2rem;
-  color: var(--text_color_dark);
-}
-
-.cart-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  /* border: 2px solid purple; */
-  margin: 20px 0;
-}
-
-.cart-footer-total {
-  font-size: 22.5px;
-  padding-bottom: 15px;
-}
-
-.clear-cart {
-  box-sizing: border-box;
-  padding: 0.5rem 0.75rem;
-  margin: 10px 0;
-  border-radius: 5px;
-  font-size: 20px;
-  background: var(--secondary_color);
-  color: var(--main_color_dark);
-  border: 2px solid var(--secondary_color);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.clear-cart:hover {
-  box-sizing: border-box;
-  background: transparent;
-  color: var(--secondary_color);
-  border: 2px solid var(--secondary_color);
-}
-
-/* end of cart */
-
-/* cart Item */
-.cart-item {
-  display: grid;
-  align-items: center;
-  grid-template-columns: auto 1fr auto;
-  grid-column-gap: 1.5rem;
-  /* margin: 1rem 0; */
-  /* border: 2px solid blue; */
-}
-.cart-item img {
-  width: 100px;
-  height: 100px;
-}
-.item-name {
-  font-size: 1.2rem;
-  text-transform: capitalize;
-  letter-spacing: var(--mainSpacing);
-}
-.item-price {
-  margin: 0.5rem 0;
-  letter-spacing: var(--mainSpacing);
-}
-.item-amount {
-  text-align: center;
-}
-.remove-item {
-  color: var(--main_color_dark);
-  background: var(--color_red);
-  border: 2px solid var(--color_red);
-  font-size: 13px;
-  border-radius: 4px;
-  padding: 0px 7px;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  font-family: Kanit;
-}
-.remove-item:hover {
-  color: var(--color_red);
-  background: transparent;
-  cursor: pointer;
-  font-family: Kanit;
-}
-
-.material-icons-round.cart-icon {
-  cursor: pointer;
-  color: black;
-  font-size: 35px;
-  padding: 5px 0;
-}
-
-.material-icons-round:hover {
-  color: var(--secondary_color);
-}
-/* end of cart item*/
 
 /* carrousel */
 .carrousel{
   grid-area: carrousel;
 }
 /* end of carrousel */
+
+
 
 /* precards */
 .pre-cards {
@@ -368,11 +298,15 @@ body::before {
 }
 /* end of pre-carts */
 
+
+
 /* footer */
 .footer {
   grid-area: footer;
 }
 /* end of footer */
+
+
 
 /* elementos generales */
 h1 {
