@@ -5,7 +5,6 @@
 
   --secondary_color: rgb(255, 165, 0);
   --secondary_color_opacity: rgb(255, 165, 0, 0.3);
-
   --color_red: hsl(356, 100%, 45%);
 
   --navbar_height: 70px;
@@ -34,8 +33,6 @@ html {
   align-content: center;
 }
 /* end of temporal default area */
-
-
 
 /* body */
 body {
@@ -85,7 +82,6 @@ body::before {
   align-items: center;
   z-index: 1;
 }
-
 .navbar {
   width: 100%;
   max-width: 1200px;
@@ -94,9 +90,8 @@ body::before {
   align-items: center;
   padding: 0 20px;
 }
-
 /* Agrupo el titulo con el buscador para desktop */
-.navbar-center{
+.navbar-center {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,18 +99,15 @@ body::before {
   width: 100%;
   max-width: 80%;
 }
-
 .title {
   font-size: 35px;
   position: relative;
   top: -2px;
   color: var(--secondary_color);
 }
-
 .cart-btn {
   position: relative; /*posicionado para el hijo.*/
 }
-
 .cart-items {
   position: absolute;
   background: var(--secondary_color);
@@ -139,7 +131,7 @@ body::before {
 
 
 /* searchbar */
-.searchbar-container{
+.searchbar-container {
   grid-area: searchbar;
   /* border: 3px solid yellow; */
   width: 100%;
@@ -147,7 +139,7 @@ body::before {
   justify-content: center;
   display: none;
 }
-.searchbar{
+.searchbar {
   /* border: 3px solid purple; */
   display: flex;
   align-items: center;
@@ -155,7 +147,7 @@ body::before {
   width: 80%;
   padding: 10px 0;
 }
-#search-input{
+.search-input {
   width: 100%;
   height: 40px;
   border-radius: 4px;
@@ -165,32 +157,41 @@ body::before {
   outline: none;
   margin-right: 3px;
 }
-.searchbar-mobile{
+.searchbar-mobile {
   display: flex;
 }
-
-@media (min-width: 800px){
-  .searchbar-container{
+@media (min-width: 800px) {
+  body {
+    grid-template-rows: auto 5px auto 5px 200px 20px auto auto 200px;
+    grid-template-areas:
+      "navbar"
+      "."
+      "searchbar"
+      "."
+      "carrousel"
+      "."
+      "pre-cards"
+      "cards"
+      "footer";
+  }
+  .searchbar-container {
     display: flex;
     /* Controlo el maximo del searchbar en desktop*/
-    max-width: 500px;
+    max-width: 550px;
   }
-  .searchbar-mobile{
+  .searchbar-mobile {
     display: none;
   }
-  .searchbar{
+  .searchbar {
     width: 100%;
   }
-  #search-input{
+  .search-input {
     max-width: none;
   }
-  .title{
+  .title {
     padding-right: 2vw;
   }
-
 }
-
-
 /* end of searchbar */
 
 
@@ -200,7 +201,6 @@ body::before {
   font-size: 30px;
   cursor: pointer;
 }
-
 .material-icons-round,
 .card-buttons-container .material-icons-round {
   background: none;
@@ -209,7 +209,6 @@ body::before {
   color: var(--icons_color_dark);
   font-size: 35px;
 }
-
 .material-icons-round:hover {
   color: var(--secondary_color);
 }
@@ -235,7 +234,7 @@ body::before {
 
 
 /* carrousel */
-.carrousel{
+.carrousel {
   grid-area: carrousel;
 }
 /* end of carrousel */
@@ -251,7 +250,6 @@ body::before {
   padding: 10px;
   /* border: 2px solid red; */
 }
-
 .selector-container {
   color: var(--text_color_dark);
   /* border: 2px solid blue; */
@@ -260,17 +258,14 @@ body::before {
   justify-content: space-between;
   flex-direction: column;
 }
-
 @media (max-width: 900px) {
   .pre-cards {
     flex-direction: column;
   }
-
   .selector-container {
     flex-direction: row;
   }
 }
-
 .selector-container h3 {
   font-family: Kanit;
   color: var(--text_color_dark);
@@ -279,20 +274,17 @@ body::before {
   /* border: 2px solid red; */
   margin: 5px;
 }
-
 .filter-button-container,
 .search-container {
   display: flex;
   /* border: 2px solid purple; */
 }
-
 .filter-button {
   border: none;
   padding: 3px 10px;
   margin: 0 3px;
   border-radius: 3px;
 }
-
 .filter-button-active {
   background: orange;
 }
@@ -324,11 +316,6 @@ p {
 
 /* end of elementos generales */
 
-.hide {
-  display: none !important;
-}
-
-.zero-opacity {
-  opacity: 0;
-  transition: all 1s ease-in-out 1s;
+.hide{
+  display: none;
 }

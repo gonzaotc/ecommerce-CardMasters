@@ -364,9 +364,8 @@ class Storage {
 }
 
 class Operations {
-  // products es el arreglo original de productos.
-  // puedo remover todos los articulos del dom y agregar
-  // únicamente los que cumplan ciertas condiciones.
+  // products: arreglo principal de productos.
+  // puedo remover todos los articulos del dom y agregar únicamente los que cumplan ciertas condiciones.
   static ClearProducts() {
     console.log(
       `ClearProducts() - removed ${productsDOM.children.length} products from productsDOM`
@@ -377,37 +376,49 @@ class Operations {
   }
 
   static searchByName() {
-    let searchInput = document.querySelector("#search-input");
-    let searchButton = document.querySelector("#search-button");
-    searchButton.addEventListener("click", () => {
-      let key = searchInput.value.toUpperCase();
-      console.log(`key: ${key}`);
+    let searchButton = [...document.querySelectorAll(".search-button")];
 
-      let searched = [...products].filter((product) =>
-        product.name.toUpperCase().includes(key)
-      );
-      if (searched.length > 0) {
-        Operations.ClearProducts();
-        ui.displayProducts(searched);
-        searchInput.value = "";
-        ui.getBuyButtons();
-      } else {
-        //Creo el elemento que avisa que no se encontro.
-        Operations.ClearProducts();
-        let notFound = document.createElement("div");
-        notFound.classList.add("not-found-container");
-        notFound.innerHTML = `
-        <span class="material-icons-round not-found-icon">
-        sentiment_dissatisfied
-        </span>
-        <p class="not-found-text">no element was found with that name</p>
-        <p class="javi">tkm javi faltan 2 min para que termine la entrega ajsajs</p>
-        `;
-        productsDOM.appendChild(notFound);
+    for (let button of searchButton) {
+      button.addEventListener("click", () => {
+        let input = button.previousElementSibling; // Cada botón selecciona su input..
+        let key = input.value.toUpperCase();
+        console.log(`Mostrando resultados de la busqueda: "${key}"`);
+        let searched = [...products].filter((product) =>
+          product.name.toUpperCase().includes(key)
+        );
+        if (searched.length > 0) {
+          Operations.ClearProducts();
+          ui.displayProducts(searched);
+          ui.getBuyButtons();
+        } else {
+          //Creo el elemento que avisa que no se encontro.
+          Operations.ClearProducts();
+          console.log("not found with that key.");
+          let notFound = document.createElement("div");
+          notFound.classList.add("not-found-container");
+          notFound.innerHTML = `
+         <span class="material-icons-round not-found-icon">
+         sentiment_dissatisfied
+         </span>
+         <p class="not-found-text">no element was found with that name</p>
+         `;
+          productsDOM.appendChild(notFound);
+        }
+        document
+          .querySelector(".products-container")
+          .scrollIntoView({ behavior: "smooth" });
+        input.value = "";
+      });
+      // ésto hace que el enter para el buscador funcione únicamente si se lo tiene seleccionado.
+    }
+    window.addEventListener("keydown", (e) => {
+      if (
+        e.keyCode === 13 &&
+        document.activeElement.nextElementSibling !== null
+      ) {
+        console.log(document.activeElement);
+        document.activeElement.nextElementSibling.click();
       }
-      document
-        .querySelector(".products-container")
-        .scrollIntoView({ behavior: "smooth" });
     });
   }
 
@@ -495,7 +506,5 @@ ui.getBuyButtons();
 ui.cartLogic();
 
 Operations.searchByName();
-
 Operations.filterByBrand();
-
 Operations.sortBy();
