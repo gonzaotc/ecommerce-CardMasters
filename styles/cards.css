@@ -168,7 +168,10 @@
   font-size: 21px;
   /* border: 2px solid yellow; */
 }
+/* end of cart */
 
+
+/* start of notfound */
 .not-found-container {
   background-color: var(--main_color_dark);
   border-radius: 12px;
@@ -189,6 +192,8 @@
 .not-found-text {
   font-size: 20px;
 }
+/* not found */
+
 
 /* modal */
 .modal-container {
@@ -216,11 +221,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
+.close-modal{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 35px;
 }
 
 .showModal {
   opacity: 1;
   display: flex;
+  z-index: 5;
 }
 /* end of modal */

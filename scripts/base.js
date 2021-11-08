@@ -160,11 +160,8 @@ class UI {
     </div>
     </div>
     `);
-      $(".modal-close").on("click", () => {
-        $(".modal-container").toggleClass("showModal");
-      });
-      $(document).on("keypress", (e) => {
-        console.log(e.keyCode);
+      $(".close-modal").on("click", () => {
+        $(".modal-container").removeClass("showModal");
       });
       // Muestra el modal
       $(".modal-container").toggleClass("showModal");
