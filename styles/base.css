@@ -6,6 +6,7 @@
   --secondary_color: rgb(255, 165, 0);
   --secondary_color_opacity: rgb(255, 165, 0, 0.3);
   --color_red: hsl(356, 100%, 45%);
+  --color_purple: rgba(80, 0, 237);
 
   --navbar_height: 70px;
 
@@ -21,6 +22,7 @@ html {
 *:after {
   box-sizing: inherit;
   font-family: Kanit;
+  user-select: none;
 }
 
 /* temporal default area: defualt style for my components */
@@ -68,8 +70,6 @@ body::before {
   z-index: -1;
 }
 /* end of body */
-
-
 
 /* navbar */
 .navbar-container {
@@ -127,8 +127,6 @@ body::before {
   border: 1px solid black;
 }
 /* end of navbar */
-
-
 
 /* searchbar */
 .searchbar-container {
@@ -194,8 +192,6 @@ body::before {
 }
 /* end of searchbar */
 
-
-
 /* icons */
 .material-icons-round {
   font-size: 30px;
@@ -208,6 +204,7 @@ body::before {
   border: none;
   color: var(--icons_color_dark);
   font-size: 35px;
+  transition: color 0.2s;
 }
 .material-icons-round:hover {
   color: var(--secondary_color);
@@ -231,15 +228,11 @@ body::before {
 }
 /* end of icons */
 
-
-
 /* carrousel */
 .carrousel {
   grid-area: carrousel;
 }
 /* end of carrousel */
-
-
 
 /* precards */
 .pre-cards {
@@ -290,15 +283,11 @@ body::before {
 }
 /* end of pre-carts */
 
-
-
 /* footer */
 .footer {
   grid-area: footer;
 }
 /* end of footer */
-
-
 
 /* elementos generales */
 h1 {
@@ -316,6 +305,6 @@ p {
 
 /* end of elementos generales */
 
-.hide{
+.hide {
   display: none;
 }

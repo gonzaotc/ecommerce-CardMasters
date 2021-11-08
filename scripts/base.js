@@ -21,6 +21,9 @@ const productsDOM = document.querySelector(".products");
 // "productos" en el que tengo mis productos.
 const cartContent = document.querySelector(".cart-content");
 
+// Selecciono el contenedor del modal para ponerle y sacarle la clase.
+const modalContainer = document.querySelector(".modal-container");
+
 // carrito
 let cart = [];
 // buttons
@@ -56,11 +59,10 @@ class UI {
       card.classList.add("card");
       // la clase card contiene los estilos de la card.
 
-      //card de los productos
       card.innerHTML = `
     <div class="card-img-container">
             <p class="card-name">${product.name}</p>
-        <img class="card-image" src="${product.img}">
+        <img class="card-image" data-id="${product.id}" src="${product.img}">
     </div>
     <div class="card-info-container">
         <div class="card-header">
@@ -91,7 +93,6 @@ class UI {
             <p class="card-info-text">energy cost: <b class="card-info-variable"> &nbsp ${product.energyCost} $ / mth</b></p>
             <p class="card-info-text">income: <b class="card-info-variable"> &nbsp ${product.income} $ / mth</b></p>
             <p class="card-info-text">rentability: <b class="card-info-variable"> &nbsp ${product.rentability} months</b></p>
-
         </div>
         <p class="card-price">price: ${product.price}$</p>
         <div class="card-buy-container">
@@ -105,12 +106,74 @@ class UI {
     `;
       productsDOM.appendChild(card);
     }
+
+    //MODAL CON JQUERY
+    // Al clickear la imagen del prod, genero el modal.
+    $(".card-image").on("click", (e) => {
+      console.log(e.target.dataset.id);
+      let id = e.target.dataset.id;
+      let product = products.find((item) => item.id == id);
+      $(".modal").html(`
+      <div class="card">
+    <div class="card-img-container">
+            <p class="card-name">${product.name}</p>
+        <img class="card-image" data-id="${product.id}" src="${product.img}">
+    </div>
+    <div class="card-info-container">
+        <div class="card-header">
+            <div class="brand ${product.brand}">
+                <img class="brand-icon" src="icons/${product.brand}_icon.png">${product.brand}
+            </div>
+            <div class="card-buttons-container">
+                <button class="material-icons-round gaming-btn" data-id=${product.id}>
+                    sports_esports
+                </button>
+                <button class="material-icons-round mining-btn" data-id=${product.id}>
+                    <img class="icon-image" src="icons/pickaxe_icon.png">
+                </button>
+            </div>
+        </div>
+        <div id="card-gaming-container" class="card-gaming-container hide">
+            <p class="card-info-text">gaming score: <b class="card-info-variable"> &nbsp ${product.gaming}/100</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming2</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming3</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming4</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming5</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming6</b></p>
+        </div>
+        <div id="card-mining-container" class="card-mining-container">
+            <p class="card-info-text">hashrate: <b class="card-info-variable"> &nbsp ${product.hashrate} usd / day</b></p>
+            <p class="card-info-text">consumption: <b class="card-info-variable"> &nbsp ${product.consumption} watts</b></p>
+            <p class="card-info-text">production: <b class="card-info-variable"> &nbsp ${product.production} $ / mth</b></p>
+            <p class="card-info-text">energy cost: <b class="card-info-variable"> &nbsp ${product.energyCost} $ / mth</b></p>
+            <p class="card-info-text">income: <b class="card-info-variable"> &nbsp ${product.income} $ / mth</b></p>
+            <p class="card-info-text">rentability: <b class="card-info-variable"> &nbsp ${product.rentability} months</b></p>
+        </div>
+        <p class="card-price">price: ${product.price}$</p>
+        <div class="card-buy-container">
+            <button class="buy-btn material-icons-round" data-id=${product.id}>
+                shopping_cart
+                <p class="buy-text" data-id=${product.id}>add to cart<p>
+            </button>
+            
+        </div>
+    </div>
+    </div>
+    `);
+      $(".modal-close").on("click", () => {
+        $(".modal-container").toggleClass("showModal");
+      });
+      $(document).on("keypress", (e) => {
+        console.log(e.keyCode);
+      });
+      // Muestra el modal
+      $(".modal-container").toggleClass("showModal");
+    });
   }
 
   // Dado que los botones de compra tienen un estado que depende de usos anteriores, los cargo luego de cargar el localStorage.
-  getBuyButtons() {
+  getButtons() {
     // Agrego mis botones de minado/gaming
-
     const miningBtn = [...document.querySelectorAll(".mining-btn")];
     for (let button of miningBtn) {
       let id = button.dataset.id;
@@ -157,7 +220,7 @@ class UI {
       }
       //Al clickear el boton de compra, se cambia el texto y se desabilita el botón.
       button.addEventListener("click", (event) => {
-      let inCart = cart.find((item) => item.id == id);
+        let inCart = cart.find((item) => item.id == id);
         if (inCart) {
           // Si ya esta en el carrito al apretar, lo unico que hago es mostrar el carrito.
           this.showCart();
@@ -255,7 +318,13 @@ class UI {
     // also close cart when press EXIT
     window.addEventListener("keydown", (e) => {
       if (e.key == "Escape") {
-        ui.hideCart();
+        // Si esta abierta la tienda, la cierra
+        if (cartDOM.classList.contains("showCart")) {
+          ui.hideCart();
+        } else {
+          // Si no, cierra el modal.
+          modalContainer.classList.remove("showModal");
+        }
       }
     });
   }
@@ -321,8 +390,8 @@ class UI {
   }
   removeItem(id) {
     // Filtro el cart con los que no sean el elemento a eliminar.
-    let removed = cart.find(item => item.id == id);
-    console.log(`${removed.name} removido del carrito.`)
+    let removed = cart.find((item) => item.id == id);
+    console.log(`${removed.name} removido del carrito.`);
     cart = cart.filter((item) => item.id != id);
     console.log(`cart is now:`);
     console.log(cart);
@@ -392,7 +461,7 @@ class Operations {
         if (searched.length > 0) {
           Operations.ClearProducts();
           ui.displayProducts(searched);
-          ui.getBuyButtons();
+          ui.getButtons();
         } else {
           //Creo el elemento que avisa que no se encontro.
           Operations.ClearProducts();
@@ -441,7 +510,7 @@ class Operations {
         filterAMD.classList.add("filter-button-active");
         filterNVIDIA.classList.remove("filter-button-active");
       }
-      ui.getBuyButtons();
+      ui.getButtons();
     });
 
     filterNVIDIA.addEventListener("click", () => {
@@ -456,7 +525,7 @@ class Operations {
         filterNVIDIA.classList.add("filter-button-active");
         filterAMD.classList.remove("filter-button-active");
       }
-      ui.getBuyButtons();
+      ui.getButtons();
     });
   }
 
@@ -489,7 +558,7 @@ class Operations {
         Operations.ClearProducts();
         ui.displayProducts(sorted);
       }
-      ui.getBuyButtons();
+      ui.getButtons();
     });
   }
 }
@@ -504,7 +573,7 @@ ui.displayProducts(products);
 // los guardo en el local storage para trabajarlos.
 Storage.saveProducts(products);
 // actualizo el estado de mis botones de añadir al carrito.
-ui.getBuyButtons();
+ui.getButtons();
 // una vez obtenido el estado de mis botones, les agrego la lógica de remover.
 ui.cartLogic();
 
