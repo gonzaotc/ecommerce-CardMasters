@@ -45,7 +45,7 @@
   background: var(--secondary_color);
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
-  border: 2px solid red;
+  /* border: 2px solid red; */
   text-align: center;
   width: 100%;
   height: 100%;
