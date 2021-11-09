@@ -1,33 +1,26 @@
-// cartBtn abre el carrito sidebar
-const cartBtn = document.querySelector(".cart-btn");
-// closeCartBtn cierra el carrito sidebar
-const closeCartBtn = document.querySelector(".close-cart");
-// clearCartBtn vacia el carrito.
-const clearCartBtn = document.querySelector(".clear-cart");
+const cartBtn = document.querySelector(".cart-btn"); //abre el cart sidebar
+const closeCartBtn = document.querySelector(".close-cart"); //cierra el cart sidebar
+const clearCartBtn = document.querySelector(".clear-cart"); //vacia el carrito
 
-// para cambiar la cantidad de items y el valor total
-const cartItems = document.querySelector(".cart-items");
-const cartTotal = document.querySelector(".cart-total");
+const cartItems = document.querySelector(".cart-items"); //cantidad de items en el carrito
+const cartTotal = document.querySelector(".cart-total"); //total del carrito
 
-// para darles las clases de mostrar/esconder el carrito sidebar.
-const cartOverlay = document.querySelector(".cart-overlay");
-const cartDOM = document.querySelector(".cart");
-// Le pongo "DOM" en el nombre para no confundir con el arreglo
-// "cart" en el que guardo los productos del carrito.
+const cartOverlay = document.querySelector(".cart-overlay"); //contenedor externo del cart sidebar 
+const cartDOM = document.querySelector(".cart"); //contenedor interior del cart sidebar
+// Le pongo "DOM" en el nombre para no confundir con el arreglo cart 
 
-// contenedores donde hago append de mis productos y los del carrito.
-const productsDOM = document.querySelector(".products");
-// le agrego "DOM" al nombre para no confundirlo con el arreglo
-// "productos" en el que tengo mis productos.
-const cartContent = document.querySelector(".cart-content");
+const productsDOM = document.querySelector(".products"); //contenedor donde inyecto los productos.
+// le agrego "DOM" al nombre para no confundirlo con el arreglo productos [json]
+const cartContent = document.querySelector(".cart-content"); //contenedor donde inyecto los productos al carrito.
 
-// Selecciono el contenedor del modal para ponerle y sacarle la clase.
-const modalContainer = document.querySelector(".modal-container");
+const modalContainer = document.querySelector(".modal-container"); //contenedor externo del modal
 
-// carrito
-let cart = [];
-// buttons
-let buttonsArray = [];
+
+
+let cart = []; //carrito
+let buttonsArray = []; //botones
+
+
 
 //CONSTANTES
 const DOLARBLUE = 195;
@@ -38,28 +31,29 @@ const DAYS = 30; //Cantidad de días que se usará por mes.
 const IVA = 1.21; // Multiplicador equivalente a 21%.
 const IMPUESTOPAIS = 1.3; //Multiplicador equivalente a 30%
 
+
+
 // Operaciones básicas sobre los productos añadidas como propiedades.
 for (let product of products) {
-  product.energyCost =
-    Math.round((product.consumption * HOURS * DAYS) / 1000) * DOLARBLUE * KWH;
+  product.energyCost = Math.round((product.consumption * HOURS * DAYS) / 1000) * DOLARBLUE * KWH;
   product.production = Math.round(product.hashrate * DAYS * DOLARBLUE);
   product.income = Math.round(product.production - product.energyCost);
   product.rentability = Math.round(product.price / product.income);
 }
 
-// La clase User Interface guarda mis metodos principales.
-class UI {
-  //Metodo para mostrar los productos
-  displayProducts(products) {
-    console.log(
-      `displayProducts() - added ${products.length} products to productsDOM.`
-    );
+
+
+           // ----------------- User Interface class START ----------------- //      
+class UI { //la clase UserInterface guarda mis métodos principales. 
+
+        // ----------------- displayProducts() START ----------------- // 
+  displayProducts(products) { //Metodo para mostrar los productos.
+    console.log(`displayProducts() - added ${products.length} products to productsDOM.`);
     for (let product of products) {
       const card = document.createElement("article");
-      card.classList.add("card");
-      // la clase card contiene los estilos de la card.
+      card.classList.add("card"); //Estilo de las cards
 
-      card.innerHTML = `
+      card.innerHTML = ` 
     <div class="card-img-container">
             <p class="card-name">${product.name}</p>
         <img class="card-image" data-id="${product.id}" src="${product.img}">
@@ -108,9 +102,8 @@ class UI {
     }
 
     //MODAL CON JQUERY
-    // Al clickear la imagen del prod, genero el modal.
+    //al clickear la imagen del producto, cambio el contenido del modal y lo muestro.
     $(".card-image").on("click", (e) => {
-      console.log(e.target.dataset.id);
       let id = e.target.dataset.id;
       let product = products.find((item) => item.id == id);
       $(".modal").html(`
@@ -160,111 +153,96 @@ class UI {
     </div>
     </div>
     `);
-      $(".close-modal").on("click", () => {
+      $(".close-modal").on("click", () => {  //le agrego el evento de cierre. 
         $(".modal-container").removeClass("showModal");
       });
-      // Muestra el modal
-      $(".modal-container").toggleClass("showModal");
+      $(".modal-container").toggleClass("showModal"); // una vez cargado, lo abro.
     });
   }
+              // ------------ displayProducts() END ------------------- // 
 
-  // Dado que los botones de compra tienen un estado que depende de usos anteriores, los cargo luego de cargar el localStorage.
+  
+  
+              // ----------- getButtons() START --------------- //
   getButtons() {
-    // Agrego mis botones de minado/gaming
+    // Agrego mis botones de minado/gaming a las tarjetas actuales. 
     const miningBtn = [...document.querySelectorAll(".mining-btn")];
     for (let button of miningBtn) {
-      let id = button.dataset.id;
       button.addEventListener("click", (event) => {
-        let miningContainer =
-          event.target.parentElement.parentElement.parentElement
-            .nextElementSibling.nextElementSibling;
-        let gamingContainer =
-          event.target.parentElement.parentElement.parentElement
-            .nextElementSibling;
-        gamingContainer.classList.toggle("hide");
-        miningContainer.classList.toggle("hide");
+        // Para relacionar cada botón con su content-info sin usar id me desplazo por el DOM. 
+        // Agrego el if para manejar el error generado al clickear el mining-btn pero no el icon-image (es más chico) 
+        if (event.target.parentElement.parentElement.parentElement.nextElementSibling != null) {
+          let miningContainer = event.target.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling;
+          let gamingContainer = event.target.parentElement.parentElement.parentElement.nextElementSibling;
+          gamingContainer.classList.add("hide");
+          miningContainer.classList.remove("hide");
+        }
       });
     }
     const gamingBtn = [...document.querySelectorAll(".gaming-btn")];
     for (let button of gamingBtn) {
-      let id = button.dataset.id;
       button.addEventListener("click", (event) => {
-        let miningContainer =
-          event.target.parentElement.parentElement.nextElementSibling
-            .nextElementSibling;
-        let gamingContainer =
-          event.target.parentElement.parentElement.nextElementSibling;
-        gamingContainer.classList.toggle("hide");
-        miningContainer.classList.toggle("hide");
+        let miningContainer = event.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
+        let gamingContainer = event.target.parentElement.parentElement.nextElementSibling;
+        gamingContainer.classList.remove("hide");
+        miningContainer.classList.add("hide");
       });
     }
 
-    // Agrego mis botones de compra
-    const buttons = [...document.querySelectorAll(".buy-btn")];
-    // genero un arreglo con todos los botones de compra
-    // Uso el spead operator para convertir el html collection en array y trabajar más comodo.
 
-    // Me hago una copia para usar en el metodo getSingleButton
-    buttonsArray = buttons;
+    //Agrego mis botones de compra a las tarjetas actuales.
+    const buttons = [...document.querySelectorAll(".buy-btn")]; //convierto el html collection en arreglo por comodidad.
+    buttonsArray = buttons; //Me hago una copia de los botones para usar en el getSingleButton
 
-    //  Busco el id de cada botón, solo les doy evento si el product NO esta en el carrito (por usos anteriores).
+
+    //Busco cada botón por id, recibe eventos en función de si ya está el producto en el carrito por usos anteriores. 
     buttons.forEach((button) => {
-      let id = button.dataset.id;
+      let id = button.dataset.id; 
       let inCart = cart.find((item) => item.id == id);
       if (inCart) {
-        // Si ya esta en el carrito, cambio el texto del boton, que es su hijo <p> .buy-text
-        button.firstElementChild.innerText = "in cart";
+        button.firstElementChild.innerText = "in cart"; //Si ya esta en el carrito, le cambio el texto a su hijo. (<p>)
       }
-      //Al clickear el boton de compra, se cambia el texto y se desabilita el botón.
-      button.addEventListener("click", (event) => {
-        let inCart = cart.find((item) => item.id == id);
+      button.addEventListener("click", (event) => { //Al clickear el botón de compra:
+        let inCart = cart.find((item) => item.id == id); //Reviso si está en el carrito al clickear.
         if (inCart) {
-          // Si ya esta en el carrito al apretar, lo unico que hago es mostrar el carrito.
-          this.showCart();
-          console.log("already in cart");
+          this.showCart(); //solo abro el carrito. 
+          console.log("product clicked already in cart");
         } else {
-          button.firstElementChild.innerText = "in cart";
-          //Obtengo el producto seleccionado desde el arreglo products guardado en el local storage.
-          //El id del producto es el mismo que el data-set del boton presionado.
-          // Le agrego la propiedad cantidad (amount). La inicio en 1.
-          let cartItem = { ...Storage.getProduct(id), amount: 1 };
+          button.firstElementChild.innerText = "in cart"; // le cambio el texto 
+          let cartItem = { ...Storage.getProduct(id), amount: 1 }; //Obtengo el producto desde el local storage y le agrego la prop amount.
           console.log(`cartItem added to the cart:`);
           console.log(cartItem);
 
-          //añado el producto seleccionado al carrito.
-          // Uso spread, copiando el anterior arreglo y agregando el
-          // elemento nuevo, pero se podria usar .push().
-          cart = [...cart, cartItem];
+          cart = [...cart, cartItem]; // Agrego el elemento al carrito.
           console.log(`cart array now is:`);
           console.log(cart);
 
-          //Guardo el estado del carrito en el localStorage.
-          Storage.saveCart(cart);
-
-          // Actualizar los valores del carrito (cant. items y total$)
-          this.setCartValues(cart);
-
-          // agregar item seleccionado al cart sidebar
-          this.addCartItem(cartItem);
-
-          // show the cart (change css propertys)
-          this.showCart();
+          Storage.saveCart(cart); //guardo el estado del carrito en el localStorage
+          this.setCartValues(cart); //actualizo los valores del carrito (cant. items y total$)
+          this.addCartItem(cartItem); //inyecto el item en el cart sidebar
+          this.showCart(); //muestro el carrito
         }
       });
     });
   }
-  //Actualizar valores del carrito
-  setCartValues(cart) {
+              // ----------- getButtons() END --------------- //
+  
+  
+  
+  // Metodo para actualizar valores del carrito
+  setCartValues(cart) { 
     let tempTotal = 0;
     let itemsTotal = 0;
-    cart.map((item) => {
-      // Por cada item del carrito, multiplica su precio por su cantidad.
+    cart.map((item) => { 
       tempTotal += item.price * item.amount;
       itemsTotal += item.amount;
     });
     cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
     cartItems.innerText = itemsTotal;
   }
+
+
+
   // Metodo para agregar item al cart sidebar
   addCartItem(item) {
     const div = document.createElement("div");
@@ -289,11 +267,15 @@ class UI {
     cartContent.appendChild(div);
   }
 
+
+
   // Metodo para abrir el carrito.
   showCart() {
     cartOverlay.classList.add("transparentBcg");
     cartDOM.classList.add("showCart");
   }
+
+
 
   // Metodo para cerrar el carrito.
   hideCart() {
@@ -301,39 +283,43 @@ class UI {
     cartDOM.classList.remove("showCart");
   }
 
-  // Metodo para iniciar la pagina.
+
+
+  // Metodo para iniciar la página.
   setupAPP() {
-    // Al inicial la pagina, intenta conseguir el estado anterior del cart del localStorage
-    cart = Storage.getCart();
-    // A partir del estado del carrito, actualizo los valores (total$ y totalItems)
-    this.setCartValues(cart);
-    this.populateCart(cart);
+    cart = Storage.getCart(); // Busca el estado anterior del carrito. 
+    this.setCartValues(cart); // actualiza valores en función del estado del carrito.
+    this.populateCart(cart); // inyecta los productos del carrito al cart sidebar. 
 
     // Añado los eventos para abrir y cerrar el carrito.
     cartBtn.addEventListener("click", this.showCart);
     closeCartBtn.addEventListener("click", this.hideCart);
-    // also close cart when press EXIT
+
+    // Agrego para que se cierre con escape. 
     window.addEventListener("keydown", (e) => {
       if (e.key == "Escape") {
         // Si esta abierta la tienda, la cierra
         if (cartDOM.classList.contains("showCart")) {
           ui.hideCart();
         } else {
-          // Si no, cierra el modal.
+          // Si no esta abierta, cierra el modal.
           modalContainer.classList.remove("showModal");
         }
       }
     });
   }
 
-  // para los items que ya están en el carrito por usos anteriores, los muestro en el sidebar cart.
+
+
+  // Carga de productos del estado anterior del carrito al cart sidebar. 
   populateCart(cart) {
     cart.forEach((item) => this.addCartItem(item));
   }
 
-  //Una vez obtenido el estado de mis botones y los productos en el cart sidebar, añado
-  // la logica para vaciar el carrito, cambiar cantidad y para poder removerlos.
-  cartLogic() {
+
+
+              // ----------- cartLogic() START --------------- //
+  cartLogic() { // obtenido el estado del carrito, a los items del cart sidebar les añado los eventos de sus botones.
     clearCartBtn.addEventListener("click", this.clearCart);
     // En este contexto this hace referencia al botón, no a la clase del metodo.
 
@@ -341,10 +327,8 @@ class UI {
     cartDOM.addEventListener("click", (event) => {
       let id = event.target.dataset.id;
       if (event.target.classList.contains("remove-item")) {
-        // lo remuevo del carrito y actualizo valores
-        ui.removeItem(id);
-        // lo remuevo del dom del cart sidebar
-        cartContent.removeChild(event.target.parentElement.parentElement);
+        ui.removeItem(id); // lo remuevo del carrito y actualizo valores
+        cartContent.removeChild(event.target.parentElement.parentElement); // lo remuevo del dom del cart sidebar
       } else if (event.target.classList.contains("up")) {
         let product = cart.find((product) => product.id == id);
         product.amount++;
@@ -357,34 +341,39 @@ class UI {
         event.target.previousElementSibling.innerText = product.amount;
         if (product.amount > 0) {
           // Si la cantidad sigue siendo mayor a cero..
-          Storage.saveCart(cart);
-          ui.setCartValues(cart);
+          Storage.saveCart(cart); //guardo
+          ui.setCartValues(cart); //actualizo valores
         } else {
-          //Si la cantidad es cero (o menor)
+          //Si la cantidad es cero (o menor) -> lo saco. 
           ui.removeItem(id);
           cartContent.removeChild(event.target.parentElement.parentElement);
         }
       }
     });
   }
+                // ----------- cartLogic() START --------------- //
 
+
+
+  //Metodo para vaciar el cart sidebar.
   clearCart() {
-    // Me genero un arreglo que contiene los ids de mis elementos en el cart.
-    let cartItems = cart.map((item) => item.id);
-    // Aplico removeItem a cada uno de los items del carrito para vaciarlo
-    // y actualizar los valores en pantalla y en localStorage.
+    let cartItems = cart.map((item) => item.id); //Arreglo con los items actuales del cart sidebar
+    // Aplico removeItem a cada uno de los items del carrito para vaciarlo, 
+    // actualizar los valores en pantalla y guardar el estado del carrito en localStorage.
     cartItems.forEach((id) => ui.removeItem(id));
 
-    // Lo elimino tambien de la vista del cart sidebar
-    // borro hijos hasta que el cartContent este vacio.
+    // Vacio tambien el DOM del cart sidebar. 
     while (cartContent.children.length > 0) {
       console.log(`removed from the cart content: \n`);
       console.log(cartContent.firstChild);
       cartContent.removeChild(cartContent.firstChild);
     }
-    //Cierro el carrito
-    ui.hideCart();
+    ui.hideCart(); // cierro el carrito al terminar.
   }
+
+
+
+  //Metodo para eliminar del carrito, pero NO del DOM del cart sidebar. -> lo hago aparte. 
   removeItem(id) {
     // Filtro el cart con los que no sean el elemento a eliminar.
     let removed = cart.find((item) => item.id == id);
@@ -392,24 +381,29 @@ class UI {
     cart = cart.filter((item) => item.id != id);
     console.log(`cart is now:`);
     console.log(cart);
-    this.setCartValues(cart);
-    Storage.saveCart(cart);
+    this.setCartValues(cart); // actualizo valores
+    Storage.saveCart(cart); //guardo el estado del carrito en localStorage
+
     // Devuelvo el estado inicial al boton de compra del producto.
     let button = this.getSingleButton(id);
-    //una vez encontrado el boton, reactivo su funcionalidad
-    button.disabled = false;
     button.firstElementChild.innerText = "add to cart";
   }
+
+
+
   // Busco el boton que tenga el id seleccionado.
   getSingleButton(id) {
     return buttonsArray.find((button) => button.dataset.id == id);
   }
 }
+     // --------------- UserInterface class END ----------------- //
 
-//esta clase contiene mis metodos para manejar el localStorage.
+
+
+     // ----------------- Storage class START ------------------- //
+// esta clase contiene mis metodos para manejar el localStorage.
+// los metodos static no necesitan instanciar a la clase para poder utilizarlos.
 class Storage {
-  // los metodos static no necesitan instanciar a la clase para poder utilizarlos.
-
   // éste metodo me guarda los productos en el local storage.
   static saveProducts(products) {
     localStorage.setItem("products", JSON.stringify(products));
@@ -431,10 +425,17 @@ class Storage {
       : [];
   }
 }
+     // ----------------- Storage class END ------------------- //
 
+
+
+    // ----------------- Operations class START ------------------- //
 class Operations {
   // products: arreglo principal de productos.
   // puedo remover todos los articulos del dom y agregar únicamente los que cumplan ciertas condiciones.
+
+
+  // Vacio el productsDOM. 
   static ClearProducts() {
     console.log(
       `ClearProducts() - removed ${productsDOM.children.length} products from productsDOM`
@@ -444,24 +445,26 @@ class Operations {
     }
   }
 
+
+    // ----------------- searchbar START ----------------- //
   static searchByName() {
     let searchButton = [...document.querySelectorAll(".search-button")];
 
     for (let button of searchButton) {
       button.addEventListener("click", () => {
-        let input = button.previousElementSibling; // Cada botón selecciona su input..
+        let input = button.previousElementSibling; // Cada botón selecciona su input
         let key = input.value.toUpperCase();
         console.log(`Mostrando resultados de la busqueda: "${key}"`);
         let searched = [...products].filter((product) =>
           product.name.toUpperCase().includes(key)
         );
-        if (searched.length > 0) {
-          Operations.ClearProducts();
-          ui.displayProducts(searched);
-          ui.getButtons();
+        if (searched.length > 0) {  // si la busqueda es valida
+          Operations.ClearProducts(); // vacio el productsDOM
+          ui.displayProducts(searched); // muestro las coincidencias
+          ui.getButtons(); // les agrego la logica de sus botones
         } else {
           //Creo el elemento que avisa que no se encontro.
-          Operations.ClearProducts();
+          Operations.ClearProducts(); // vacio el productsDOM
           console.log("not found with that key.");
           let notFound = document.createElement("div");
           notFound.classList.add("not-found-container");
@@ -475,11 +478,13 @@ class Operations {
         }
         document
           .querySelector(".products-container")
-          .scrollIntoView({ behavior: "smooth" });
+          .scrollIntoView({ behavior: "smooth" }); // Desplazo suavemente hacia el productsDOM.
         input.value = "";
       });
-      // ésto hace que el enter para el buscador funcione únicamente si se lo tiene seleccionado.
     }
+
+
+    // ésto hace que el enter para el buscador funcione únicamente si se lo tiene seleccionado.
     window.addEventListener("keydown", (e) => {
       if (
         e.keyCode === 13 &&
@@ -490,7 +495,11 @@ class Operations {
       }
     });
   }
+      // ------------------ searchbar END ------------------ //
 
+  
+  
+      // ------------------ filtrar por marca START ------------------ //
   static filterByBrand() {
     let filterAMD = document.querySelector("#AMD");
     let filterNVIDIA = document.querySelector("#NVIDIA");
@@ -525,7 +534,10 @@ class Operations {
       ui.getButtons();
     });
   }
+        // ------------------ filtrar por marca END ------------------ //
 
+
+        // ------------------ ordenar por parametro START ------------------ //
   static sortBy() {
     const sortInput = document.querySelector("#sort-input");
     sortInput.addEventListener("change", () => {
@@ -559,21 +571,25 @@ class Operations {
     });
   }
 }
+    // ------------------ ordenar por parametro END ------------------ //
+    // ----------------- Operations class END ------------------- //
 
-// main del programa
 
-const ui = new UI();
-// funciones iniciales, obtengo estados posteriores de la página y el localStorage.
-ui.setupAPP();
-// cargo los productos
-ui.displayProducts(products);
-// los guardo en el local storage para trabajarlos.
-Storage.saveProducts(products);
-// actualizo el estado de mis botones de añadir al carrito.
-ui.getButtons();
-// una vez obtenido el estado de mis botones, les agrego la lógica de remover.
-ui.cartLogic();
+// MAIN DEL PROGRAMA
 
+const ui = new UI(); // instancio la clase UserInterface para utilizar sus métodos
+
+ui.setupAPP(); // funciones iniciales, obtengo estados posteriores de la página y el localStorage.
+
+ui.displayProducts(products); // cargo los productos
+
+Storage.saveProducts(products); // los guardo en el local storage para trabajarlos.
+
+ui.getButtons(); // actualizo el estado de mis botones de añadir al carrito.
+
+ui.cartLogic(); // una vez obtenido el estado de mis botones, les agrego la lógica de remover.
+
+//Añado la lógica de ordenado ,busqueda y filtrado.
 Operations.searchByName();
 Operations.filterByBrand();
 Operations.sortBy();
