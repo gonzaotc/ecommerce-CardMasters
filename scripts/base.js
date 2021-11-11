@@ -92,25 +92,22 @@ class UI { //la clase UserInterface guarda mis métodos principales.
           </div>
         </div>
 
+
+        <div class="card-price-container marb-10">
+          <p class="card-price">price: ${product.price}$</p>
+        </div>
+
         <div class="card-moreinfo-container marb-20">
           <button class="card-moreinfo-button" data-id=${product.id}>
             More info about specs
           </button>
         </div>
 
-        <div class="card-price-container marb-10">
-          <p class="card-price">price: ${product.price}$</p>
-        </div>
-
-        <div class="card-buy-container marb-20">
-          <button class="buy-btn material-icons-round" data-id=${product.id}>
-            shopping_cart
-            <p class="buy-text" data-id=${product.id}>add to cart<p>
-          </button>
-        </div>
-
     </div>
     `;
+      
+      // const card = document.createElement("article");
+      // card.classList.add("card"); //Estilo de las cards
       productsDOM.appendChild(card);
     }
 
@@ -121,11 +118,63 @@ class UI { //la clase UserInterface guarda mis métodos principales.
       let product = products.find((item) => item.id == id);
       $(".modal").html(`
       <div class="card-modal">
-        <div class="card-img-container">
+        <div class="card-img-container marb-20">
             <p class="card-name">${product.name}</p>
             <img class="card-image" data-id="${product.id}" src="${product.img}">
         </div>
-        <div class="card-spec-container">
+
+        <div class="card-header-container marb-10">
+          <div class="brand ${product.brand}">
+            <img class="brand-icon" src="icons/${product.brand}_icon.png">${product.brand}
+          </div>
+          <div class="card-buttons-container">
+            <button class="material-icons-round gaming-btn" data-id=${product.id}>
+              sports_esports
+            </button>
+            <button class="material-icons-round mining-btn" data-id=${product.id}>
+              <img class="icon-image" src="icons/pickaxe_icon.png">
+            </button>
+          </div>
+        </div>
+
+        <div class="card-info-container marb-20">
+          <div id="card-gaming-container" class="card-gaming-container hide">
+            <p class="card-info-text">gaming score: <b class="card-info-variable"> &nbsp ${product.gaming}/100</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming2</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming3</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming4</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming5</b></p>
+            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming6</b></p>
+          </div>
+          <div id="card-mining-container" class="card-mining-container">
+            <p class="card-info-text">hashrate: <b class="card-info-variable"> &nbsp ${product.hashrate} usd / day</b></p>
+            <p class="card-info-text">consumption: <b class="card-info-variable"> &nbsp ${product.consumption} watts</b></p>
+            <p class="card-info-text">production: <b class="card-info-variable"> &nbsp ${product.production} $ / mth</b></p>
+            <p class="card-info-text">energy cost: <b class="card-info-variable"> &nbsp ${product.energyCost} $ / mth</b></p>
+            <p class="card-info-text">income: <b class="card-info-variable"> &nbsp ${product.income} $ / mth</b></p>
+            <p class="card-info-text">rentability: <b class="card-info-variable"> &nbsp ${product.rentability} months</b></p>
+          </div>
+        </div>
+
+        <div class="card-price-container marb-10">
+          <p class="card-price">price: ${product.price}$</p>
+        </div>
+
+        <div class="card-buy-container marb-30">
+          <button class="buy-btn material-icons-round" data-id=${product.id}>
+            shopping_cart
+            <p class="buy-text" data-id=${product.id}>add to cart<p>
+          </button>
+        </div>
+
+        <div class="video-container marb-30">
+          <p class="video-title"></p>
+          <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/iWkdcbru3Ik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="card-spec-container marb-30">
+          <p class="spec-main-title">Technical specs</p>
+      
           <p class="spec-section">General</p>
             <p class="spec-title">Type of conection</p>
             <p class="spec-info">PCI Express 3.0</p>
@@ -171,52 +220,11 @@ class UI { //la clase UserInterface guarda mis métodos principales.
             <p class="spec-info">384</p>
         </div>
 
-        <div class="card-header-container">
-          <div class="brand ${product.brand}">
-            <img class="brand-icon" src="icons/${product.brand}_icon.png">${product.brand}
-          </div>
-          <div class="card-buttons-container">
-            <button class="material-icons-round gaming-btn" data-id=${product.id}>
-              sports_esports
-            </button>
-            <button class="material-icons-round mining-btn" data-id=${product.id}>
-              <img class="icon-image" src="icons/pickaxe_icon.png">
-            </button>
-          </div>
-        </div>
-
-        <div class="card-info-container">
-          <div id="card-gaming-container" class="card-gaming-container hide">
-            <p class="card-info-text">gaming score: <b class="card-info-variable"> &nbsp ${product.gaming}/100</b></p>
-            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming2</b></p>
-            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming3</b></p>
-            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming4</b></p>
-            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming5</b></p>
-            <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming6</b></p>
-          </div>
-          <div id="card-mining-container" class="card-mining-container">
-            <p class="card-info-text">hashrate: <b class="card-info-variable"> &nbsp ${product.hashrate} usd / day</b></p>
-            <p class="card-info-text">consumption: <b class="card-info-variable"> &nbsp ${product.consumption} watts</b></p>
-            <p class="card-info-text">production: <b class="card-info-variable"> &nbsp ${product.production} $ / mth</b></p>
-            <p class="card-info-text">energy cost: <b class="card-info-variable"> &nbsp ${product.energyCost} $ / mth</b></p>
-            <p class="card-info-text">income: <b class="card-info-variable"> &nbsp ${product.income} $ / mth</b></p>
-            <p class="card-info-text">rentability: <b class="card-info-variable"> &nbsp ${product.rentability} months</b></p>
-          </div>
-        </div>
-
-        <div class="card-price-container">
-          <p class="card-price">price: ${product.price}$</p>
-        </div>
-
-        <div class="card-buy-container">
-          <button class="buy-btn material-icons-round" data-id=${product.id}>
-            shopping_cart
-            <p class="buy-text" data-id=${product.id}>add to cart<p>
-          </button>
-        </div>
-
     </div>
     `);
+      // $(".card-moreinfo-button").on("click", (e) => {
+      //   $(".card-image").trigger("click");
+      // });
       $(".close-modal").on("click", () => {  //le agrego el evento de cierre. 
         $(".modal-container").removeClass("showModal");
       });

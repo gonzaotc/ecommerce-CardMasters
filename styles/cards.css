@@ -63,9 +63,9 @@
   font-weight: 400;
   font-size: 35px;
   position: relative;
-  /* top: 15px; */
+  top: 10px;
   right: 0px;
-  border: 2px solid purple;
+  /* border: 2px solid purple; */
 }
 
 .card-image {
@@ -75,7 +75,8 @@
   filter: drop-shadow(-15px 5px 7px rgba(0, 0, 0, 0.4));
   position: relative;
   /* top: 5px; */
-  border: 2px solid red;
+  /* border: 2px solid red; */
+  max-width: 210px;  /*temporal dado que tengo problemas en chrome */
   object-fit: contain;
 }
 
@@ -222,6 +223,11 @@
 
 
 /* elementos generales para las cards */
+
+.marb-30{
+  margin-bottom: 30px;
+}
+
 .marb-20{
   margin-bottom: 20px;
 }
