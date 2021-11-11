@@ -1,5 +1,9 @@
 :root {
   --main_color_dark: rgba(32, 34, 49, 0.97);
+  --main_color_dark_plain: rgba(32, 34, 49, 1);
+  --main_color_dark_opacity: rgba(32, 34, 49, 0.5);
+
+
   --icons_color_dark: rgba(255, 255, 255, 1);
   --text_color_dark: white;
 
@@ -213,8 +217,8 @@ body::before {
 /* this is to make an image(png) icon look like the material ones. */
 /* used png because the picaxe icon is custom made. */
 .icon-image {
-  height: 24px;
-  width: 24px;
+  height: 23px;
+  width: 23px;
   filter: invert(100%);
   position: relative;
   top: -6px;

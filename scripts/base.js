@@ -54,48 +54,61 @@ class UI { //la clase UserInterface guarda mis métodos principales.
       card.classList.add("card"); //Estilo de las cards
 
       card.innerHTML = ` 
-    <div class="card-img-container">
-            <p class="card-name">${product.name}</p>
-        <img class="card-image" data-id="${product.id}" src="${product.img}">
-    </div>
-    <div class="card-info-container">
-        <div class="card-header">
-            <div class="brand ${product.brand}">
-                <img class="brand-icon" src="icons/${product.brand}_icon.png">${product.brand}
-            </div>
-            <div class="card-buttons-container">
-                <button class="material-icons-round gaming-btn" data-id=${product.id}>
-                    sports_esports
-                </button>
-                <button class="material-icons-round mining-btn" data-id=${product.id}>
-                    <img class="icon-image" src="icons/pickaxe_icon.png">
-                </button>
-            </div>
+        <div class="card-img-container marb-10">
+          <p class="card-name">${product.name}</p>
+          <img class="card-image" data-id="${product.id}" src="${product.img}">
         </div>
-        <div id="card-gaming-container" class="card-gaming-container hide">
+
+        <div class="card-header-container marb-10">
+          <div class="brand ${product.brand}">
+            <img class="brand-icon" src="icons/${product.brand}_icon.png">${product.brand}
+          </div>
+          <div class="card-buttons-container">
+            <button class="material-icons-round gaming-btn" data-id=${product.id}>
+              sports_esports
+            </button>
+            <button class="material-icons-round mining-btn" data-id=${product.id}>
+              <img class="icon-image" src="icons/pickaxe_icon.png">
+            </button>
+          </div>
+        </div>
+
+        <div class="card-info-container marb-10">
+          <div id="card-gaming-container" class="card-gaming-container hide">
             <p class="card-info-text">gaming score: <b class="card-info-variable"> &nbsp ${product.gaming}/100</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming2</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming3</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming4</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming5</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming6</b></p>
-        </div>
-        <div id="card-mining-container" class="card-mining-container">
+          </div>
+          <div id="card-mining-container" class="card-mining-container">
             <p class="card-info-text">hashrate: <b class="card-info-variable"> &nbsp ${product.hashrate} usd / day</b></p>
             <p class="card-info-text">consumption: <b class="card-info-variable"> &nbsp ${product.consumption} watts</b></p>
             <p class="card-info-text">production: <b class="card-info-variable"> &nbsp ${product.production} $ / mth</b></p>
             <p class="card-info-text">energy cost: <b class="card-info-variable"> &nbsp ${product.energyCost} $ / mth</b></p>
             <p class="card-info-text">income: <b class="card-info-variable"> &nbsp ${product.income} $ / mth</b></p>
             <p class="card-info-text">rentability: <b class="card-info-variable"> &nbsp ${product.rentability} months</b></p>
+          </div>
         </div>
-        <p class="card-price">price: ${product.price}$</p>
-        <div class="card-buy-container">
-            <button class="buy-btn material-icons-round" data-id=${product.id}>
-                shopping_cart
-                <p class="buy-text" data-id=${product.id}>add to cart<p>
-            </button>
-            
+
+        <div class="card-moreinfo-container marb-20">
+          <button class="card-moreinfo-button" data-id=${product.id}>
+            More info about specs
+          </button>
         </div>
+
+        <div class="card-price-container marb-10">
+          <p class="card-price">price: ${product.price}$</p>
+        </div>
+
+        <div class="card-buy-container marb-20">
+          <button class="buy-btn material-icons-round" data-id=${product.id}>
+            shopping_cart
+            <p class="buy-text" data-id=${product.id}>add to cart<p>
+          </button>
+        </div>
+
     </div>
     `;
       productsDOM.appendChild(card);
@@ -107,56 +120,108 @@ class UI { //la clase UserInterface guarda mis métodos principales.
       let id = e.target.dataset.id;
       let product = products.find((item) => item.id == id);
       $(".modal").html(`
-      <div class="card">
-    <div class="card-img-container">
+      <div class="card-modal">
+        <div class="card-img-container">
             <p class="card-name">${product.name}</p>
-        <img class="card-image" data-id="${product.id}" src="${product.img}">
-    </div>
-    <div class="card-info-container">
-        <div class="card-header">
-            <div class="brand ${product.brand}">
-                <img class="brand-icon" src="icons/${product.brand}_icon.png">${product.brand}
-            </div>
-            <div class="card-buttons-container">
-                <button class="material-icons-round gaming-btn" data-id=${product.id}>
-                    sports_esports
-                </button>
-                <button class="material-icons-round mining-btn" data-id=${product.id}>
-                    <img class="icon-image" src="icons/pickaxe_icon.png">
-                </button>
-            </div>
+            <img class="card-image" data-id="${product.id}" src="${product.img}">
         </div>
-        <div id="card-gaming-container" class="card-gaming-container hide">
+        <div class="card-spec-container">
+          <p class="spec-section">General</p>
+            <p class="spec-title">Type of conection</p>
+            <p class="spec-info">PCI Express 3.0</p>
+            <p class="spec-title">GPU Chipset</p>
+            <p class="spec-info">NVIDIA GeForceGT 1030</p>
+
+          <p class="spec-section">Conectivity</p>
+            <p class="spec-title">HDMI outputs</p>
+            <p class="spec-info">1</p>
+            <p class="spec-title">VGA outputs</p>
+            <p class="spec-info">1</p>
+            <p class="spec-title">DisplayPort</p>
+            <p class="spec-info">No</p>
+
+          <p class="spec-section">Energy</p>
+            <p class="spec-title">Consumption</p>
+            <p class="spec-info">30W</p>
+            <p class="spec-title">Recommended power source</p>
+            <p class="spec-info">300 W</p>
+            <p class="spec-title">Energy conection</p>
+            <p class="spec-info">N/A</p>
+
+          <p class="spec-section">Coolers</p>
+            <p class="spec-title">Ammount of fan coolers</p>
+            <p class="spec-info">1</p>
+
+          <p class="spec-section">Details</p>
+            <p class="spec-title">Base core speed</p>
+            <p class="spec-info">1228 Mhz</p>
+            <p class="spec-title">Turbo core speed</p>
+            <p class="spec-info">1468 Mhz</p>
+            <p class="spec-title">Type of memory</p>
+            <p class="spec-info">DDR4</p>
+            <p class="spec-title">Memory capacity</p>
+            <p class="spec-info">2 GB</p>
+            <p class="spec-title">Memory speed</p>
+            <p class="spec-info">14 Gbps</p>
+            <p class="spec-title">Memory Interface</p>
+            <p class="spec-info">64 Bits</p>
+            <p class="spec-title">Type of processes</p>
+            <p class="spec-info">CUDA</p>
+            <p class="spec-title">Ammount of processes</p>
+            <p class="spec-info">384</p>
+        </div>
+
+        <div class="card-header-container">
+          <div class="brand ${product.brand}">
+            <img class="brand-icon" src="icons/${product.brand}_icon.png">${product.brand}
+          </div>
+          <div class="card-buttons-container">
+            <button class="material-icons-round gaming-btn" data-id=${product.id}>
+              sports_esports
+            </button>
+            <button class="material-icons-round mining-btn" data-id=${product.id}>
+              <img class="icon-image" src="icons/pickaxe_icon.png">
+            </button>
+          </div>
+        </div>
+
+        <div class="card-info-container">
+          <div id="card-gaming-container" class="card-gaming-container hide">
             <p class="card-info-text">gaming score: <b class="card-info-variable"> &nbsp ${product.gaming}/100</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming2</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming3</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming4</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming5</b></p>
             <p class="card-info-text">Extra info about <b class="card-info-variable"> &nbsp gaming6</b></p>
-        </div>
-        <div id="card-mining-container" class="card-mining-container">
+          </div>
+          <div id="card-mining-container" class="card-mining-container">
             <p class="card-info-text">hashrate: <b class="card-info-variable"> &nbsp ${product.hashrate} usd / day</b></p>
             <p class="card-info-text">consumption: <b class="card-info-variable"> &nbsp ${product.consumption} watts</b></p>
             <p class="card-info-text">production: <b class="card-info-variable"> &nbsp ${product.production} $ / mth</b></p>
             <p class="card-info-text">energy cost: <b class="card-info-variable"> &nbsp ${product.energyCost} $ / mth</b></p>
             <p class="card-info-text">income: <b class="card-info-variable"> &nbsp ${product.income} $ / mth</b></p>
             <p class="card-info-text">rentability: <b class="card-info-variable"> &nbsp ${product.rentability} months</b></p>
+          </div>
         </div>
-        <p class="card-price">price: ${product.price}$</p>
+
+        <div class="card-price-container">
+          <p class="card-price">price: ${product.price}$</p>
+        </div>
+
         <div class="card-buy-container">
-            <button class="buy-btn material-icons-round" data-id=${product.id}>
-                shopping_cart
-                <p class="buy-text" data-id=${product.id}>add to cart<p>
-            </button>
-            
+          <button class="buy-btn material-icons-round" data-id=${product.id}>
+            shopping_cart
+            <p class="buy-text" data-id=${product.id}>add to cart<p>
+          </button>
         </div>
-    </div>
+
     </div>
     `);
       $(".close-modal").on("click", () => {  //le agrego el evento de cierre. 
         $(".modal-container").removeClass("showModal");
       });
       $(".modal-container").toggleClass("showModal"); // una vez cargado, lo abro.
+      this.getButtons();
     });
   }
               // ------------ displayProducts() END ------------------- // 
@@ -171,19 +236,19 @@ class UI { //la clase UserInterface guarda mis métodos principales.
       button.addEventListener("click", (event) => {
         // Para relacionar cada botón con su content-info sin usar id me desplazo por el DOM. 
         // Agrego el if para manejar el error generado al clickear el mining-btn pero no el icon-image (es más chico) 
-        if (event.target.parentElement.parentElement.parentElement.nextElementSibling != null) {
-          let miningContainer = event.target.parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling;
-          let gamingContainer = event.target.parentElement.parentElement.parentElement.nextElementSibling;
+        if (event.target.parentElement.classList.contains('mining-btn')){
+          let miningContainer = event.target.parentElement.parentElement.parentElement.nextElementSibling.lastElementChild;
+          let gamingContainer = event.target.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild;
           gamingContainer.classList.add("hide");
-          miningContainer.classList.remove("hide");
+          miningContainer.classList.remove("hide"); 
         }
       });
     }
     const gamingBtn = [...document.querySelectorAll(".gaming-btn")];
     for (let button of gamingBtn) {
       button.addEventListener("click", (event) => {
-        let miningContainer = event.target.parentElement.parentElement.nextElementSibling.nextElementSibling;
-        let gamingContainer = event.target.parentElement.parentElement.nextElementSibling;
+        let miningContainer = event.target.parentElement.parentElement.nextElementSibling.lastElementChild
+        let gamingContainer = event.target.parentElement.parentElement.nextElementSibling.firstElementChild;
         gamingContainer.classList.remove("hide");
         miningContainer.classList.add("hide");
       });
@@ -205,9 +270,11 @@ class UI { //la clase UserInterface guarda mis métodos principales.
       button.addEventListener("click", (event) => { //Al clickear el botón de compra:
         let inCart = cart.find((item) => item.id == id); //Reviso si está en el carrito al clickear.
         if (inCart) {
+          modalContainer.classList.remove('showModal');
           this.showCart(); //solo abro el carrito. 
           console.log("product clicked already in cart");
         } else {
+          modalContainer.classList.remove('showModal');
           button.firstElementChild.innerText = "in cart"; // le cambio el texto 
           let cartItem = { ...Storage.getProduct(id), amount: 1 }; //Obtengo el producto desde el local storage y le agrego la prop amount.
           console.log(`cartItem added to the cart:`);
@@ -216,6 +283,7 @@ class UI { //la clase UserInterface guarda mis métodos principales.
           cart = [...cart, cartItem]; // Agrego el elemento al carrito.
           console.log(`cart array now is:`);
           console.log(cart);
+          ui.getButtons();
 
           Storage.saveCart(cart); //guardo el estado del carrito en el localStorage
           this.setCartValues(cart); //actualizo los valores del carrito (cant. items y total$)
