@@ -1,0 +1,147 @@
+/* start of cart */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    transition: var(--mainTransition);
+    background: var(--secondary_color_opacity);
+    z-index: 2;
+    visibility: hidden;
+
+    &__show {
+        visibility: visible;
+    }
+}
+.cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    z-index: 3;
+    background: var(--main_color_dark);
+    padding: 1.5rem;
+    transition: var(--mainTransition);
+    transform: translateX(100%);
+
+    &__show {
+        transform: translateX(0);
+    }
+
+    &__closebtn {
+        font-size: 35px;
+        cursor: pointer;
+    }
+
+    &__title {
+        text-transform: capitalize;
+        font-size: 2rem;
+        text-align: center;
+        letter-spacing: var(--mainSpacing);
+        margin-bottom: 2rem;
+        color: var(--text_color_dark);
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        /* border: 2px solid purple; */
+        margin: 20px 0;
+
+        &__total {
+            font-size: 22.5px;
+            padding-bottom: 15px;
+        }
+
+        &__clearbtn {
+            box-sizing: border-box;
+            padding: 0.5rem 0.75rem;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 20px;
+            background: var(--secondary_color);
+            color: var(--main_color_dark);
+            border: 2px solid var(--secondary_color);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                box-sizing: border-box;
+                background: transparent;
+                color: var(--secondary_color);
+                border: 2px solid var(--secondary_color);
+            }
+        }
+    }
+}
+// Hago que en desktop no ocupe toda la pantalla.
+@media screen and (min-width: 768px) {
+    .cart {
+        width: 30vw;
+        min-width: 450px;
+    }
+}
+/* end of cart */
+
+/* cart Item */
+.cart-item {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr auto;
+    grid-column-gap: 1.5rem;
+    // border: 2px solid orange;
+
+    img {
+        width: 100px;
+        height: 100px;
+    }
+    &__stats{
+        // border: 2px solid red;
+        height: auto;
+        display: grid;
+        align-items: center;
+        justify-content: start;
+        row-gap: 0.3rem;
+    }
+    &__name {
+        font-size: 1.2rem;
+        text-transform: capitalize;
+        letter-spacing: var(--mainSpacing);
+    }
+    &__price {
+        // margin: 0.3rem 0;
+        // padding-bottom: 0.2rem;
+        letter-spacing: var(--mainSpacing);
+        font-size: 1.2rem;
+    }
+    &__amount {
+        text-align: center;
+        font-size: 20px;
+    }
+    &__remove {
+        color: var(--main_color_dark);
+        background: var(--color_red);
+        border: 2px solid var(--color_red);
+        font-size: 15px;
+        width: 4.575rem;
+        border-radius: 4px;
+        padding: 0.225rem 0px;
+        text-align: center;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        font-family: Kanit;
+
+        &:hover {
+            color: var(--color_red);
+            background: transparent;
+            cursor: pointer;
+            font-family: Kanit;
+        }
+    }
+}
+/* end of cart item*/

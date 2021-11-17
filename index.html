@@ -19,7 +19,7 @@
 
     <!-- CSS archives -->
     <link href="styles/reset.css" rel="stylesheet">
-    <link href="styles/base.css" rel="stylesheet">
+    <link href="sass/main.min.css" rel="stylesheet">
     <link href="styles/cart.css" rel="stylesheet">
     <link href="styles/cards.css" rel="stylesheet">
     <link href="styles/modal.css" rel="stylesheet">
@@ -34,12 +34,12 @@
             <span class="menu nav-icon material-icons-round">
                 menu
             </span>
-            <div class="navbar-center">
-                <h1 class="title">CardMaster</h1>
+            <div class="navbar__center">
+                <h1 class="navbar__title">CardMaster</h1>
                 <section class="searchbar-container">
                     <div class="searchbar">
-                        <input type="text" name="" class="search-input" placeholder=" search..." data-id="1">
-                        <span class="nav-icon material-icons-round search-button" data-id="1">
+                        <input type="text" name="" class="searchbar__input" placeholder=" search..." data-id="1">
+                        <span class="nav-icon material-icons-round searchbar__button" data-id="1">
                             search
                         </span>
                     </div>
@@ -56,10 +56,10 @@
     <!-- end of navbar -->
 
     <!-- searchbar -->
-    <section class="searchbar-container defaultArea searchbar-mobile">
+    <section class="searchbar-container__mobile defaultArea">
         <div class="searchbar">
-            <input type="text" name="" class="search-input" placeholder=" search..." data-id="2">
-            <span class="nav-icon material-icons-round search-button" data-id="2">
+            <input type="text" name="" class="searchbar__input" placeholder=" search..." data-id="2">
+            <span class="nav-icon material-icons-round searchbar__button" data-id="2">
                 search
             </span>
         </div>
@@ -70,16 +70,16 @@
     <!-- cart -->
     <div class="cart-overlay">
         <div class="cart">
-            <span class="close-cart material-icons-round">
+            <span class="cart__closebtn material-icons-round">
                 disabled_by_default
             </span>
-            <p class="cart-title">Your order: </p>
+            <p class="cart__title">Your order: </p>
             <!-- en este contenedor van los cartItems -->
             <div class="cart-content">
             </div>
-            <div class="cart-footer">
-                <p class="cart-footer-total">order total: <span class="cart-total"></span>$</p>
-                <button class="clear-cart">delete cart</button>
+            <div class="cart__footer">
+                <p class="cart__footer__total">order total: <span class="cart-total"></span>$</p>
+                <button class="cart__footer__clearbtn">clear cart</button>
             </div>
         </div>
     </div>
@@ -102,47 +102,48 @@
     </div>
     <!-- end of carrousel -->
 
-    <!-- pre-cards -->
-    <section class="pre-cards defaultArea">
-        <div class="selector-container">
-            <h3>sort by </h3>
-            <select id="sort-input">
-                <option value="none">sin ordenar</option>
-                <option value="maxprice">mayor precio</option>
-                <option value="minprice">menor precio</option>
-                <option value="hashrate">hashrate (minado)</option>
-                <option value="rentability">rentabilidad (inversión)</option>
-                <option value="gaming">rendimiento en gaming</option>
-            </select>
-        </div>
-        <div class="selector-container">
-            <h3>filter</h3>
-            <div class="filter-button-container">
-                <button id="AMD" class="filter-button">AMD</button>
-                <button id="NVIDIA" class="filter-button">NVIDIA</button>
+    <!-- precards -->
+
+    <section class="precards defaultArea">
+        <div class="precards__selectors">
+            <div class="selector-container">
+                <h3>sort by </h3>
+                <select class="entrada" id="sort-input">
+                    <option value="none">sin ordenar</option>
+                    <option value="maxprice">mayor precio</option>
+                    <option value="minprice">menor precio</option>
+                    <option value="hashrate">hashrate (minado)</option>
+                    <option value="rentability">rentabilidad (inversión)</option>
+                    <option value="gaming">rendimiento en gaming</option>
+                </select>
+            </div>
+            <div class="selector-container">
+                <h3>filter</h3>
+                <div class="filter-button-container">
+                    <button id="AMD" class="filter-button">AMD</button>
+                    <button id="NVIDIA" class="filter-button">NVIDIA</button>
+                </div>
+            </div>
+            <div class="selector-container">
+                <h3>khw value</h3>
+                <input class="entrada" id="KWH" name="KHW" type="number" placeholder=" default: 0.1 usd">
+            </div>
+            <div class="selector-container">
+                <h3>red minado</h3>
+                <select class="entrada" id="network">
+                    <option value="eth">Ethereum (ETH)</option>
+                    <option value="rvn">Ravencoin (RVN)</option>
+                    <option value="erg">Ergo (ERG)</option>
+                    <option value="beam">Beam (Beam)</option>
+                    <option value="etc">EthereumClassic (ETC)</option>
+                    <option value="CLO">Callisto (CLO)</option>
+                    <option value="ETP">Metaverse (ETP)</option>
+                    <option value="QKC">Quark Chain (1KC)</option>
+                </select>
             </div>
         </div>
-        <div class="selector-container">
-            <h3>khw value</h3>
-            <input id="KWH" name="KHW" type="number" placeholder=" default: 0.1 usd">
-        </div>
-        <div class="selector-container">
-            <h3>red minado</h3>
-            <select id="network">
-                <option value="eth">Ethereum (ETH)</option>
-                <option value="rvn">Ravencoin (RVN)</option>
-                <option value="erg">Ergo (ERG)</option>
-                <option value="beam">Beam (Beam)</option>
-                <option value="etc">EthereumClassic (ETC)</option>
-                <option value="CLO">Callisto (CLO)</option>
-                <option value="ETP">Metaverse (ETP)</option>
-                <option value="QKC">Quark Chain (1KC)</option>
-            </select>
-
-        </div>
-
     </section>
-    <!-- end of pre-cards -->
+    <!-- end of precards -->
 
 
     <!-- cards section -->
@@ -157,7 +158,12 @@
 
     <!-- footer -->
     <footer class="footer defaultArea">
-        footer - @gonzaotc -> //Under construction
+        <div class="footer-container">
+            <div class="footer__icons-container">
+                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-instagram-square"></i>
+            </div>
+        </div>
     </footer>
     <!-- end of footer -->
 

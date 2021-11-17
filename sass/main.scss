@@ -1,0 +1,251 @@
+@import "reset";
+@import "utilities";
+
+/* temporal default area: defualt style for my components */
+.defaultArea {
+    color: white;
+    background: var(--main_color_dark);
+    font-size: 30px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+/* end of temporal default area */
+
+/* body */
+body {
+    position: relative;
+    background: var(--main_color_dark);
+    display: grid;
+    grid-template-rows: auto 5px auto 5px 200px 10px auto 30px auto 200px;
+    grid-template-areas:
+        "navbar"
+        "."
+        "searchbar"
+        "."
+        "carrousel"
+        "."
+        "precards"
+        "."
+        "cards"
+        "footer";
+
+    &:before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url(../images/wallpaper.jpeg);
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        filter: opacity(1);
+        z-index: -1;
+    }
+}
+/* end of body */
+
+/* navbar */
+.navbar-container {
+    grid-area: navbar;
+    position: sticky;
+    top: 0;
+    height: var(--navbar_height);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+.navbar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+
+    &__center {
+        /* Agrupo el titulo con el buscador para desktop */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* border: 2px solid green; */
+        width: 100%;
+        max-width: 80%;
+    }
+    &__title {
+        font-size: 35px;
+        position: relative;
+        top: -2px;
+        color: var(--secondary_color);
+    }
+    .cart-btn {
+        position: relative; /*posicionado para el hijo.*/
+    }
+    .cart-items {
+        position: absolute;
+        background: var(--secondary_color);
+        font-family: Kanit;
+        font-size: 16px;
+        font-weight: 500;
+        width: 22px;
+        height: 22px;
+        padding: 2px;
+        top: -10px;
+        right: -9px;
+        border-radius: 50%;
+        color: var(--main_color_dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+    }
+}
+/* end of navbar */
+
+/* searchbar */
+.searchbar-container {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: none;
+
+    &__mobile{
+        grid-area: searchbar;
+        display: flex;
+    }
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    padding: 10px 0;
+
+    &__input {
+        width: 100%;
+        height: 40px;
+        border-radius: 4px;
+        font-size: 16px;
+        max-width: 500px;
+        border: none;
+        outline: none;
+        margin-right: 3px;
+    }
+}
+
+@media (min-width: 800px) {
+    body {
+        grid-template-rows: auto 5px auto 5px 200px 50px auto 200px;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "navbar navbar"
+            ". ."
+            "searchbar searchbar"
+            ". ."
+            "carrousel carrousel"
+            ". ."
+            "precards cards"
+            "footer footer";
+    }
+    .searchbar-container {
+        display: flex;
+        max-width: 550px; /* Controlo el maximo del searchbar en desktop*/
+
+        &__mobile{
+        display: none;
+        }
+    }
+    .searchbar {
+        width: 100%;
+        padding-left: 2vw;
+
+        &__input{
+            max-width: none;
+        }
+    }
+}
+/* end of searchbar */
+
+/* carrousel */
+.carrousel {
+    grid-area: carrousel;
+}
+/* end of carrousel */
+
+/* precards */
+.precards {
+    grid-area: precards;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.selector-container {
+    color: var(--text_color_dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.selector-container h3 {
+    font-family: Kanit;
+    color: var(--text_color_dark);
+    font-size: 20px;
+    padding: 0 5px;
+    /* border: 2px solid red; */
+    margin: 5px;
+}
+.filter-button-container,
+.search-container {
+    display: flex;
+    /* border: 2px solid purple; */
+}
+.filter-button {
+    border: none;
+    padding: 3px 10px;
+    margin: 0 3px;
+    border-radius: 3px;
+}
+.filter-button-active {
+    background: orange;
+}
+
+@media (min-width: 800px){
+    .precards{
+        align-items: center;
+        justify-content: start;
+        margin-right: 2rem;
+        margin-left: 10rem;
+        width: 14rem;
+        padding: 0px 10px;
+        padding-top: 1rem;
+    }
+    .selector-container{
+        flex-direction: column;
+        padding: 10px;
+    }
+    .entrada{
+        width: 8rem;
+    }
+    .products-container{
+        margin-right: 10rem;
+    }
+}
+/* end of precarts */
+
+/* footer */
+.footer {
+    grid-area: footer;
+}
+/* end of footer */
+
+@import "cards", "cart", "modal","_icons","footer" ;

@@ -43,14 +43,16 @@
 }
 /* end of modal */
 
-
+.card__buy__text{
+  font-size: 25px;
+}
 
 /* start of modal card */
-
 .card-modal {
   /* La card se separa en dos partes principales: el image-container y el info-container.*/
   background: var(--main_color_dark);
   width: 90%;
+  max-width: 375px;
   height: 90vh;
   border-radius: 10px;
   display: grid;
@@ -84,13 +86,14 @@
 }
 
 .card-spec-container{
-    /* border: 2px solid red; */
-    justify-self: start;
-    padding-left: 30px;
+    // border: 2px solid red; 
+    width: 60%;
+    justify-self: center;
+    // padding-left: 60px;
 }
 
 .spec-main-title{
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 400;
 }
 
@@ -99,17 +102,17 @@
     padding-bottom: 1px;
     margin-bottom: 6px;
 
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 400;
     margin-top: 15px;
 }
 .spec-title{
-    font-size: 17px;
+    font-size: 19px;
     font-weight: 400;
     margin-bottom: 3px;
 }
 .spec-info{
-    font-size: 16px;
+    font-size: 17.5px;
     font-weight: 300;
     margin-bottom: 5px;
 
@@ -125,6 +128,6 @@
 .card-price-container{
 /* border: 2px solid cyan; */
 }
-.card-buy-container{
- /* border: 2px solid orange; */
+.card-buy-container:hover p{
+  color: orange;
 }

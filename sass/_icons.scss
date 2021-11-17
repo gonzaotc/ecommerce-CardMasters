@@ -1,0 +1,70 @@
+/* icons */
+.material-icons-round {
+    color: var(--icons_color_dark);
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: 0.2s;
+
+    &:hover {
+        color: var(--secondary_color);
+    }
+
+    &.gaming-btn {
+        font-size: 35px;
+    }
+
+    &.cart-icon {
+        color: var(--color_black);
+        font-size: 40px;
+
+        &:hover {
+            color: var(--secondary_color);
+        }
+    }
+
+
+    // &.card__buy__btn{
+    //     font-size: 30px;
+    // }
+
+    &.not-found__icon{
+        margin-top: 20px;
+        font-size: 80px;
+    }
+}
+
+/* this is to make an image(png) icon look like the material ones. */
+/* used png because the picaxe icon is custom made. */
+.icon-image {
+    height: 23px;
+    width: 23px;
+    filter: invert(100%);
+    position: relative;
+    top: -6px;
+
+    /* filters generated to simulate the --secondary_color color. */
+    /* url of the tool: https://codepen.io/sosuke/pen/Pjoqqp */
+    &:hover {
+        filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg)
+            brightness(98%) contrast(108%);
+    }
+}
+/* end of icons */
+
+/* Iconos de la marca */
+.brand-icon {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 1px;
+    left: -4px;
+}
+.AMD {
+    color: rgba(255, 0, 0, 0.7);
+}
+.NVIDIA {
+    color: rgba(127, 255, 0, 0.7);
+}
+/* End of iconos de la marca */

@@ -1,0 +1,87 @@
+:root {
+    --main_color_dark: rgba(32, 34, 49, 0.97);
+    --main_color_dark_plain: rgba(32, 34, 49, 1);
+    --main_color_dark_opacity: rgba(32, 34, 49, 0.9);
+
+    --icons_color_dark: rgba(255, 255, 255, 1);
+    --text_color_dark: white;
+
+    --secondary_color: rgb(255, 165, 0);
+    --secondary_color_opacity: rgb(255, 165, 0, 0.3);
+
+    --color_red: hsl(356, 100%, 45%);
+    --color_purple: rgba(80, 0, 237);
+    --color_black: black;
+
+    --navbar_height: 70px;
+
+    --mainTransition: all 0.3s linear;
+
+    --card_width: 300px;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+    font-family: Kanit;
+    user-select: none;
+}
+
+.marb-40 {
+    margin-bottom: 40px;
+}
+
+.marb-30 {
+    margin-bottom: 30px;
+}
+
+.marb-20 {
+    margin-bottom: 20px;
+}
+
+.marb-10 {
+    margin-bottom: 10px;
+}
+
+/* start of notfound */
+.not-found {
+    &__container {
+        background-color: var(--main_color_dark);
+        border-radius: 12px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+        width: 320px;
+        height: 180px;
+    }
+    &__text {
+        font-size: 20px;
+    }
+}
+
+/* end of not found */
+
+/* elementos generales */
+h1,p {
+    font-family: Kanit;
+    font-size: 300px;
+    color: var(--text_color_dark);
+}
+
+/* end of elementos generales */
+
+.hide {
+    // para esconder cosas en JS.
+    display: none;
+}
+
+.permanent-color{
+    color: var(--secondary_color) !important;
+}
