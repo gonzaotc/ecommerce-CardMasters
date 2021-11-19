@@ -26,16 +26,41 @@ const DAYS = 30; //Cantidad de días que se usará por mes.
 const IVA = 1.21; // Multiplicador equivalente a 21%.
 const IMPUESTOPAIS = 1.3; //Multiplicador equivalente a 30%
 
-// Operaciones básicas sobre los productos añadidas como propiedades.
-for (let product of products) {
-    product.energyCost =
-        Math.round((product.consumption * HOURS * DAYS) / 1000) *
-        DOLARBLUE *
-        KWH;
-    product.production = Math.round(product.hashrate * DAYS * DOLARBLUE);
-    product.income = Math.round(product.production - product.energyCost);
-    product.rentability = Math.round(product.price / product.income);
+class Products {
+    async getProducts() {
+        try {
+            console.log(`getProducts() - fetch started..`);
+            let result = await fetch("http://myjson.dit.upm.es/api/bins/442l");
+            let data = await result.json();
+            let products = data.products;
+            console.log(
+                `getProducts() - fetch completed! ${products.length} products fetched`
+            );
+            return products;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    calculate(products) {
+        for (let product of products) {
+            product.energyCost =
+                Math.round((product.consumption * HOURS * DAYS) / 1000) *
+                DOLARBLUE *
+                KWH;
+            product.production = Math.round(
+                product.hashrate * DAYS * DOLARBLUE
+            );
+            product.income = Math.round(
+                product.production - product.energyCost
+            );
+            product.rentability = Math.round(product.price / product.income);
+        }
+        return products;
+    }
 }
+
+// Operaciones básicas sobre los productos añadidas como propiedades.
 
 // ----------------- User Interface class START ----------------- //
 class UI {
@@ -312,6 +337,7 @@ class UI {
                 }
             });
         });
+        console.log(`getButtons() - buttons state added.`);
     }
     // ----------- getButtons() END --------------- //
 
@@ -325,6 +351,9 @@ class UI {
         });
         cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
         cartItems.innerText = itemsTotal;
+        console.log(
+            `setCartValues() - total: ${tempTotal}$, items: ${itemsTotal} `
+        );
     }
 
     // Metodo para agregar item al cart sidebar
@@ -378,7 +407,7 @@ class UI {
             if (e.key == "Escape") {
                 // Si esta abierta la tienda, la cierra
                 if (cartDOM.classList.contains("cart__show")) {
-                    ui.hideCart();
+                    this.hideCart();
                 } else {
                     // Si no esta abierta, cierra el modal.
                     modalContainer.classList.remove("showModal");
@@ -390,12 +419,18 @@ class UI {
     // Carga de productos del estado anterior del carrito al cart sidebar.
     populateCart(cart) {
         cart.forEach(item => this.addCartItem(item));
+        console.log(
+            `populateCart() - ${cart.length} items added to the sidebar cart`
+        );
     }
 
     // ----------- cartLogic() START --------------- //
     cartLogic() {
         // obtenido el estado del carrito, a los items del cart sidebar les añado los eventos de sus botones.
-        clearCartBtn.addEventListener("click", this.clearCart);
+        clearCartBtn.addEventListener("click", () => {
+            console.log("test");
+            this.clearCart();
+        });
         // En este contexto this hace referencia al botón, no a la clase del metodo.
 
         // Utilizo event bubbling para determinar la accion a realizar. (depende de donde se haga click (target))
@@ -404,7 +439,7 @@ class UI {
             // console.log(id);
             // console.log(event.target);
             if (event.target.classList.contains("cart-item__remove")) {
-                ui.removeItem(id); // lo remuevo del carrito y actualizo valores
+                this.removeItem(id); // lo remuevo del carrito y actualizo valores
                 cartContent.removeChild(
                     event.target.parentElement.parentElement
                 ); // lo remuevo del dom del cart sidebar
@@ -412,7 +447,7 @@ class UI {
                 let product = cart.find(product => product.id == id);
                 product.amount++;
                 Storage.saveCart(cart);
-                ui.setCartValues(cart);
+                this.setCartValues(cart);
                 event.target.nextElementSibling.innerText = product.amount;
             } else if (event.target.classList.contains("down")) {
                 let product = cart.find(product => product.id == id);
@@ -421,16 +456,17 @@ class UI {
                 if (product.amount > 0) {
                     // Si la cantidad sigue siendo mayor a cero..
                     Storage.saveCart(cart); //guardo
-                    ui.setCartValues(cart); //actualizo valores
+                    this.setCartValues(cart); //actualizo valores
                 } else {
                     //Si la cantidad es cero (o menor) -> lo saco.
-                    ui.removeItem(id);
+                    this.removeItem(id);
                     cartContent.removeChild(
                         event.target.parentElement.parentElement
                     );
                 }
             }
         });
+        console.log(`cartLogic() - added logic for the cart sidebar.`);
     }
     // ----------- cartLogic() START --------------- //
 
@@ -439,15 +475,13 @@ class UI {
         let cartItems = cart.map(item => item.id); //Arreglo con los items actuales del cart sidebar
         // Aplico removeItem a cada uno de los items del carrito para vaciarlo,
         // actualizar los valores en pantalla y guardar el estado del carrito en localStorage.
-        cartItems.forEach(id => ui.removeItem(id));
+        cartItems.forEach(id => this.removeItem(id));
 
         // Vacio tambien el DOM del cart sidebar.
         while (cartContent.children.length > 0) {
-            console.log(`removed from the cart content: \n`);
-            console.log(cartContent.firstChild);
-            cartContent.removeChild(cartContent.firstChild);
+            cartContent.removeChild(cartContent.children[0]);
         }
-        ui.hideCart(); // cierro el carrito al terminar.
+        this.hideCart(); // cierro el carrito al terminar.
     }
 
     //Metodo para eliminar del carrito, pero NO del DOM del cart sidebar. -> lo hago aparte.
@@ -471,6 +505,9 @@ class Storage {
     static saveProducts(products) {
         //guarda los productos en el local storage.
         localStorage.setItem("products", JSON.stringify(products));
+        console.log(
+            `saveProducts() - ${products.length} products saved in localStorage.`
+        );
     }
 
     static getProduct(id) {
@@ -487,6 +524,7 @@ class Storage {
     static getCart() {
         // Intento obtener el estado del carrito del localStorage
         // Si la peticion de JSON devuelve undefined, entonces devuelvo el cart vacio.
+        console.log("getCart() - getting the cart from the local storage..");
         return localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart"))
             : [];
@@ -494,15 +532,18 @@ class Storage {
 }
 // ----------------- Storage class END ------------------- //
 
+
+//Instancio la clase para poder usar sus métodos.
+let ui = new UI()
 // ----------------- Operations class START ------------------- //
 class Operations {
     // products: arreglo principal de productos.
     // puedo remover todos los articulos del dom y agregar únicamente los que cumplan ciertas condiciones.
 
-    static ClearProducts() {
+    static clearProducts() {
         // Vacio el productsDOM.
         console.log(
-            `ClearProducts() - removed ${productsDOM.children.length} products from productsDOM`
+            `clearProducts() - removed ${productsDOM.children.length} products from productsDOM`
         );
         while (productsDOM.children.length > 0) {
             productsDOM.removeChild(productsDOM.firstChild);
@@ -510,7 +551,7 @@ class Operations {
     }
 
     // ----------------- searchbar START ----------------- //
-    static searchByName() {
+    static searchByName(products) {
         let searchButton = [...document.querySelectorAll(".searchbar__button")];
 
         for (let button of searchButton) {
@@ -523,12 +564,12 @@ class Operations {
                 );
                 if (searched.length > 0) {
                     // si la busqueda es valida
-                    Operations.ClearProducts(); // vacio el productsDOM
+                    Operations.clearProducts(); // vacio el productsDOM
                     ui.displayProducts(searched); // muestro las coincidencias
                     ui.getButtons(); // les agrego la logica de sus botones
                 } else {
                     //Creo el elemento que avisa que no se encontro.
-                    Operations.ClearProducts(); // vacio el productsDOM
+                    Operations.clearProducts(); // vacio el productsDOM
                     console.log("not found with that key.");
                     let notFound = document.createElement("div");
                     notFound.classList.add("not-found__container");
@@ -561,20 +602,20 @@ class Operations {
     // ------------------ searchbar END ------------------ //
 
     // ------------------ filtrar por marca START ------------------ //
-    static filterByBrand() {
+    static filterByBrand(products) {
         let filterAMD = document.querySelector("#AMD");
         let filterNVIDIA = document.querySelector("#NVIDIA");
 
         filterAMD.addEventListener("click", () => {
             if (filterAMD.classList.contains("filter-button-active")) {
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(products);
                 filterAMD.classList.remove("filter-button-active");
             } else {
                 let filtered = products.filter(
                     product => product.brand == "AMD"
                 );
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(filtered);
                 filterAMD.classList.add("filter-button-active");
                 filterNVIDIA.classList.remove("filter-button-active");
@@ -584,14 +625,14 @@ class Operations {
 
         filterNVIDIA.addEventListener("click", () => {
             if (filterNVIDIA.classList.contains("filter-button-active")) {
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(products);
                 filterNVIDIA.classList.remove("filter-button-active");
             } else {
                 let filtered = products.filter(
                     product => product.brand == "NVIDIA"
                 );
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(filtered);
                 filterNVIDIA.classList.add("filter-button-active");
                 filterAMD.classList.remove("filter-button-active");
@@ -602,35 +643,35 @@ class Operations {
     // ------------------ filtrar por marca END ------------------ //
 
     // ------------------ ordenar por parametro START ------------------ //
-    static sortBy() {
+    static sortBy(products) {
         const sortInput = document.querySelector("#sort-input");
         sortInput.addEventListener("change", () => {
             if (sortInput.value == "none") {
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(products);
             } else if (sortInput.value == "maxprice") {
                 let sorted = [...products].sort((a, b) => b.price - a.price);
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(sorted);
             } else if (sortInput.value == "minprice") {
                 let sorted = [...products].sort((a, b) => a.price - b.price);
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(sorted);
             } else if (sortInput.value == "hashrate") {
                 let sorted = [...products].sort(
                     (a, b) => b.hashrate - a.hashrate
                 );
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(sorted);
             } else if (sortInput.value == "rentability") {
                 let sorted = [...products].sort(
                     (a, b) => a.rentability - b.rentability
                 );
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(sorted);
             } else if (sortInput.value == "gaming") {
                 let sorted = [...products].sort((a, b) => b.gaming - a.gaming);
-                Operations.ClearProducts();
+                Operations.clearProducts();
                 ui.displayProducts(sorted);
             }
             ui.getButtons();
@@ -638,23 +679,30 @@ class Operations {
     }
 }
 // ------------------ ordenar por parametro END ------------------ //
+
 // ----------------- Operations class END ------------------- //
 
 // MAIN DEL PROGRAMA
 
-const ui = new UI(); // instancio la clase UserInterface para utilizar sus métodos
+document.addEventListener("DOMContentLoaded", () => {
+    const ui = new UI(); // instancio la clase UserInterface para utilizar sus métodos
+    const productsClass = new Products();
 
-ui.setupAPP(); // funciones iniciales, obtengo estados posteriores de la página y el localStorage.
+    ui.setupAPP(); // funciones iniciales, obtengo estados posteriores de la página y el localStorage.
+    productsClass.getProducts()
+        .then(products => {
+            productsClass.calculate(products);
+            ui.displayProducts(products);
+            Storage.saveProducts(products);
 
-ui.displayProducts(products); // cargo los productos
-
-Storage.saveProducts(products); // los guardo en el local storage para trabajarlos.
-
-ui.getButtons(); // actualizo el estado de mis botones de añadir al carrito.
-
-ui.cartLogic(); // una vez obtenido el estado de mis botones, les agrego la lógica de remover.
-
-//Añado la lógica de ordenado ,busqueda y filtrado.
-Operations.searchByName();
-Operations.filterByBrand();
-Operations.sortBy();
+            console.log(products);
+            Operations.searchByName(products);
+            Operations.filterByBrand(products);
+            Operations.sortBy(products);
+        })
+        .then(() => {
+            ui.getButtons(); // actualizo el estado de mis botones de añadir al carrito.
+            ui.cartLogic(); // una vez obtenido el estado de mis botones, les agrego la lógica de remover.
+            //Añado la lógica de ordenado ,busqueda y filtrado.
+        });
+});

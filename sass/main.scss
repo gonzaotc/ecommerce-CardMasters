@@ -113,7 +113,7 @@ body {
     justify-content: center;
     display: none;
 
-    &__mobile{
+    &__mobile {
         grid-area: searchbar;
         display: flex;
     }
@@ -156,15 +156,15 @@ body {
         display: flex;
         max-width: 550px; /* Controlo el maximo del searchbar en desktop*/
 
-        &__mobile{
-        display: none;
+        &__mobile {
+            display: none;
         }
     }
     .searchbar {
         width: 100%;
         padding-left: 2vw;
 
-        &__input{
+        &__input {
             max-width: none;
         }
     }
@@ -179,6 +179,7 @@ body {
 
 /* precards */
 .precards {
+    // border: 2px solid red;
     grid-area: precards;
     display: flex;
     align-items: center;
@@ -190,6 +191,7 @@ body {
 
 .selector-container {
     color: var(--text_color_dark);
+    // border: 2px solid green;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -219,24 +221,28 @@ body {
     background: orange;
 }
 
-@media (min-width: 800px){
-    .precards{
+@media (min-width: 800px) {
+    .precards {
         align-items: center;
         justify-content: start;
         margin-right: 2rem;
         margin-left: 10rem;
         width: 14rem;
         padding: 0px 10px;
-        padding-top: 1rem;
+        padding-top: 3rem;
+
+        position: sticky;
+        height: calc(100vh - var(--navbar_height));
+        top: calc(var(--navbar_height) + 50px);
     }
-    .selector-container{
+    .selector-container {
         flex-direction: column;
-        padding: 10px;
+        padding: 20px;
     }
-    .entrada{
+    .entrada {
         width: 8rem;
     }
-    .products-container{
+    .products-container {
         margin-right: 10rem;
     }
 }
@@ -248,4 +254,4 @@ body {
 }
 /* end of footer */
 
-@import "cards", "cart", "modal","_icons","footer" ;
+@import "cards", "cart", "modal", "_icons", "footer";
