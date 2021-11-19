@@ -27,54 +27,41 @@ const IVA = 1.21; // Multiplicador equivalente a 21%.
 const IMPUESTOPAIS = 1.3; //Multiplicador equivalente a 30%
 
 class Products {
+    // obtencion de productos de forma asincrona.
     async getProducts() {
         try {
             console.log(`getProducts() - fetch started..`);
             let result = await fetch("http://myjson.dit.upm.es/api/bins/442l");
             let data = await result.json();
             let products = data.products;
-            console.log(
-                `getProducts() - fetch completed! ${products.length} products fetched`
-            );
+            console.log(`getProducts() - fetch completed! ${products.length} products fetched`);
             return products;
         } catch (error) {
             console.log(error);
         }
     }
 
+    //Calculos básicos sobre los productos.
     calculate(products) {
         for (let product of products) {
-            product.energyCost =
-                Math.round((product.consumption * HOURS * DAYS) / 1000) *
-                DOLARBLUE *
-                KWH;
-            product.production = Math.round(
-                product.hashrate * DAYS * DOLARBLUE
-            );
-            product.income = Math.round(
-                product.production - product.energyCost
-            );
+            product.energyCost = Math.round((product.consumption * HOURS * DAYS) / 1000) * DOLARBLUE * KWH;
+            product.production = Math.round(product.hashrate * DAYS * DOLARBLUE);
+            product.income = Math.round(product.production - product.energyCost);
             product.rentability = Math.round(product.price / product.income);
         }
         return products;
     }
 }
 
-// Operaciones básicas sobre los productos añadidas como propiedades.
-
 // ----------------- User Interface class START ----------------- //
 class UI {
-    //la clase UserInterface guarda mis métodos principales.
-
     // ----------------- displayProducts() START ----------------- //
     displayProducts(products) {
         //Metodo para mostrar los productos.
-        console.log(
-            `displayProducts() - added ${products.length} products to productsDOM.`
-        );
+        console.log(`displayProducts() - added ${products.length} products to productsDOM.`);
         for (let product of products) {
             const card = document.createElement("article");
-            card.classList.add("card"); //Estilo de las cards
+            card.classList.add("card");
 
             card.innerHTML = ` 
             <div class="card__image-container marb-10">
@@ -130,7 +117,6 @@ class UI {
         }
 
         //MODAL CON JQUERY
-        //al clickear la imagen del producto, cambio el contenido del modal y lo muestro.
         $(".card__image , .card__moreinfo__button").on("click", e => {
             let id = e.target.dataset.id;
             let product = products.find(item => item.id == id);
@@ -250,7 +236,6 @@ class UI {
             </div>
     `);
             $(".close-modal").on("click", () => {
-                //le agrego el evento de cierre.
                 $(".modal-container").removeClass("showModal");
             });
             // una vez cargado (luego del click), lo abro.
@@ -267,16 +252,13 @@ class UI {
         for (let button of miningBtn) {
             button.addEventListener("click", event => {
                 // Para relacionar cada botón con su content-info sin usar id me desplazo por el DOM.
-                // Agrego el if para manejar el error generado al clickear el mining-btn pero no el icon-image (es más chico)
-                if (
-                    event.target.parentElement.classList.contains("mining-btn")
-                ) {
+                if (event.target.parentElement.classList.contains("mining-btn")) {
                     let miningContainer =
-                        event.target.parentElement.parentElement.parentElement
-                            .nextElementSibling.lastElementChild;
+                        event.target.parentElement.parentElement.parentElement.nextElementSibling
+                            .lastElementChild;
                     let gamingContainer =
-                        event.target.parentElement.parentElement.parentElement
-                            .nextElementSibling.firstElementChild;
+                        event.target.parentElement.parentElement.parentElement.nextElementSibling
+                            .firstElementChild;
                     gamingContainer.classList.add("hide");
                     miningContainer.classList.remove("hide");
                 }
@@ -286,11 +268,9 @@ class UI {
         for (let button of gamingBtn) {
             button.addEventListener("click", event => {
                 let miningContainer =
-                    event.target.parentElement.parentElement.nextElementSibling
-                        .lastElementChild;
+                    event.target.parentElement.parentElement.nextElementSibling.lastElementChild;
                 let gamingContainer =
-                    event.target.parentElement.parentElement.nextElementSibling
-                        .firstElementChild;
+                    event.target.parentElement.parentElement.nextElementSibling.firstElementChild;
                 gamingContainer.classList.remove("hide");
                 miningContainer.classList.add("hide");
             });
@@ -319,8 +299,8 @@ class UI {
                     modalContainer.classList.remove("showModal");
 
                     button.firstElementChild.innerText = "in cart"; // le cambio el texto
-                    button.firstElementChild.classList.add("permanent-color"); // le seteo el color al texto
-                    button.classList.add("permanent-color"); // le seteo el color al boton
+                    button.firstElementChild.classList.add("permanent-color"); // le seteo el color
+                    button.classList.add("permanent-color");
 
                     let cartItem = { ...Storage.getProduct(id), amount: 1 }; //Obtengo el producto desde el local storage y le agrego la prop amount.
                     console.log(`cartItem added to the cart:`);
@@ -351,9 +331,7 @@ class UI {
         });
         cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
         cartItems.innerText = itemsTotal;
-        console.log(
-            `setCartValues() - total: ${tempTotal}$, items: ${itemsTotal} `
-        );
+        console.log(`setCartValues() - total: ${tempTotal}$, items: ${itemsTotal} `);
     }
 
     // Metodo para agregar item al cart sidebar
@@ -392,7 +370,7 @@ class UI {
         cartDOM.classList.remove("cart__show");
     }
 
-    // Metodo para iniciar la página.
+    // Metodo para iniciar la página (resumo métodos en uno).
     setupAPP() {
         cart = Storage.getCart(); // Busca el estado anterior del carrito.
         this.populateCart(cart); // inyecta los productos del carrito al cart sidebar.
@@ -419,9 +397,7 @@ class UI {
     // Carga de productos del estado anterior del carrito al cart sidebar.
     populateCart(cart) {
         cart.forEach(item => this.addCartItem(item));
-        console.log(
-            `populateCart() - ${cart.length} items added to the sidebar cart`
-        );
+        console.log(`populateCart() - ${cart.length} items added to the sidebar cart`);
     }
 
     // ----------- cartLogic() START --------------- //
@@ -436,13 +412,10 @@ class UI {
         // Utilizo event bubbling para determinar la accion a realizar. (depende de donde se haga click (target))
         cartDOM.addEventListener("click", event => {
             let id = event.target.dataset.id;
-            // console.log(id);
-            // console.log(event.target);
+
             if (event.target.classList.contains("cart-item__remove")) {
                 this.removeItem(id); // lo remuevo del carrito y actualizo valores
-                cartContent.removeChild(
-                    event.target.parentElement.parentElement
-                ); // lo remuevo del dom del cart sidebar
+                cartContent.removeChild(event.target.parentElement.parentElement); // lo remuevo del dom del cart sidebar
             } else if (event.target.classList.contains("up")) {
                 let product = cart.find(product => product.id == id);
                 product.amount++;
@@ -460,15 +433,13 @@ class UI {
                 } else {
                     //Si la cantidad es cero (o menor) -> lo saco.
                     this.removeItem(id);
-                    cartContent.removeChild(
-                        event.target.parentElement.parentElement
-                    );
+                    cartContent.removeChild(event.target.parentElement.parentElement);
                 }
             }
         });
         console.log(`cartLogic() - added logic for the cart sidebar.`);
     }
-    // ----------- cartLogic() START --------------- //
+    // ----------- cartLogic() END --------------- //
 
     //Metodo para vaciar el cart sidebar.
     clearCart() {
@@ -505,9 +476,7 @@ class Storage {
     static saveProducts(products) {
         //guarda los productos en el local storage.
         localStorage.setItem("products", JSON.stringify(products));
-        console.log(
-            `saveProducts() - ${products.length} products saved in localStorage.`
-        );
+        console.log(`saveProducts() - ${products.length} products saved in localStorage.`);
     }
 
     static getProduct(id) {
@@ -525,16 +494,13 @@ class Storage {
         // Intento obtener el estado del carrito del localStorage
         // Si la peticion de JSON devuelve undefined, entonces devuelvo el cart vacio.
         console.log("getCart() - getting the cart from the local storage..");
-        return localStorage.getItem("cart")
-            ? JSON.parse(localStorage.getItem("cart"))
-            : [];
+        return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
     }
 }
 // ----------------- Storage class END ------------------- //
 
-
 //Instancio la clase para poder usar sus métodos.
-let ui = new UI()
+let ui = new UI();
 // ----------------- Operations class START ------------------- //
 class Operations {
     // products: arreglo principal de productos.
@@ -542,9 +508,7 @@ class Operations {
 
     static clearProducts() {
         // Vacio el productsDOM.
-        console.log(
-            `clearProducts() - removed ${productsDOM.children.length} products from productsDOM`
-        );
+        console.log(`clearProducts() - removed ${productsDOM.children.length} products from productsDOM`);
         while (productsDOM.children.length > 0) {
             productsDOM.removeChild(productsDOM.firstChild);
         }
@@ -559,9 +523,7 @@ class Operations {
                 let input = button.previousElementSibling; // Cada botón selecciona su input
                 let key = input.value.toUpperCase();
                 console.log(`Mostrando resultados de la busqueda: "${key}"`);
-                let searched = [...products].filter(product =>
-                    product.name.toUpperCase().includes(key)
-                );
+                let searched = [...products].filter(product => product.name.toUpperCase().includes(key));
                 if (searched.length > 0) {
                     // si la busqueda es valida
                     Operations.clearProducts(); // vacio el productsDOM
@@ -581,19 +543,14 @@ class Operations {
                     `;
                     productsDOM.appendChild(notFound);
                 }
-                document
-                    .querySelector(".products-container")
-                    .scrollIntoView({ behavior: "smooth" }); // Desplazo suavemente hacia el productsDOM.
+                document.querySelector(".products-container").scrollIntoView({ behavior: "smooth" }); // Desplazo suavemente hacia el productsDOM.
                 input.value = "";
             });
         }
 
         // ésto hace que el enter para el buscador funcione únicamente si se lo tiene seleccionado.
         window.addEventListener("keydown", e => {
-            if (
-                e.keyCode === 13 &&
-                document.activeElement.nextElementSibling !== null
-            ) {
+            if (e.keyCode === 13 && document.activeElement.nextElementSibling !== null) {
                 console.log(document.activeElement);
                 document.activeElement.nextElementSibling.click();
             }
@@ -612,9 +569,7 @@ class Operations {
                 ui.displayProducts(products);
                 filterAMD.classList.remove("filter-button-active");
             } else {
-                let filtered = products.filter(
-                    product => product.brand == "AMD"
-                );
+                let filtered = products.filter(product => product.brand == "AMD");
                 Operations.clearProducts();
                 ui.displayProducts(filtered);
                 filterAMD.classList.add("filter-button-active");
@@ -629,9 +584,7 @@ class Operations {
                 ui.displayProducts(products);
                 filterNVIDIA.classList.remove("filter-button-active");
             } else {
-                let filtered = products.filter(
-                    product => product.brand == "NVIDIA"
-                );
+                let filtered = products.filter(product => product.brand == "NVIDIA");
                 Operations.clearProducts();
                 ui.displayProducts(filtered);
                 filterNVIDIA.classList.add("filter-button-active");
@@ -658,15 +611,11 @@ class Operations {
                 Operations.clearProducts();
                 ui.displayProducts(sorted);
             } else if (sortInput.value == "hashrate") {
-                let sorted = [...products].sort(
-                    (a, b) => b.hashrate - a.hashrate
-                );
+                let sorted = [...products].sort((a, b) => b.hashrate - a.hashrate);
                 Operations.clearProducts();
                 ui.displayProducts(sorted);
             } else if (sortInput.value == "rentability") {
-                let sorted = [...products].sort(
-                    (a, b) => a.rentability - b.rentability
-                );
+                let sorted = [...products].sort((a, b) => a.rentability - b.rentability);
                 Operations.clearProducts();
                 ui.displayProducts(sorted);
             } else if (sortInput.value == "gaming") {
@@ -685,24 +634,23 @@ class Operations {
 // MAIN DEL PROGRAMA
 
 document.addEventListener("DOMContentLoaded", () => {
-    const ui = new UI(); // instancio la clase UserInterface para utilizar sus métodos
+    const ui = new UI(); // instancio para poder usar los métodos.
     const productsClass = new Products();
 
     ui.setupAPP(); // funciones iniciales, obtengo estados posteriores de la página y el localStorage.
-    productsClass.getProducts()
+    productsClass
+        .getProducts()
         .then(products => {
             productsClass.calculate(products);
             ui.displayProducts(products);
             Storage.saveProducts(products);
 
-            console.log(products);
             Operations.searchByName(products);
             Operations.filterByBrand(products);
             Operations.sortBy(products);
         })
         .then(() => {
-            ui.getButtons(); // actualizo el estado de mis botones de añadir al carrito.
-            ui.cartLogic(); // una vez obtenido el estado de mis botones, les agrego la lógica de remover.
-            //Añado la lógica de ordenado ,busqueda y filtrado.
+            ui.getButtons();
+            ui.cartLogic();
         });
 });
