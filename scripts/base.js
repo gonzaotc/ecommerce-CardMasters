@@ -31,7 +31,7 @@ class Products {
     async getProducts() {
         try {
             console.log(`getProducts() - fetch started..`);
-            let result = await fetch("http://myjson.dit.upm.es/api/bins/442l");
+            let result = await fetch("https://myjson.dit.upm.es/api/bins/442l");
             let data = await result.json();
             let products = data.products;
             console.log(`getProducts() - fetch completed! ${products.length} products fetched`);
