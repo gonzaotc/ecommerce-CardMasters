@@ -79,7 +79,7 @@ h1,p {
 
 .hide {
     // para esconder cosas en JS.
-    display: none;
+    display: none !important;
 }
 
 .permanent-color{

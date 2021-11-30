@@ -1,0 +1,28 @@
+// SELECTORES
+const cartBtn = document.querySelector(".cart-btn"); //abre el cart sidebar
+const closeCartBtn = document.querySelector(".cart__closebtn"); //cierra el cart sidebar
+const clearCartBtn = document.querySelector(".cart__footer__clearbtn"); //vacia el carrito
+
+const cartItems = document.querySelector(".cart-items"); //cantidad de items en el carrito
+const cartTotal = document.querySelector(".cart-total"); //total del carrito
+
+const cartOverlay = document.querySelector(".cart-overlay"); //contenedor externo del cart sidebar
+const cartDOM = document.querySelector(".cart"); //contenedor interior del cart sidebar
+// Le pongo "DOM" en el nombre para no confundir con el arreglo cart
+
+const productsDOM = document.querySelector(".products"); //contenedor donde inyecto los productos.
+// le agrego "DOM" al nombre para no confundirlo con el arreglo productos [json]
+const cartContent = document.querySelector(".cart-content"); //contenedor donde inyecto los productos al carrito.
+
+const modalContainer = document.querySelector(".modal-container"); //contenedor externo del modal
+
+let cart = []; //carrito
+
+//CONSTANTES
+const DOLARBLUE = 195;
+const DOLAROFICIAL = 110;
+const KWH = 0.1;
+const HOURS = 24; //Cantidad de horas que se usará por día.
+const DAYS = 30; //Cantidad de días que se usará por mes.
+const IVA = 1.21; // Multiplicador equivalente a 21%.
+const IMPUESTOPAIS = 1.3; //Multiplicador equivalente a 30%
