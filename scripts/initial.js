@@ -21,7 +21,7 @@ let cart = []; //carrito
 //CONSTANTES
 const DOLARBLUE = 195;
 const DOLAROFICIAL = 110;
-const KWH = 0.1;
+let KWH = 0.1;
 const HOURS = 24; //Cantidad de horas que se usará por día.
 const DAYS = 30; //Cantidad de días que se usará por mes.
 const IVA = 1.21; // Multiplicador equivalente a 21%.

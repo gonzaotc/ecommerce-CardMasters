@@ -14,8 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let productsCopy = [...products];
             Operations.searchByName(products, productsCopy);
-            Operations.filterByBrand(products, productsCopy);
+            Operations.filterByBrandClick(products, productsCopy);
             Operations.sortBy(products, productsCopy);
+            Operations.setKWH(products, productsCopy);
         })
         .then(() => {
             ui.getButtons();

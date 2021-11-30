@@ -51,7 +51,6 @@ class Operations {
         // ésto hace que el enter para el buscador funcione únicamente si se lo tiene seleccionado.
         window.addEventListener("keydown", e => {
             if (e.keyCode === 13 && document.activeElement.nextElementSibling !== null) {
-                console.log(document.activeElement);
                 document.activeElement.nextElementSibling.click();
             }
         });
@@ -60,13 +59,14 @@ class Operations {
 
     //------------------ filtrar por marca START ------------------ //
 
-    static filterByBrand(products, productsCopy) {
+    // Para filtrar por clase me hago dos metodos.
+    // La primera es para cambiarlo desde los botones. 
+    static filterByBrandClick() {
         let filterAMD = document.querySelector("#AMD");
         let filterNVIDIA = document.querySelector("#NVIDIA");
 
         let amds = document.querySelectorAll(".AMD");
         let nvidias = document.querySelectorAll(".NVIDIA");
-
 
         filterAMD.addEventListener("click", () => {
             amds = document.querySelectorAll(".AMD");
@@ -81,7 +81,6 @@ class Operations {
                     filterNVIDIA.click();
                 }
                 filterAMD.classList.add("filter-button-active");
-                console.log(nvidias);
                 nvidias.forEach(element => {
                     element.classList.add("hide");
                 });
@@ -107,29 +106,44 @@ class Operations {
             }
         });
     }
-    // ------------------ filtrar por marca END ------------------ //
 
-    // ------------------ ordenar por parametro START ------------------ //
-    static sortBy(products, productsCopy) {
+    //Esta segunda funcion es para que los ordenados y el cambio de KHW no desarmen
+    // el filtrado y funcionen correctamente al mismo tiempo. 
+    static filterByBrand() {
         let filterAMD = document.querySelector("#AMD");
         let filterNVIDIA = document.querySelector("#NVIDIA");
 
+        let amds = document.querySelectorAll(".AMD");
+        let nvidias = document.querySelectorAll(".NVIDIA");
+
+        if (filterAMD.classList.contains("filter-button-active")) {
+            nvidias.forEach(element => {
+                element.classList.add("hide");
+            });
+        }
+        if (filterNVIDIA.classList.contains("filter-button-active")) {
+            amds.forEach(element => {
+                element.classList.add("hide");
+            });
+        }
+    }
+    // ------------------ filtrar por marca END ------------------ //
+
+    // ------------------ ordenar por parametro START ------------------ //
+    static sortBy(productsCopy) {
         const sortInput = document.querySelector("#sort-input");
         sortInput.addEventListener("change", () => {
             if (sortInput.value == "none") {
                 Operations.clearProducts();
                 ui.displayProducts(productsCopy);
-                console.log(productsCopy);
             } else if (sortInput.value == "maxprice") {
                 productsCopy.sort((a, b) => b.price - a.price);
                 Operations.clearProducts();
                 ui.displayProducts(productsCopy);
-                console.log(productsCopy);
             } else if (sortInput.value == "minprice") {
                 productsCopy.sort((a, b) => a.price - b.price);
                 Operations.clearProducts();
                 ui.displayProducts(productsCopy);
-                console.log(productsCopy);
             } else if (sortInput.value == "hashrate") {
                 productsCopy.sort((a, b) => b.hashrate - a.hashrate);
                 Operations.clearProducts();
@@ -143,28 +157,25 @@ class Operations {
                 Operations.clearProducts();
                 ui.displayProducts(productsCopy);
             }
-            ui.getButtons();
+            ui.getButtons(); // Obtengo el estado actual de los botones por usos anteriores.
+            Operations.filterByBrand(); // Aplico los filtros que estén seleccionados previamente.
+        });
+    }
+    // ------------------ ordenar por parametro END ------------------ //
 
-            // Si estan activados los botones de filtrado por marca
-            // => filtro por marca luego de ordenar.
-            // De esta forma funciona el ordenado y el filtrado al mismo tiempo. 
-            let amds = document.querySelectorAll(".AMD");
-            let nvidias = document.querySelectorAll(".NVIDIA");
-            if (filterAMD.classList.contains("filter-button-active")) {
-                nvidias.forEach(element => {
-                    element.classList.add("hide");
-                });
-            }
-            if (filterNVIDIA.classList.contains("filter-button-active")) {
-                amds.forEach(element => {
-                    element.classList.add("hide");
-                });
-            }
-
+    static setKWH(products, productsCopy) {
+        let prod = new Products();
+        let kwh__input = document.querySelector("#KWH");
+        kwh__input.addEventListener("change", e => {
+            KWH = e.target.value;
+            prod.calculate(products);
+            Operations.clearProducts();
+            ui.displayProducts(productsCopy);
+            ui.getButtons(); // Obtengo el estado actual de los botones por usos anteriores.
+            Operations.filterByBrand(); // Aplico los filtros que esten seleccioandos previamente.
+            console.log(`setKHW - KHW price is now ${KWH} usd.`)
         });
     }
 }
-// ------------------ ordenar por parametro END ------------------ //
-
-
+    
 // ----------------- Operations class END ------------------- //
