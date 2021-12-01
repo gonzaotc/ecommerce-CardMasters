@@ -24,12 +24,11 @@
         }
     }
 
-
     // &.card__buy__btn{
     //     font-size: 30px;
     // }
 
-    &.not-found__icon{
+    &.not-found__icon {
         margin-top: 20px;
         font-size: 80px;
     }
@@ -47,8 +46,7 @@
     /* filters generated to simulate the --secondary_color color. */
     /* url of the tool: https://codepen.io/sosuke/pen/Pjoqqp */
     &:hover {
-        filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg)
-            brightness(98%) contrast(108%);
+        filter: invert(62%) sepia(83%) saturate(1066%) hue-rotate(357deg) brightness(98%) contrast(108%);
     }
 }
 /* end of icons */
@@ -68,3 +66,58 @@
     color: rgba(127, 255, 0, 0.7);
 }
 /* End of iconos de la marca */
+
+// start of whatsapp
+.whatsapp__container {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 2;
+    .whatsapp {
+        &__icon {
+            // background-color: green;
+            color: white;
+            height: 50px;
+            width: 50px;
+        }
+        &__text {
+            display: none;
+            color: black;
+            text-align: center;
+            background-color: white;
+            text-decoration: none;
+            position: absolute;
+            font-family: Kanit;
+            width: 10rem;
+            padding: 0.6rem 0.3rem;
+            border-radius: 0.3rem;
+            top: 0.8rem;
+            right: 5rem;
+            font-weight: 300;
+            &__pointer {
+                background-color: white;
+                width: 1rem;
+                height: 1rem;
+                position: absolute;
+                right: -0.3rem;
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
+@media (min-width: 800px) {
+    .whatsapp__container {
+        right: 2rem;
+        bottom: 2rem;
+        .whatsapp {
+            &__icon {
+                height: 60px;
+                width: 60px;
+            }
+            &:hover .whatsapp__text {
+                display: inline-block;
+            }
+        }
+    }
+}
+//end of whatsapp

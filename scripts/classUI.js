@@ -413,3 +413,9 @@ class UI {
     }
 }
 // --------------- UserInterface class END ----------------- //
+
+
+function buscarPorId(ID, carro) {
+    carro.filter(prod => prod.id !== ID);
+    return carro;
+}

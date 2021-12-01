@@ -16,6 +16,8 @@ const cartContent = document.querySelector(".cart-content"); //contenedor donde 
 
 const modalContainer = document.querySelector(".modal-container"); //contenedor externo del modal
 
+const sortInput = document.querySelector("#sort-input");
+
 let cart = []; //carrito
 
 //CONSTANTES

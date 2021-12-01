@@ -131,7 +131,6 @@ class Operations {
 
     // ------------------ ordenar por parametro START ------------------ //
     static sortBy(productsCopy) {
-        const sortInput = document.querySelector("#sort-input");
         sortInput.addEventListener("change", () => {
             if (sortInput.value == "none") {
                 Operations.clearProducts();
@@ -172,10 +171,15 @@ class Operations {
             Operations.clearProducts();
             ui.displayProducts(productsCopy);
             ui.getButtons(); // Obtengo el estado actual de los botones por usos anteriores.
-            Operations.filterByBrand(); // Aplico los filtros que esten seleccioandos previamente.
+            Operations.filterByBrand(); // Aplico los filtros de marca que esten seleccioandos previamente.
             console.log(`setKHW - KHW price is now ${KWH} usd.`)
+            sortInput.dispatchEvent(new Event("change")); // Aplico el filtro de orden. 
         });
     }
 }
     
 // ----------------- Operations class END ------------------- //
+
+function buscarIndex(array, elemento) {
+    return array.indexOf(elemento);
+ }
