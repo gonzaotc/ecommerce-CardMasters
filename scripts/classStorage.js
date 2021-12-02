@@ -1,6 +1,4 @@
-// ----------------- Storage class START ------------------- //
 // esta clase contiene mis metodos para manejar el localStorage.
-// los metodos static no necesitan instanciar a la clase para poder utilizarlos.
 class Storage {
     static saveProducts(products) {
         //guarda los productos en el local storage.
@@ -26,4 +24,3 @@ class Storage {
         return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
     }
 }
-// ----------------- Storage class END ------------------- //

@@ -32,7 +32,7 @@
     }
 
     &__closebtn {
-        font-size: 35px;
+        font-size: 35px !important;
         cursor: pointer;
     }
 
@@ -55,45 +55,36 @@
 
         &__total {
             font-size: 22.5px;
-            padding-bottom: 15px;
+            margin-bottom: 15px;
+            // border: 2px solid green;
         }
 
         &__buttons {
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
+            justify-content: space-around;
             // border: 2px solid green;
             width: 100%;
         }
         &__clearbtn {
-            box-sizing: border-box;
-            padding: 0.2rem 0.5rem;
-            margin: 10px 0;
-            border-radius: 5px;
-            font-size: 20px;
-            background: var(--color_red);
-            color: var(--main_color_dark);
-            border: 2px solid var(--color_red);
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-
-            &:hover {
-                box-sizing: border-box;
-                background: transparent;
-                color: var(--color_red);
-                box-shadow: 0px 0px 5px var(--color_red);
+            &__icon {
+                position: relative;
+                color: var(--main_color_dark) !important;
+                font-size: 27.5px !important;
+            }
+            &:hover &__icon {
+                    color: var(--color_red) !important;
             }
         }
         &__completebtn {
-            @extend .cart__footer__clearbtn;
-            border: 2px solid var(--secondary_color);
-            background: var(--secondary_color);
-            margin-left: 2rem;
-            &:hover {
-                border: 2px solid var(--secondary_color);
-                color: var(--secondary_color);
-                box-shadow: 0px 0px 5px var(--secondary_color);
+            &__icon {
+                position: relative;
+                color: var(--main_color_dark) !important;
+                font-size: 27.5px !important;
+            }
+            &:hover &__icon {
+                    color: var(--secondary_color) !important;
             }
         }
     }
@@ -143,24 +134,10 @@
         font-size: 20px;
     }
     &__remove {
-        color: var(--main_color_dark);
-        background: var(--color_red);
-        border: 2px solid var(--color_red);
-        font-size: 15px;
-        width: 4.575rem;
-        border-radius: 4px;
-        padding: 0.225rem 0px;
-        text-align: center;
-        transition: all 0.2s ease-in-out;
-        cursor: pointer;
         font-family: Kanit;
-
-        &:hover {
-            color: var(--color_red);
-            background: transparent;
-            cursor: pointer;
-            font-family: Kanit;
-        }
+        padding: 2px 0px !important;
+        width: 70px;
+        font-size: 15px !important;
     }
 }
 /* end of cart item*/

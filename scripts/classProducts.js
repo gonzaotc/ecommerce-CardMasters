@@ -9,10 +9,9 @@ class Products {
             console.log(`getProducts() - fetch completed! ${products.length} products fetched`);
             return products;
         } catch (error) {
-            console.log(error);
+            console.log('Error at fetching:\n', error);
         }
     }
-
     //Calculos básicos sobre los productos.
     calculate(products) {
         for (let product of products) {

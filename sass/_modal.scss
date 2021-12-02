@@ -1,70 +1,69 @@
 /* modal */
 .modal-container {
-  display: none;
-  width: 100%;
-  height: 100%;
-  /* background-color: red; */
-  position: fixed;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  opacity: 0;
-  transition: all 0.3s linear;
-  background-color: var(--main_color_dark_opacity);
-  /* overflow: scroll; */
+    display: none;
+    width: 100%;
+    height: 100%;
+    /* background-color: red; */
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    opacity: 0;
+    transition: all 0.3s linear;
+    background-color: var(--main_color_dark_opacity);
+    /* overflow: scroll; */
 }
 .modal {
-  width: 100%;
-  height: 100%;
-  max-width: 500px;
-  /* background-color: var(--main_color_dark); */
-  border-radius: 10px;
-  position: absolute;
-  /* border: 3px solid red; */
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* overflow: scroll; */
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    /* background-color: var(--main_color_dark); */
+    border-radius: 10px;
+    position: absolute;
+    /* border: 3px solid red; */
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* overflow: scroll; */
 }
-.close-modal{
-  position: absolute;
-  top: 6%;
-  left: 7%;
-  font-size: 42px;
-  z-index:6;
+.close-modal {
+    position: absolute;
+    top: 6%;
+    left: 7%;
+    font-size: 42px;
+    z-index: 6;
 }
 
 .showModal {
-  opacity: 1;
-  display: flex;
-  z-index: 5;
+    opacity: 1;
+    display: flex;
+    z-index: 5;
 }
 /* end of modal */
 
-.card__buy__text{
-  font-size: 25px;
+.card__buy__text {
+    font-size: 25px;
 }
 
 /* start of modal card */
 .card-modal {
-  /* La card se separa en dos partes principales: el image-container y el info-container.*/
-  background: var(--main_color_dark);
-  width: 90%;
-  max-width: 375px;
-  height: 90vh;
-  border-radius: 10px;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-rows: 225px auto auto auto auto;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 1);
-  box-shadow: -5px -5px 20px rgba(0, 0, 0, 1);
-  /* border: 2px solid orange; */
-  overflow-Y: scroll;
+    /* La card se separa en dos partes principales: el image-container y el info-container.*/
+    background: var(--main_color_dark);
+    width: 90%;
+    max-width: 375px;
+    height: 90vh;
+    border-radius: 10px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: 225px auto auto auto auto;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 1), -10px -10px 30px rgba(0, 0, 0, 1);
+    /* border: 2px solid orange; */
+    overflow-y: scroll;
 }
 
-.video-container{
+.video-container {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -73,30 +72,31 @@
     width: 100%;
 }
 
-.video-title{ /* no me convencia como quedaba*/
+.video-title {
+    /* no me convencia como quedaba*/
     /* font-size: 25px;
     align-self: start; */
 }
 
-.video{
+.video {
     width: 90%;
     border-radius: 7px;
     height: 300px;
 }
 
-.card-spec-container{
-    // border: 2px solid red; 
+.card-spec-container {
+    // border: 2px solid red;
     width: 60%;
     justify-self: center;
     // padding-left: 60px;
 }
 
-.spec-main-title{
+.spec-main-title {
     font-size: 30px;
     font-weight: 400;
 }
 
-.spec-section{
+.spec-section {
     border-bottom: 2px solid var(--color_purple);
     padding-bottom: 1px;
     margin-bottom: 6px;
@@ -105,12 +105,12 @@
     font-weight: 400;
     margin-top: 15px;
 }
-.spec-title{
+.spec-title {
     font-size: 19px;
     font-weight: 400;
     margin-bottom: 3px;
 }
-.spec-info{
+.spec-info {
     font-size: 17.5px;
     font-weight: 300;
     margin-bottom: 5px;
@@ -118,15 +118,15 @@
     color: grey;
 }
 
-.card-header-container{
-/* border: 2px solid green; */
+.card-header-container {
+    /* border: 2px solid green; */
 }
-.card-info-container{
-/* border: 2px solid yellow; */
+.card-info-container {
+    /* border: 2px solid yellow; */
 }
-.card-price-container{
-/* border: 2px solid cyan; */
+.card-price-container {
+    /* border: 2px solid cyan; */
 }
-.card-buy-container:hover p{
-  color: orange;
+.card-buy-container:hover p {
+    color: orange;
 }

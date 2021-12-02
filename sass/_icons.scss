@@ -6,28 +6,19 @@
     background: none;
     border: none;
     transition: 0.2s;
-
     &:hover {
         color: var(--secondary_color);
     }
-
     &.gaming-btn {
         font-size: 35px;
     }
-
-    &.cart-icon {
+    &.cart-amount-icon {
         color: var(--color_black);
         font-size: 40px;
-
         &:hover {
             color: var(--secondary_color);
         }
     }
-
-    // &.card__buy__btn{
-    //     font-size: 30px;
-    // }
-
     &.not-found__icon {
         margin-top: 20px;
         font-size: 80px;
@@ -42,7 +33,6 @@
     filter: invert(100%);
     position: relative;
     top: -6px;
-
     /* filters generated to simulate the --secondary_color color. */
     /* url of the tool: https://codepen.io/sosuke/pen/Pjoqqp */
     &:hover {
@@ -51,7 +41,7 @@
 }
 /* end of icons */
 
-/* Iconos de la marca */
+/* start of brand icons */
 .brand-icon {
     width: 30px;
     height: 30px;
@@ -65,7 +55,90 @@
 .header__NVIDIA {
     color: rgba(127, 255, 0, 0.7);
 }
-/* End of iconos de la marca */
+/* End of brand icons*/
+
+// Start of buttons
+$colors: (
+    red: var(--color_red),
+    purple: var(--color_purple),
+    orange: var(--secondary_color),
+    white: var(--text_color_dark),
+);
+
+@each $colorname, $color in $colors {
+    .coolButton--#{$colorname} {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        background: none;
+        color: var(--text_color_dark);
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: 2px solid var(--text_color_dark);
+        font-size: 16px;
+        cursor: pointer;
+
+        &:hover {
+            color: $color;
+            border: 2px solid $color;
+            box-shadow: 0px 0px 5px $color;
+        }
+    }
+}
+
+@each $colorname, $color in $colors {
+    .coolButton2--#{$colorname} {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        background: $color;
+        color: var(--main_color_dark);
+        padding: 10px 12.5px;
+        padding-left: 7px;
+        border-radius: 4px;
+        border: 2px solid $color;
+        font-size: 20px;
+        // height: 50px;
+        cursor: pointer;
+
+        &:hover {
+            color: $color;
+            background: transparent;
+            border: 2px solid $color;
+            box-shadow: 0px 0px 5px $color;
+        }
+    }
+}
+
+@each $colorname, $color in $colors {
+    .coolButton3--#{$colorname} {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        color: $color;
+        background: transparent;
+        border: 2px solid $color;
+        box-shadow: 0px 0px 5px $color;
+        padding: 10px 12.5px;
+        padding-left: 7px;
+        border-radius: 4px;
+        font-size: 17.5px;
+        // height: 50px;
+        cursor: pointer;
+
+        &:hover {
+            background: $color;
+            color: var(--main_color_dark);
+            border: 2px solid $color;
+        }
+    }
+}
+
+//end of buttons
 
 // start of whatsapp
 .whatsapp__container {
@@ -111,8 +184,8 @@
         bottom: 2rem;
         .whatsapp {
             &__icon {
-                height: 60px;
-                width: 60px;
+                height: 55px;
+                width: 55px;
             }
             &:hover .whatsapp__text {
                 display: inline-block;

@@ -6,8 +6,7 @@ class UI {
         for (let product of products) {
             const card = document.createElement("article");
             card.classList.add("card");
-            card.classList.add(`${product.brand}`);
-            // Uso la clase marca para los filtros.
+            card.classList.add(`${product.brand}`); // Uso la clase marca para los filtros.
 
             card.innerHTML = ` 
             <div class="card__image-container marb-10">
@@ -53,7 +52,7 @@ class UI {
             </div>
 
             <div class="card__moreinfo__container marb-20">
-                <button class="card__moreinfo__button" data-id=${product.id}>
+                <button class="card__moreinfo__button coolButton--orange" data-id=${product.id}>
                     BUY (More Info)
                 </button>
             </div>
@@ -64,7 +63,7 @@ class UI {
 
         //MODAL CON JQUERY
         $(".card__image , .card__moreinfo__button").on("click", e => {
-            let id = e.target.dataset.id;
+            let id = e.target.dataset.id; // El modal se carga con la info del prod seleccionado.
             let product = products.find(item => item.id == id);
             $(".modal").html(`
             <div class="card-modal">
@@ -184,9 +183,8 @@ class UI {
             $(".close-modal").on("click", () => {
                 $(".modal-container").removeClass("showModal");
             });
-            // una vez cargado (luego del click), lo abro.
-            $(".modal-container").toggleClass("showModal");
-            this.getButtons(); //obtengo el estado actual de los botones.
+            this.getButtons(); //obtengo el estado actual de los botones del producto.
+            $(".modal-container").toggleClass("showModal"); // una vez cargado (luego del click), lo abro.
         });
     }
     // ------------ displayProducts() END ------------------- //
@@ -239,7 +237,6 @@ class UI {
                 if (inCart) {
                     modalContainer.classList.remove("showModal");
                     this.showCart(); //solo abro el carrito.
-                    console.log("product clicked already in cart");
                 } else {
                     modalContainer.classList.remove("showModal");
 
@@ -248,12 +245,10 @@ class UI {
                     button.classList.add("permanent-color");
 
                     let cartItem = { ...Storage.getProduct(id), amount: 1 }; //Obtengo el producto desde el local storage y le agrego la prop amount.
-                    console.log(`cartItem added to the cart:`);
-                    console.log(cartItem);
+                    console.log(`cartItem added to the cart:\n`, cartItem);
 
                     cart = [...cart, cartItem]; // Agrego el elemento al carrito.
-                    console.log(`cart array now is:`);
-                    console.log(cart);
+                    console.log(`cart array now is:`, cart);
 
                     Storage.saveCart(cart); //guardo el estado del carrito en el localStorage
                     this.setCartValues(cart); //actualizo los valores del carrito (cant. items y total$)
@@ -288,14 +283,14 @@ class UI {
            <div class="cart-item__stats">
                <p class="cart-item__name">${item.name}</p>
                <p class="cart-item__price">${item.price}$</p>
-               <span class="cart-item__remove" data-id=${item.id}>remove</span>
+               <span class="coolButton2--red cart-item__remove" data-id=${item.id}>remove</span>
            </div>
            <div>
-               <span class="material-icons-round cart-icon up" data-id=${item.id}>
+               <span class="material-icons-round cart-amount-icon up" data-id=${item.id}>
                     expand_less
                </span>
                <p class="cart-item__amount" data-id=${item.id}>${item.amount}</p>
-                <span class="material-icons-round cart-icon down" data-id=${item.id}>
+                <span class="material-icons-round cart-amount-icon down" data-id=${item.id}>
                     expand_more
                 </span>
            </div>
@@ -328,8 +323,13 @@ class UI {
         // Agrego para que se cierre con escape.
         window.addEventListener("keydown", e => {
             if (e.key == "Escape") {
+                // Si esta abierto el modal de pago final, lo cierra. 
+                if (!paymentModal__container.classList.contains("hide")) {
+                    console.log('hola manolo');
+                    paymentModal__container.classList.add("hide");
+                }
                 // Si esta abierta la tienda, la cierra
-                if (cartDOM.classList.contains("cart__show")) {
+                else if (cartDOM.classList.contains("cart__show")) {
                     this.hideCart();
                 } else {
                     // Si no esta abierta, cierra el modal.
@@ -409,8 +409,7 @@ class UI {
         let removed = cart.find(item => item.id == id);
         console.log(`${removed.name} removido del carrito.`);
         cart = cart.filter(item => item.id != id);
-        console.log(`cart is now:`);
-        console.log(cart);
+        console.log(`cart is now:`, cart);
         this.setCartValues(cart); // actualizo valores
         Storage.saveCart(cart); //guardo el estado del carrito en localStorage
     }
@@ -421,11 +420,4 @@ class UI {
         });
     }
     // paymentModal
-}
-
-// --------------- UserInterface class END ----------------- //
-
-function buscarPorId(ID, carro) {
-    carro.filter(prod => prod.id !== ID);
-    return carro;
 }

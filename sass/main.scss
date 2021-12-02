@@ -17,7 +17,7 @@ body {
     position: relative;
     background: var(--main_color_dark);
     display: grid;
-    grid-template-rows: auto 5px auto 5px 200px 10px auto 30px auto 200px;
+    grid-template-rows: auto 10px auto 10px 200px 10px auto 50px auto auto;
     grid-template-areas:
         "navbar"
         "."
@@ -37,7 +37,13 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background: url(../images/wallpaper.jpeg);
+        background: rgb(13, 4, 21);
+        background: linear-gradient(
+            140deg,
+            rgba(13, 4, 21, 1) 0%,
+            rgba(40, 20, 57, 1) 51%,
+            rgba(13, 4, 21, 1) 99%
+        );
         background-attachment: fixed;
         background-size: cover;
         background-position: center center;
@@ -56,6 +62,7 @@ body {
     height: var(--navbar_height);
     width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
     z-index: 1;
 }
@@ -81,6 +88,8 @@ body {
         position: relative;
         top: -2px;
         color: var(--secondary_color);
+        text-decoration: none;
+        font-family: Kanit;
     }
     .cart-btn {
         position: relative; /*posicionado para el hijo.*/
@@ -140,7 +149,7 @@ body {
 
 @media (min-width: 800px) {
     body {
-        grid-template-rows: auto 5px auto 5px 200px 50px auto 200px;
+        grid-template-rows: auto 10px auto 10px 200px 50px auto auto;
         grid-template-columns: auto 1fr;
         grid-template-areas:
             "navbar navbar"
@@ -249,7 +258,7 @@ body {
 /* end of precarts */
 
 /* footer */
-.footer {
+.footer__container {
     grid-area: footer;
 }
 /* end of footer */

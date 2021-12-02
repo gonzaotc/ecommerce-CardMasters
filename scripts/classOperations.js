@@ -1,11 +1,7 @@
-//Instancio la clase para poder usar sus métodos.
+//Instancio la clase UI para poder usar sus métodos.
 const ui = new UI();
 
-// ----------------- Operations class START ------------------- //
 class Operations {
-    // products: arreglo principal de productos.
-    // puedo remover todos los articulos del dom y agregar únicamente los que cumplan ciertas condiciones.
-
     static clearProducts() {
         // Vacio el productsDOM.
         console.log(`clearProducts() - removed ${productsDOM.children.length} products from productsDOM`);
@@ -44,7 +40,7 @@ class Operations {
                     productsDOM.appendChild(notFound);
                 }
                 document.querySelector(".products-container").scrollIntoView({ behavior: "smooth" }); // Desplazo suavemente hacia el productsDOM.
-                input.value = "";
+                input.value = ""; // Vacio el input
             });
         }
 
@@ -58,13 +54,9 @@ class Operations {
     // ------------------ searchbar END ------------------ //
 
     //------------------ filtrar por marca START ------------------ //
-
     // Para filtrar por clase me hago dos metodos.
-    // La primera es para cambiarlo desde los botones. 
+    // La primera es para cambiarlo desde los botones.
     static filterByBrandClick() {
-        let filterAMD = document.querySelector("#AMD");
-        let filterNVIDIA = document.querySelector("#NVIDIA");
-
         let amds = document.querySelectorAll(".AMD");
         let nvidias = document.querySelectorAll(".NVIDIA");
 
@@ -108,11 +100,8 @@ class Operations {
     }
 
     //Esta segunda funcion es para que los ordenados y el cambio de KHW no desarmen
-    // el filtrado y funcionen correctamente al mismo tiempo. 
+    // el filtrado y funcionen correctamente al mismo tiempo.
     static filterByBrand() {
-        let filterAMD = document.querySelector("#AMD");
-        let filterNVIDIA = document.querySelector("#NVIDIA");
-
         let amds = document.querySelectorAll(".AMD");
         let nvidias = document.querySelectorAll(".NVIDIA");
 
@@ -162,8 +151,9 @@ class Operations {
     }
     // ------------------ ordenar por parametro END ------------------ //
 
+    //  ------------------- setear valor KHW Start ----------------- //
     static setKWH(products, productsCopy) {
-        let prod = new Products();
+        let prod = new Products(); // Inicializo para poder usar sus métodos
         let kwh__input = document.querySelector("#KWH");
         kwh__input.addEventListener("change", e => {
             KWH = e.target.value;
@@ -172,14 +162,9 @@ class Operations {
             ui.displayProducts(productsCopy);
             ui.getButtons(); // Obtengo el estado actual de los botones por usos anteriores.
             Operations.filterByBrand(); // Aplico los filtros de marca que esten seleccioandos previamente.
-            console.log(`setKHW - KHW price is now ${KWH} usd.`)
-            sortInput.dispatchEvent(new Event("change")); // Aplico el filtro de orden. 
+            console.log(`setKHW - KHW price is now ${KWH} usd.`);
+            sortInput.dispatchEvent(new Event("change")); // Aplico el filtro de orden.
         });
     }
+    //  ------------------- setear valor KHW END ----------------- //
 }
-    
-// ----------------- Operations class END ------------------- //
-
-function buscarIndex(array, elemento) {
-    return array.indexOf(elemento);
- }
