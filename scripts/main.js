@@ -21,5 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(() => {
             ui.getButtons();
             ui.cartLogic();
+            ui.paymentModal();
         });
 });

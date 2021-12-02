@@ -77,7 +77,11 @@
             </div>
             <div class="cart__footer">
                 <p class="cart__footer__total">order total: <span class="cart-total"></span>$</p>
-                <button class="cart__footer__clearbtn">clear cart</button>
+                <div class="cart__footer__buttons">
+                    <button class="cart__footer__clearbtn">clear cart</button>
+                    <button class="cart__footer__completebtn">Complete pucharse</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -92,6 +96,75 @@
         </div>
     </div>
     <!-- end of modal -->
+
+    <!-- start of paymentModal -->
+    <div class="paymentModal__container hide">
+        <div class="paymentModal">
+            <span class="paymentModal__closebtn material-icons-round">
+                disabled_by_default
+            </span>
+            <form action="" class="paymentForm" autocomplete="off">
+                <h1 class="paymentForm__title">Secure Checkout</h1>
+                <h3 class="paymentForm__subtitle">Shipping Adress</h3>
+                <p>* Indicates required field</p>
+
+                <label for="firstName">
+                    <input type="text" class="paymentForm__input" name="firstName" id="firstName" required
+                        autocomplete="off">
+                    <span class="paymentForm__placeholder">First Name*</span>
+                </label>
+
+                <label for="firstName">
+                    <input type="text" class="paymentForm__input" name="lastName" id="lastName" required
+                        autocomplete="off">
+                    <span class="paymentForm__placeholder">Last Name*</span>
+                </label>
+
+                <label for="streetAddress">
+                    <input type="text" class="paymentForm__input" name="streetAddress" id="streetAddress" required
+                        autocomplete="off">
+                    <span class="paymentForm__placeholder">Street Address*</span>
+                </label>
+
+                <label for="zipCode">
+                    <input type="text" class="paymentForm__input" name="zipCode" id="zipCode" required
+                        autocomplete="off">
+                    <span class="paymentForm__placeholder">Zip Code*</span>
+                </label>
+
+
+                <h3 class="paymentForm__subtitle">Contact Information</h3>
+
+                <label for="phoneNumber">
+                    <input type="text" class="paymentForm__input" name="phoneNumber" id="phoneNumber" required
+                        autocomplete="off">
+                    <span class="paymentForm__placeholder">Phone Number*</span>
+                </label>
+
+                <label for="email">
+                    <input type="text" class="paymentForm__input" name="email" id="email" required autocomplete="off">
+                    <span class="paymentForm__placeholder">Email Address*</span>
+                </label>
+
+                <div class="checkbox__container">
+                    <input type="checkbox" name="emailOffers" id="">
+                    <p>I would like to receive email offers</p>
+                </div>
+
+                <div class="checkbox__container">
+                    <input type="checkbox" class="paymentForm__input" name="useAdress" id="">
+                    <p>Use this adress for billing</p>
+                </div>
+
+                <button class="paymentForm__continuebtn">Continue</button>
+            </form>
+
+            <!-- <div class="paymentModal__shoppingCart">
+                <h1>Shopping cart</h1>
+            </div> -->
+        </div>
+    </div>
+    <!-- end of paymentModal -->
 
 
     <!-- carrousel -->
@@ -124,7 +197,8 @@
             </div>
             <div class="selector-container">
                 <h3>khw value</h3>
-                <input class="entrada" id="KWH" name="KHW" type="number" placeholder=" default: 0.1 usd">
+                <input class="entrada" id="KWH" name="KHW" type="number" step="0.01" min="0"
+                    placeholder=" default: 0.1 usd">
             </div>
             <div class="selector-container">
                 <h3>red minado</h3>
@@ -155,7 +229,8 @@
 
     <!-- start of whastapp icon -->
     <div class="whatsapp__container">
-        <a class="whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=5492236690448&text=Hello!%20Im%20interesed%20in%20buying%20an%20RX550XT,%20can%20you%20send%20me%20more%20information%20please?">
+        <a class="whatsapp" target="_blank"
+            href="https://api.whatsapp.com/send?phone=5492236690448&text=Hello!%20Im%20interesed%20in%20buying%20an%20RX550XT,%20can%20you%20send%20me%20more%20information%20please?">
             <!-- <span class="whatsapp__icon material-icons">
                 whatsapp
             </span> -->
@@ -163,7 +238,7 @@
             <span class="whatsapp__text">
                 Can we help you?
                 <span class="whatsapp__text__pointer">
-                    
+
                 </span>
             </span>
         </a>

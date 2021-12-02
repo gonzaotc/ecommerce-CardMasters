@@ -1,13 +1,13 @@
 class UI {
     // ----------------- displayProducts() START ----------------- //
     displayProducts(products) {
-        //Metodo para mostrar los productos. Genera las cards de forma dínamica y escalable. 
+        //Metodo para mostrar los productos. Genera las cards de forma dínamica y escalable.
         console.log(`displayProducts() - added ${products.length} products to productsDOM.`);
         for (let product of products) {
             const card = document.createElement("article");
             card.classList.add("card");
-            card.classList.add(`${product.brand}`)
-            // Uso la clase marca para los filtros. 
+            card.classList.add(`${product.brand}`);
+            // Uso la clase marca para los filtros.
 
             card.innerHTML = ` 
             <div class="card__image-container marb-10">
@@ -41,9 +41,9 @@ class UI {
                 <div id="card-mining-container" class="card-mining-container">
                     <p class="card__info__text">hashrate: <b class="card__info__variable"> &nbsp ${product.hashrate} usd / day</b></p>
                     <p class="card__info__text">consumption: <b class="card__info__variable"> &nbsp ${product.consumption} watts</b></p>
-                    <p class="card__info__text">production: <b class="card__info__variable"> &nbsp ${product.production} $ / mth</b></p>
-                    <p class="card__info__text">energy cost: <b class="card__info__variable"> &nbsp ${product.energyCost} $ / mth</b></p>
-                    <p class="card__info__text">income: <b class="card__info__variable"> &nbsp ${product.income} $ / mth</b></p>
+                    <p class="card__info__text">production: <b class="card__info__variable"> &nbsp ${product.production} $ / month</b></p>
+                    <p class="card__info__text">energy cost: <b class="card__info__variable"> &nbsp ${product.energyCost} $ / month</b></p>
+                    <p class="card__info__text">income: <b class="card__info__variable"> &nbsp ${product.income} $ / month</b></p>
                     <p class="card__info__text">rentability: <b class="card__info__variable"> &nbsp ${product.rentability} months</b></p>
                 </div>
             </div>
@@ -106,9 +106,9 @@ class UI {
                     <div id="card-mining-container" class="card-mining-container">
                         <p class="card__info__text">hashrate: <b class="card__info__variable"> &nbsp ${product.hashrate} usd / day</b></p>
                         <p class="card__info__text">consumption: <b class="card__info__variable"> &nbsp ${product.consumption} watts</b></p>
-                        <p class="card__info__text">production: <b class="card__info__variable"> &nbsp ${product.production} $ / mth</b></p>
-                        <p class="card__info__text">energy cost: <b class="card__info__variable"> &nbsp ${product.energyCost} $ / mth</b></p>
-                        <p class="card__info__text">income: <b class="card__info__variable"> &nbsp ${product.income} $ / mth</b></p>
+                        <p class="card__info__text">production: <b class="card__info__variable"> &nbsp ${product.production} $ / month</b></p>
+                        <p class="card__info__text">energy cost: <b class="card__info__variable"> &nbsp ${product.energyCost} $ / month</b></p>
+                        <p class="card__info__text">income: <b class="card__info__variable"> &nbsp ${product.income} $ / month</b></p>
                         <p class="card__info__text">rentability: <b class="card__info__variable"> &nbsp ${product.rentability} months</b></p>
                     </div>
 
@@ -349,10 +349,13 @@ class UI {
     cartLogic() {
         // obtenido el estado del carrito, a los items del cart sidebar les añado los eventos de sus botones.
         clearCartBtn.addEventListener("click", () => {
-            console.log("test");
             this.clearCart();
         });
         // En este contexto this hace referencia al botón, no a la clase del metodo.
+
+        completeBtn.addEventListener("click", () => {
+            paymentModal__container.classList.remove("hide");
+        });
 
         // Utilizo event bubbling para determinar la accion a realizar. (depende de donde se haga click (target))
         cartDOM.addEventListener("click", event => {
@@ -411,9 +414,16 @@ class UI {
         this.setCartValues(cart); // actualizo valores
         Storage.saveCart(cart); //guardo el estado del carrito en localStorage
     }
+    // paymentModal
+    paymentModal() {
+        paymentModal__close.addEventListener("click", () => {
+            paymentModal__container.classList.add("hide");
+        });
+    }
+    // paymentModal
 }
-// --------------- UserInterface class END ----------------- //
 
+// --------------- UserInterface class END ----------------- //
 
 function buscarPorId(ID, carro) {
     carro.filter(prod => prod.id !== ID);
