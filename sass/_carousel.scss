@@ -1,0 +1,52 @@
+.carousel {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    margin: 0 auto;
+    &__button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        &--right {
+            right: 0;
+        }
+        &--left {
+            z-index: 1;
+        }
+    }
+    &__track-container {
+        background: lightblue;
+        height: 100%;
+        position: relative;
+    }
+    &__track {
+    }
+    &__slide {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    &__nav {
+        position: absolute;
+        left: 50%;
+        bottom: 0.5rem;
+        transform: translateX(-50%);
+    }
+    &__indicator {
+        border: none;
+        height: 0.85rem;
+        width: 0.85rem;
+        margin: 0 0.1rem;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.4);
+        &.current-slide {
+            background: rgba(255, 255, 255, 0.85);
+        }
+    }
+}

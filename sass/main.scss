@@ -17,13 +17,13 @@ body {
     position: relative;
     background: var(--main_color_dark);
     display: grid;
-    grid-template-rows: auto 10px auto 10px 200px 10px auto 50px auto auto;
+    grid-template-rows: auto 10px auto 10px auto 10px auto 50px auto auto;
     grid-template-areas:
         "navbar"
         "."
         "searchbar"
         "."
-        "carrousel"
+        "carousel"
         "."
         "precards"
         "."
@@ -149,14 +149,14 @@ body {
 
 @media (min-width: 800px) {
     body {
-        grid-template-rows: auto 10px auto 10px 200px 50px auto auto;
+        grid-template-rows: auto 10px auto 10px auto 50px auto auto;
         grid-template-columns: auto 1fr;
         grid-template-areas:
             "navbar navbar"
             ". ."
             "searchbar searchbar"
             ". ."
-            "carrousel carrousel"
+            "carousel carousel"
             ". ."
             "precards cards"
             "footer footer";
@@ -180,11 +180,11 @@ body {
 }
 /* end of searchbar */
 
-/* carrousel */
-.carrousel {
-    grid-area: carrousel;
+/* carousel */
+.carousel {
+    grid-area: carousel;
 }
-/* end of carrousel */
+/* end of carousel */
 
 /* precards */
 .precards {
@@ -263,4 +263,4 @@ body {
 }
 /* end of footer */
 
-@import "cards", "cart", "modal", "paymentModal", "icons", "footer";
+@import "carousel", "cards", "cart", "modal", "paymentModal", "icons", "footer";
