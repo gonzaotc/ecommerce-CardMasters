@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     productsClass
         .getProducts() // Me traigo el catálogo de producos (JSON) asíncronicamente. 
         .then(products => {
+            Operations.carousel();
             productsClass.calculate(products);
             ui.displayProducts(products);
             Storage.saveProducts(products);
