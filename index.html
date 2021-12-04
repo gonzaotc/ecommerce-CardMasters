@@ -89,7 +89,7 @@
                         </span>
                         clear cart
                     </button>
-                    <button class="cart__footer__completebtn coolButton2--orange">
+                    <button class="cart__footer__completebtn coolButton2--orange hide">
                         <span class="material-icons-round cart__footer__completebtn__icon">
                             shopping_cart_checkout
                         </span>
@@ -118,101 +118,107 @@
             <span class="paymentModal__closebtn material-icons-round">
                 disabled_by_default
             </span>
-            <form action="" class="paymentForm" autocomplete="off">
+            <form action="" id="form" class="paymentForm" autocomplete="off">
                 <h1 class="paymentForm__title">Secure Checkout</h1>
                 <h3 class="paymentForm__subtitle">Shipping Adress</h3>
-                <p>* Indicates required field</p>
 
                 <label for="firstName">
-                    <input type="text" class="paymentForm__input" name="firstName" id="firstName" required
-                        autocomplete="off">
+                    <input type="text" class="paymentForm__input" name="firstName" id="firstName" min-length="3"
+                        required autocomplete="off">
                     <span class="paymentForm__placeholder">First Name*</span>
                 </label>
 
-                <label for="firstName">
-                    <input type="text" class="paymentForm__input" name="lastName" id="lastName" required
+                <label for="lastName">
+                    <input type="text" class="paymentForm__input" name="lastName" id="lastName" min-length="3" required
                         autocomplete="off">
                     <span class="paymentForm__placeholder">Last Name*</span>
                 </label>
 
                 <label for="streetAddress">
-                    <input type="text" class="paymentForm__input" name="streetAddress" id="streetAddress" required
-                        autocomplete="off">
+                    <input type="text" class="paymentForm__input" name="streetAddress" id="streetAddress" min-length="6"
+                        required autocomplete="off">
                     <span class="paymentForm__placeholder">Street Address*</span>
                 </label>
 
                 <label for="zipCode">
-                    <input type="text" class="paymentForm__input" name="zipCode" id="zipCode" required
+                    <input type="number" class="paymentForm__input" name="zipCode" id="zipCode" min-length="4" required
                         autocomplete="off">
                     <span class="paymentForm__placeholder">Zip Code*</span>
                 </label>
+                <p class="indicates">* Indicates required field</p>
 
 
                 <h3 class="paymentForm__subtitle">Contact Information</h3>
 
                 <label for="phoneNumber">
-                    <input type="text" class="paymentForm__input" name="phoneNumber" id="phoneNumber" required
-                        autocomplete="off">
+                    <input type="text" class="paymentForm__input" name="phoneNumber" id="phoneNumber" min-length="9"
+                        required autocomplete="off">
                     <span class="paymentForm__placeholder">Phone Number*</span>
                 </label>
 
                 <label for="email">
-                    <input type="text" class="paymentForm__input" name="email" id="email" required autocomplete="off">
+                    <input type="text" class="paymentForm__input" name="email" id="email" required min-length="10"
+                        autocomplete="off">
                     <span class="paymentForm__placeholder">Email Address*</span>
                 </label>
 
                 <div class="checkbox__container">
-                    <input type="checkbox" name="emailOffers" id="">
+                    <input type="checkbox" name="emailOffers" id="emailOffers">
                     <p>I would like to receive email offers</p>
                 </div>
 
                 <div class="checkbox__container">
-                    <input type="checkbox" class="paymentForm__input" name="useAdress" id="">
+                    <input type="checkbox" class="paymentForm__input" name="useAdress" id="useAdress">
                     <p>Use this adress for billing</p>
                 </div>
 
                 <button class="paymentForm__continuebtn">Continue</button>
             </form>
 
-            <!-- <div class="paymentModal__shoppingCart">
-                <h1>Shopping cart</h1>
-            </div> -->
         </div>
     </div>
     <!-- end of paymentModal -->
 
 
     <!-- carousel -->
-        <div class="carousel">
-            <div class="carousel__button carousel__button--left">
-                <span class="material-icons-round">
-                    arrow_back_ios
-                </span>
-            </div>
-            <div class="carousel__track-container">
-                <ul class="carousel__track">
-                    <li class="carousel__slide current-slide">
-                        <img src="./images/carousel/slider1.jpg" alt="">
-                    </li>
-                    <li class="carousel__slide">
-                        <img src="./images/carousel/slider2.jpg" alt="">
-                    </li>
-                    <li class="carousel__slide">
-                        <img src="./images/carousel/slider3.jpg" alt="">
-                    </li>
-                </ul>
-            </div>
-            <div class="carousel__button carousel__button--right">
-                <span class="material-icons-round">
-                    arrow_forward_ios
-                </span>
-            </div>
-            <div class="carousel__nav">
-                <button class="carousel__indicator current-slide"></button>
-                <button class="carousel__indicator"></button>
-                <button class="carousel__indicator"></button>
-            </div>
+    <div class="carousel">
+        <div class="carousel__button carousel__button--left">
+            <span class="material-icons-round">
+                arrow_back_ios
+            </span>
         </div>
+        <div class="carousel__track-container">
+            <ul class="carousel__track">
+                <li class="carousel__slide current-slide">
+                    <img src="./images/carousel/slider1.png" alt="">
+                </li>
+                <li class="carousel__slide">
+                    <img src="./images/carousel/slider2.jpg" alt="">
+                </li>
+                <li class="carousel__slide">
+                    <img src="./images/carousel/slider3.png" alt="">
+                </li>
+                <li class="carousel__slide">
+                    <img src="./images/carousel/slider4.jpg" alt="">
+                </li>
+                <li class="carousel__slide">
+                    <img src="./images/carousel/slider5.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+        <div class="carousel__button carousel__button--right">
+            <span class="material-icons-round">
+                arrow_forward_ios
+            </span>
+        </div>
+        <div class="carousel__nav">
+            <button class="carousel__indicator current-slide"></button>
+            <button class="carousel__indicator"></button>
+            <button class="carousel__indicator"></button>
+            <button class="carousel__indicator"></button>
+            <button class="carousel__indicator"></button>
+        </div>
+    </div>
     <!-- end of carousel -->
 
     <!-- precards -->

@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     productsClass
         .getProducts() // Me traigo el catálogo de producos (JSON) asíncronicamente. 
         .then(products => {
-            Operations.carousel();
             productsClass.calculate(products);
+            Operations.carousel();
             ui.displayProducts(products);
             Storage.saveProducts(products);
 
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Operations.filterByBrandClick();
             Operations.sortBy(productsCopy);
             Operations.setKWH(products, productsCopy);
+            Operations.formValidator();
         })
         .then(() => {
             ui.getButtons();

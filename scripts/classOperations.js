@@ -171,7 +171,7 @@ class Operations {
     // ------------ CARROUSEL start ------------ //
     static carousel() {
         const track = document.querySelector(".carousel__track");
-        const slides = [...track.children]; 
+        const slides = [...track.children];
         const nextButton = document.querySelector(".carousel__button--right");
         const prevButton = document.querySelector(".carousel__button--left");
         const dotsNav = document.querySelector(".carousel__nav");
@@ -185,11 +185,13 @@ class Operations {
         slides.forEach(setSlidePosition);
 
         const moveToSlide = (track, currentSlide, targetSlide) => {
+            if (targetSlide === null) return;
             track.style.transform = "translateX(-" + targetSlide.style.left + ")";
             currentSlide.classList.remove("current-slide");
             targetSlide.classList.add("current-slide");
         };
-        const updateDots = (currentDot,targetDot) => {
+        const updateDots = (currentDot, targetDot) => {
+            if (targetDot === null) return;
             currentDot.classList.remove("current-slide");
             targetDot.classList.add("current-slide");
         };
@@ -197,7 +199,7 @@ class Operations {
         nextButton.addEventListener("click", e => {
             const currentSlide = track.querySelector(".current-slide");
             const nextSlide = currentSlide.nextElementSibling;
-            const currentDot = dotsNav.querySelector('.current-slide');
+            const currentDot = dotsNav.querySelector(".current-slide");
             const nextDot = currentDot.nextElementSibling;
 
             moveToSlide(track, currentSlide, nextSlide);
@@ -226,6 +228,27 @@ class Operations {
             updateDots(currentDot, targetDot);
         });
     }
+    // ------------ CARROUSEL END ------------ //
 
-    // ------------ CARROUSEL start ------------ //
+    // static formValidator() {
+    //     //completeBtn;
+    //     //paymentModal__close;
+    //     //paymentModal__container
+    //     const firstName = document.querySelector("#firstName");
+    //     const lastName = document.querySelector("#lastName");
+    //     const streetAddress = document.querySelector("#streetAddress");
+    //     const zipCode = document.querySelector("#zipCode");
+    //     const phoneNumber = document.querySelector("#phoneNumber");
+    //     const email = document.querySelector("#email");
+    //     const emailOffers = document.querySelector("#emailOffers");
+    //     const useAddress = document.querySelector("#useAddress");
+
+    //     const form = document.querySelector("#form");
+        
+    //     form.addEventListener('submit', e => {
+    //         let messages = [];
+
+    //         e.preventDefault();
+    //     })
+    // }
 }

@@ -53,15 +53,18 @@
         color: white;
         font-size: 22.5px;
         margin-top: 1rem;
-        margin-bottom: 0.5rem;
     }
     p {
         font-size: 15px;
         margin-bottom: 0.3rem;
     }
+    p.indicates{
+        margin-top: 0.4rem;
+        font-weight: 300;
+    }
     label {
         position: relative;
-        padding-top: 10px;
+        padding-top: 11px;
         // border: 2px solid red;
         width: 100%;
 
@@ -137,15 +140,3 @@
         }
     }
 }
-
-// .paymentModal__shoppingCart{
-//     width: 100%;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-
-//     border-top: 1px solid white;
-//     h1{
-//         font-size: 25px;
-//     }
-// }

@@ -296,6 +296,10 @@ class UI {
            </div>
          `;
         cartContent.appendChild(div);
+
+        if (cart.length > 0) {
+            this.showCompleteBtn();
+         }
     }
 
     // Metodo para abrir el carrito.
@@ -323,9 +327,9 @@ class UI {
         // Agrego para que se cierre con escape.
         window.addEventListener("keydown", e => {
             if (e.key == "Escape") {
-                // Si esta abierto el modal de pago final, lo cierra. 
+                // Si esta abierto el modal de pago final, lo cierra.
                 if (!paymentModal__container.classList.contains("hide")) {
-                    console.log('hola manolo');
+                    console.log("hola manolo");
                     paymentModal__container.classList.add("hide");
                 }
                 // Si esta abierta la tienda, la cierra
@@ -354,7 +358,9 @@ class UI {
         // En este contexto this hace referencia al botón, no a la clase del metodo.
 
         completeBtn.addEventListener("click", () => {
-            paymentModal__container.classList.remove("hide");
+            if (cart.length > 0) {
+                paymentModal__container.classList.remove("hide");
+            }
         });
 
         // Utilizo event bubbling para determinar la accion a realizar. (depende de donde se haga click (target))
@@ -412,12 +418,24 @@ class UI {
         console.log(`cart is now:`, cart);
         this.setCartValues(cart); // actualizo valores
         Storage.saveCart(cart); //guardo el estado del carrito en localStorage
+
+        if (cart.length === 0) {
+            this.hideCompleteBtn();
+        }
     }
     // paymentModal
     paymentModal() {
         paymentModal__close.addEventListener("click", () => {
             paymentModal__container.classList.add("hide");
         });
+    }
+
+    showCompleteBtn() {
+        completeBtn.classList.remove("hide");
+    }
+
+    hideCompleteBtn() {
+        completeBtn.classList.add("hide");
     }
     // paymentModal
 }
