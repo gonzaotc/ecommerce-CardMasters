@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Operations.filterByBrandClick();
             Operations.sortBy(productsCopy);
             Operations.setKWH(products, productsCopy);
-            Operations.formValidator();
+            // Operations.formValidator();
         })
         .then(() => {
             ui.getButtons();
