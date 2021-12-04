@@ -229,7 +229,6 @@ class Operations {
         });
     }
     // ------------ CARROUSEL END ------------ //
-
     // static formValidator() {
     //     //completeBtn;
     //     //paymentModal__close;
