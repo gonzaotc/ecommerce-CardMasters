@@ -433,11 +433,9 @@ class UI {
             paymentModal__container.classList.add("hide");
         });
     }
-
     showCompleteBtn() {
         completeBtn.classList.remove("hide");
     }
-
     hideCompleteBtn() {
         completeBtn.classList.add("hide");
     }

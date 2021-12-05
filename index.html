@@ -77,8 +77,8 @@
                 disabled_by_default
             </span>
             <p class="cart__title">Your order: </p>
-            <!-- en este contenedor van los cartItems -->
             <div class="cart-content">
+                <!-- Here I append dinamically the items from JS. -->
             </div>
             <div class="cart__footer">
                 <p class="cart__footer__total">order total: <span class="cart-total"></span>$</p>
@@ -186,11 +186,6 @@
                     <p>Use this address for billing</p>
                 </div>
 
-                <!-- <div class="cartorder__container">
-                    <div class="cartorder__content">
-                    </div>
-                </div> -->
-
                 <button class="paymentForm__continuebtn">Continue</button>
                 <p class="paymentForm__continuebtn__text">you will be redirected to our payment system.</p>
 
@@ -243,7 +238,6 @@
     <!-- end of carousel -->
 
     <!-- precards -->
-
     <section class="precards defaultArea">
             <div class="selector-container">
                 <h3>khw value</h3>
@@ -267,19 +261,6 @@
                     <button id="AMD" class="filter-button">AMD</button>
                     <button id="NVIDIA" class="filter-button">NVIDIA</button>
                 </div>
-            <!-- <div class="selector-container">
-                <h3>red minado</h3>
-                <select class="entrada" id="network">
-                    <option value="eth">Ethereum (ETH)</option>
-                    <option value="rvn">Ravencoin (RVN)</option>
-                    <option value="erg">Ergo (ERG)</option>
-                    <option value="beam">Beam (Beam)</option>
-                    <option value="etc">EthereumClassic (ETC)</option>
-                    <option value="CLO">Callisto (CLO)</option>
-                    <option value="ETP">Metaverse (ETP)</option>
-                    <option value="QKC">Quark Chain (1KC)</option>
-                </select>
-            </div> -->
         </div>
     </section>
     <!-- end of precards -->
@@ -391,7 +372,7 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- scripts -->
-    <script src="scripts/initial.js"></script>
+    <script src="scripts/constants.js"></script>
     <script src="scripts/classProducts.js"></script>
     <script src="scripts/classUI.js"></script>
     <script src="scripts/classStorage.js"></script>

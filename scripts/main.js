@@ -7,16 +7,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .getProducts() // Me traigo el catálogo de producos (JSON) asíncronicamente. 
         .then(products => {
             productsClass.calculate(products);
-            Operations.carousel();
-            ui.displayProducts(products);
             Storage.saveProducts(products);
-
+            ui.displayProducts(products);
+            
             let productsCopy = [...products];
+            Operations.setKWH(products, productsCopy);
             Operations.searchByName(products);
             Operations.filterByBrandClick();
             Operations.sortBy(productsCopy);
-            Operations.setKWH(products, productsCopy);
             Operations.formValidator();
+            Operations.carousel();
         })
         .then(() => {
             ui.getButtons();
