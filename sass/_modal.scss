@@ -8,10 +8,7 @@
     align-items: center;
     justify-content: center;
     z-index: 3;
-    opacity: 0;
-    transition: all 0.3s linear;
-    background-color: var(--main_color_dark_opacity);
-    /* overflow: scroll; */
+    background: var(--main_color_dark_mediumopacity);
 }
 .modal {
     width: 100%;
