@@ -229,25 +229,131 @@ class Operations {
         });
     }
     // ------------ CARROUSEL END ------------ //
-    // static formValidator() {
-    //     //completeBtn;
-    //     //paymentModal__close;
-    //     //paymentModal__container
-    //     const firstName = document.querySelector("#firstName");
-    //     const lastName = document.querySelector("#lastName");
-    //     const streetAddress = document.querySelector("#streetAddress");
-    //     const zipCode = document.querySelector("#zipCode");
-    //     const phoneNumber = document.querySelector("#phoneNumber");
-    //     const email = document.querySelector("#email");
-    //     const emailOffers = document.querySelector("#emailOffers");
-    //     const useAddress = document.querySelector("#useAddress");
 
-    //     const form = document.querySelector("#form");
-        
-    //     form.addEventListener('submit', e => {
-    //         let messages = [];
+    // --------- Form Validation Start ----------- //
+    static formValidator() {
+        //completeBtn;
+        //paymentModal__close;
+        //paymentModal__container
+        const form = document.querySelector("#form");
+        const firstName = document.querySelector("#firstName");
+        const lastName = document.querySelector("#lastName");
+        const streetAddress = document.querySelector("#streetAddress");
+        const zipCode = document.querySelector("#zipCode");
+        const phoneNumber = document.querySelector("#phoneNumber");
+        const email = document.querySelector("#email");
 
-    //         e.preventDefault();
-    //     })
-    // }
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            checkInputs();
+        });
+
+        function checkInputs() {
+            const firstNameValue = firstName.value.trim();
+            const lastNameValue = lastName.value.trim();
+            const streetAddressValue = streetAddress.value.trim();
+            const zipCodeValue = zipCode.value.trim();
+            const phoneNumberValue = phoneNumber.value.trim();
+            const emailValue = email.value.trim();
+
+            // Realizo validaciones
+            if (firstNameValue.length < 3) {
+                setErrorFor(firstName, "First Name must be larger than 3 words.");
+            } else {
+                if (!onlyLetters(firstNameValue)) {
+                    setErrorFor(firstName, "First Name must only contain letters.");
+                } else setSuccessFor(firstName);
+            }
+
+            if (lastNameValue.length < 3) {
+                setErrorFor(lastName, "Last Name must be larger than 3 words.");
+            } else {
+                if (!onlyLetters(lastNameValue)) {
+                    setErrorFor(lastName, "Last Name must only contain letters.");
+                } else setSuccessFor(lastName);
+            }
+
+            if (!isAddress(streetAddressValue)) {
+                setErrorFor(streetAddress, "Street Address not valid.");
+            } else setSuccessFor(streetAddress);
+
+            if (!isZipCode(zipCodeValue)) {
+                setErrorFor(zipCode, "Zip Code not valid.");
+            } else setSuccessFor(zipCode);
+
+            if (phoneNumberValue.length < 9) {
+                setErrorFor(phoneNumber, "Phone Number must be at least 9 numbers.");
+            } else {
+                if (!isPhoneNumber(phoneNumberValue)) {
+                    setErrorFor(phoneNumber, "Phone Number not valid.");
+                } else setSuccessFor(phoneNumber);
+            }
+
+            if (!isEmail(emailValue)) {
+                setErrorFor(email, "Email not valid.");
+            } else setSuccessFor(email);
+
+            // Terminan las validaciones
+
+            let inputs = [firstName, lastName, streetAddress, zipCode, phoneNumber, email];
+            if (allValid(inputs)) {
+                console.log("allValid() - All inputs are success!. Submiting Form..");
+                form.submit();
+            }
+        }
+
+        function setErrorFor(input, message) {
+            let inputContainer = input.parentElement;
+            let errorMessage = input.nextElementSibling.nextElementSibling;
+            errorMessage.innerText = message;
+            input.classList.remove("inputSuccess");
+            input.classList.add("inputError");
+
+            let icon = inputContainer.lastElementChild;
+            icon.innerHTML = '<span class="material-icons-outlined input__icon--error">error_outline</span>';
+        }
+
+        function setSuccessFor(input) {
+            let inputContainer = input.parentElement;
+            let errorMessage = input.nextElementSibling.nextElementSibling;
+            errorMessage.innerText = "";
+            input.classList.remove("inputError");
+            input.classList.add("inputSuccess");
+
+            let icon = inputContainer.lastElementChild;
+            icon.innerHTML = '<span class="material-icons-outlined input__icon--success">check_circle</span>';
+        }
+
+        function allValid(inputs) {
+            let bool = true;
+            inputs.forEach(el => {
+                if (!el.classList.contains("inputSuccess")) {
+                    bool = false;
+                }
+            });
+            return bool;
+        }
+
+        function onlyLetters(entry) {
+            return /^[a-zA-ZñÑ]+$/.test(entry);
+        }
+        function isAddress(entry) {
+            return /^[#.0-9a-zA-Z\s,-]+$/.test(entry);
+        }
+        function isZipCode(entry) {
+            return /^[a-z0-9][a-z0-9\- ]{0,10}[a-z0-9]$/.test(entry);
+        }
+        function isPhoneNumber(entry) {
+            return /^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i.test(
+                entry
+            );
+        }
+        function isEmail(entry) {
+            return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+                entry
+            );
+        }
+    }
+
+    // --------- Form Validation END ----------- //
 }

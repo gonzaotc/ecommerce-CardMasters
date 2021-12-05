@@ -118,32 +118,42 @@
             <span class="paymentModal__closebtn material-icons-round">
                 disabled_by_default
             </span>
-            <form action="" id="form" class="paymentForm" autocomplete="off">
+            <form action="https://getform.io/f/899b4010-f515-45f4-bd1f-332ebe4635bc" method="POST" id="form"
+                class="paymentForm" autocomplete="off">
                 <h1 class="paymentForm__title">Secure Checkout</h1>
                 <h3 class="paymentForm__subtitle">Shipping Adress</h3>
 
                 <label for="firstName">
-                    <input type="text" class="paymentForm__input" name="firstName" id="firstName" min-length="3"
-                        required autocomplete="off">
+                    <input type="text" class="paymentForm__input" name="firstName" id="firstName" required
+                        autocomplete="off">
                     <span class="paymentForm__placeholder">First Name*</span>
+                    <span class="errorMessage"></span>
+                    <span class="input__icon"></span>
                 </label>
 
                 <label for="lastName">
-                    <input type="text" class="paymentForm__input" name="lastName" id="lastName" min-length="3" required
+                    <input type="text" class="paymentForm__input" name="lastName" id="lastName" required
                         autocomplete="off">
                     <span class="paymentForm__placeholder">Last Name*</span>
+                    <span class="errorMessage"></span>
+                    <span class="input__icon"></span>
                 </label>
 
+
                 <label for="streetAddress">
-                    <input type="text" class="paymentForm__input" name="streetAddress" id="streetAddress" min-length="6"
-                        required autocomplete="off">
+                    <input type="text" class="paymentForm__input" name="streetAddress" id="streetAddress" required
+                        autocomplete="off">
                     <span class="paymentForm__placeholder">Street Address*</span>
+                    <span class="errorMessage"></span>
+                    <span class="input__icon"></span>
                 </label>
 
                 <label for="zipCode">
-                    <input type="number" class="paymentForm__input" name="zipCode" id="zipCode" min-length="4" required
+                    <input type="text" class="paymentForm__input" name="zipCode" id="zipCode" required
                         autocomplete="off">
                     <span class="paymentForm__placeholder">Zip Code*</span>
+                    <span class="errorMessage"></span>
+                    <span class="input__icon"></span>
                 </label>
                 <p class="indicates">* Indicates required field</p>
 
@@ -151,28 +161,39 @@
                 <h3 class="paymentForm__subtitle">Contact Information</h3>
 
                 <label for="phoneNumber">
-                    <input type="text" class="paymentForm__input" name="phoneNumber" id="phoneNumber" min-length="9"
-                        required autocomplete="off">
+                    <input type="text" class="paymentForm__input" name="phoneNumber" id="phoneNumber" required
+                        autocomplete="off">
                     <span class="paymentForm__placeholder">Phone Number*</span>
+                    <span class="errorMessage"></span>
+                    <span class="input__icon"></span>
                 </label>
 
                 <label for="email">
-                    <input type="text" class="paymentForm__input" name="email" id="email" required min-length="10"
-                        autocomplete="off">
+                    <input type="text" class="paymentForm__input" name="email" id="email" required autocomplete="off">
                     <span class="paymentForm__placeholder">Email Address*</span>
+                    <span class="errorMessage"></span>
+                    <span class="input__icon"></span>
                 </label>
 
                 <div class="checkbox__container">
                     <input type="checkbox" name="emailOffers" id="emailOffers">
                     <p>I would like to receive email offers</p>
+                    <span class="input__icon"></span>
                 </div>
 
                 <div class="checkbox__container">
-                    <input type="checkbox" class="paymentForm__input" name="useAdress" id="useAdress">
-                    <p>Use this adress for billing</p>
+                    <input type="checkbox" class="paymentForm__input" name="useAddress" id="useAddress">
+                    <p>Use this address for billing</p>
                 </div>
 
+                <!-- <div class="cartorder__container">
+                    <div class="cartorder__content">
+                    </div>
+                </div> -->
+
                 <button class="paymentForm__continuebtn">Continue</button>
+                <p class="paymentForm__continuebtn__text">you will be redirected to our payment system.</p>
+
             </form>
 
         </div>

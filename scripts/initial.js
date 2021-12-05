@@ -6,6 +6,7 @@ const clearCartBtn = document.querySelector(".cart__footer__clearbtn"); //vacia 
 const completeBtn = document.querySelector(".cart__footer__completebtn"); // Abre el modal de compra final.
 const paymentModal__close = document.querySelector(".paymentModal__closebtn"); // Cierra el modal de compra final.
 const paymentModal__container = document.querySelector(".paymentModal__container"); // contenedor del modal de compra final
+const cartorder__content = document.querySelector(".cartorder__content");
 
 const cartItems = document.querySelector(".cart-items"); //cantidad de items en el carrito
 const cartTotal = document.querySelector(".cart-total"); //total del carrito

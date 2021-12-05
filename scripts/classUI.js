@@ -329,7 +329,6 @@ class UI {
             if (e.key == "Escape") {
                 // Si esta abierto el modal de pago final, lo cierra.
                 if (!paymentModal__container.classList.contains("hide")) {
-                    console.log("hola manolo");
                     paymentModal__container.classList.add("hide");
                 }
                 // Si esta abierta la tienda, la cierra
@@ -359,6 +358,11 @@ class UI {
 
         completeBtn.addEventListener("click", () => {
             if (cart.length > 0) {
+                // let total = cart.reduce((acc, item) => acc + item.price * item.amount, 0);
+                // cartorder__content.innerHTML = `
+                // <span class="cartorder__total"> total to pay: ${total} $ </span>
+                // `
+
                 paymentModal__container.classList.remove("hide");
             }
         });
