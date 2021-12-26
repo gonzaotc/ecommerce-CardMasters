@@ -4,4 +4,4 @@ I learned a lot from this project, mostly manipulating the DOM with JS, organizi
 requests .</br>
 Works with Local Storage to persist data and API's to get the products catalogue from a CMS. </br>
 
-Live demo: https://gonzaotc.github.io/CardMasterShop-Project/
+Live demo: https://gonzaotc.github.io/ecommerce-CardMasters/
